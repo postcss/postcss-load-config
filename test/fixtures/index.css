@@ -1,0 +1,17 @@
+@import "css/section.css";
+
+@block index {
+  @elem test {
+    color: blue;
+  }
+
+  @mods test {
+    color: red;
+  }
+}
+
+.index {
+  &-nested {
+    color: goldenrod;
+  }
+}
