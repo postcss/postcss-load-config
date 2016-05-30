@@ -1,5 +1,5 @@
 // ------------------------------------
-// #POSTCSS - LOAD PLUGINS
+// #POSTCSS - LOAD CONFIG
 // ------------------------------------
 
 'use strict'
