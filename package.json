@@ -1,0 +1,57 @@
+{
+  "name": "postcss-loads-config",
+  "version": "1.0.0-alpha",
+  "description": "Autoload Config for PostCSS",
+  "engines": {
+    "node": ">=4"
+  },
+  "main": "index.js",
+  "scripts": {
+    "pretest": "echo '=> Linting' && standard",
+    "test": "echo '=> Testing' && nyc ava '*.test.js'",
+    "posttest": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
+    "start": "echo '=> Starting' && node index"
+  },
+  "dependencies": {
+    "cosmiconfig": "^1.1.0"
+  },
+  "devDependencies": {},
+  "ava": {
+    "babel": "inherit"
+  },
+  "nyc": {
+    "all": true,
+    "require": "babel-register",
+    "include": ["lib", "test"],
+    "extension": [".js"]
+  },
+  "standard": {
+    "ignore": []
+  },
+  "babel": {
+    "env": {
+      "development": {
+        "sourceMaps": "inline"
+      }
+    },
+    "presets": ["es2015"]
+  },
+  "keywords": [
+    "PostCSS",
+    "Autoload",
+    "Plugins"
+  ],
+  "author": {
+    "name": "Michael Ciniawky",
+    "email": "michael.ciniawsky@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michael-ciniawsky/postcss-load-config.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michael-ciniawsky/postcss-load-config/issues"
+  },
+  "homepage": "https://github.com/michael-ciniawsky/postcss-load-config#readme",
+  "license": "MIT"
+}
