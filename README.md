@@ -43,6 +43,9 @@ After installing your plugins there a two common ways to declare your plugins an
  "devDependencies": {},
  "postcss": {
    "parser": "sugarss",
+   "from": "src/app.sss",
+   "map": "inline",
+   "to": "app.css",
    "plugins": {
      "postcss-bem": {
        "defaultNamespace": "undefined",
@@ -68,6 +71,9 @@ After installing your plugins there a two common ways to declare your plugins an
 ```js
 module.exports = {
   parser: "sugarss",
+  from: 'src/app.sss',
+  map: 'inline',
+  to: 'app.css',
   plugins: {
     'postcss-bem': {
       defaultNamespace: undefined,
@@ -90,8 +96,11 @@ module.exports = {
 
 ```json
 "parser": "sugarss",
+"from": "src/app.sss",
+"map": "inline",
+"to": "app.css",
 "plugins": {
-  "bem": {
+  "postcss-bem": {
     "defaultNamespace": "undefined",
     "style": "bem",
     "separators": {
@@ -136,7 +145,7 @@ postcssrc.then(({ plugins, options }) => {
 const fs = require('fs')
 
 const postcss = require('postcss')
-const postcssrc = require('postcss-load-config')('./postcssrc.json')
+const postcssrc = require('postcss-load-config')('./path/to/postcssrc.json')
 
 const css = fs.readFileSync('./index.css', 'utf-8')
 
