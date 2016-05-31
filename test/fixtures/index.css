@@ -1,4 +1,4 @@
-@import "css/section.css";
+@import "imports/section.css";
 
 @block index {
   @elem test {
