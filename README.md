@@ -4,7 +4,7 @@
 [![DevDependencies][devdeps]][devdeps-url]
 [![Standard Code Style][style]][style-url]
 
-# PostCSS Load Config
+# PostCSS Load Config <img align="right" width="108" height="108" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
 
 ## Status
 
@@ -21,10 +21,18 @@ npm i -D postcss-load-config
 
 ## Usage
 
-Need a Plugin? [PostCSS Plugins](https://postcss.parts)
+[PostCSS Plugins](https://postcss.parts)
 
-Plugins will load directly from your projects ***package.json*** file.
-Install them as usual with ``` npm i -S postcss-plugin``` or ``` npm i -D postcss-plugin ```.
+Plugins will be loaded directly from your projects ***package.json*** file.
+
+Install them as usual with as deps/devDeps.
+
+```
+npm i -S postcss-plugin
+```
+```
+npm i -D postcss-plugin
+```
 
 After installing your plugins there a two common ways to declare your plugins and options.
 
@@ -33,6 +41,32 @@ After installing your plugins there a two common ways to declare your plugins an
 
 ## Options
 
+Plugin **options** can either take ```null``` or an object ```{/* options */}```
+as value.
+
+```null``` : Load plugin with no options (plugin defaults).
+
+```[Object]``` : Load plugin with given options.
+
+## Ordering
+
+Plugin **order** will be determined by declaration in plugins section.
+
+```js
+plugins: {
+  'postcss-plugin1': null,
+  'postcss-plugin2': null,
+  'postcss-plugin3': {/* options */}
+}
+
+=> [
+    require('postcss-plugin1')(),
+    require('postcss-plugin2')(),
+    require('postcss-plugin3')(options)
+   ]
+```
+
+## Examples
 #### package.json
 
 ```json
@@ -40,6 +74,8 @@ After installing your plugins there a two common ways to declare your plugins an
  "dependencies": {
    "sugarss": "^0.1.4",
    "postcss-bem": "^0.2.2",
+   "postcss-nested": ""
+   "postcss-import": ""
  },
  "postcss": {
    "parser": "sugarss",
@@ -47,6 +83,8 @@ After installing your plugins there a two common ways to declare your plugins an
    "map": "inline",
    "to": "app.css",
    "plugins": {
+     "postcss-import": null,
+     "postcss-nested": null,
      "postcss-bem": {
        "defaultNamespace": "undefined",
        "style": "bem",
@@ -75,6 +113,8 @@ module.exports = {
   map: 'inline',
   to: 'app.css',
   plugins: {
+    'postcss-import': null,
+    'postcss-nested': null,
     'postcss-bem': {
       defaultNamespace: undefined,
       style: 'bem',
@@ -101,6 +141,8 @@ module.exports = {
   "map": "inline",
   "to": "app.css",
   "plugins": {
+    "postcss-import": null,
+    "postcss-nested": null,
     "postcss-bem": {
       "defaultNamespace": "undefined",
       "style": "bem",
