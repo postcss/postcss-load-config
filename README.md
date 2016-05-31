@@ -96,10 +96,10 @@ plugins: {
          "component": "block",
          "descendent": "elem",
          "modifier": "mods"
-       }
-     }  
-   }
- }
+        }
+      }  
+    }
+  }
 }
 ```
 
