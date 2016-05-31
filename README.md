@@ -38,9 +38,9 @@ After installing your plugins there a two common ways to declare your plugins an
 ```json
 {
  "dependencies": {
+   "sugarss": "^0.1.4",
    "postcss-bem": "^0.2.2",
  },
- "devDependencies": {},
  "postcss": {
    "parser": "sugarss",
    "from": "src/app.sss",
@@ -95,23 +95,25 @@ module.exports = {
 #### postcssrc.json
 
 ```json
-"parser": "sugarss",
-"from": "src/app.sss",
-"map": "inline",
-"to": "app.css",
-"plugins": {
-  "postcss-bem": {
-    "defaultNamespace": "undefined",
-    "style": "bem",
-    "separators": {
-      "namespace": "-",
-      "descendent":"__",
-      "modifier": "--"
-    },
-    "shortcuts": {
-      "component": "block",
-      "descendent": "elem",
-      "modifier": "mods"
+{
+  "parser": "sugarss",
+  "from": "src/app.sss",
+  "map": "inline",
+  "to": "app.css",
+  "plugins": {
+    "postcss-bem": {
+      "defaultNamespace": "undefined",
+      "style": "bem",
+      "separators": {
+        "namespace": "-",
+        "descendent":"__",
+        "modifier": "--"
+      },
+      "shortcuts": {
+        "component": "block",
+        "descendent": "elem",
+        "modifier": "mods"
+      }
     }
   }
 }
