@@ -7,9 +7,9 @@
   },
   "main": "index.js",
   "scripts": {
+    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
     "pretest": "echo '=> Linting' && standard",
     "test": "echo '=> Testing' && nyc ava './test/index.js'",
-    "posttest": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
     "start": "echo '=> Starting' && node ./test/index.js"
   },
   "dependencies": {
