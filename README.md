@@ -74,8 +74,8 @@ plugins: {
  "dependencies": {
    "sugarss": "^0.1.4",
    "postcss-bem": "^0.2.2",
-   "postcss-nested": ""
-   "postcss-import": ""
+   "postcss-nested": "^1.0.0",
+   "postcss-import": "^8.1.2"
  },
  "postcss": {
    "parser": "sugarss",
@@ -86,7 +86,6 @@ plugins: {
      "postcss-import": null,
      "postcss-nested": null,
      "postcss-bem": {
-       "defaultNamespace": "undefined",
        "style": "bem",
        "separators": {
          "namespace": "-",
@@ -116,7 +115,6 @@ module.exports = {
     'postcss-import': null,
     'postcss-nested': null,
     'postcss-bem': {
-      defaultNamespace: undefined,
       style: 'bem',
       separators: {
         namespace: '-',
@@ -144,7 +142,6 @@ module.exports = {
     "postcss-import": null,
     "postcss-nested": null,
     "postcss-bem": {
-      "defaultNamespace": "undefined",
       "style": "bem",
       "separators": {
         "namespace": "-",
@@ -239,8 +236,8 @@ SOFTWARE.
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
 
-[travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg
-[travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config
+[travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=master
+[travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=master
 
 [travis-rel]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=release/1.0.0
 [travis-rel-url]:https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=release/1.0.0
