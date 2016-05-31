@@ -16,6 +16,13 @@
     "cosmiconfig": "^1.1.0"
   },
   "devDependencies": {
+    "postcss": "^5.0.21",
+    "postcss-bem": "^0.4.1",
+    "postcss-import": "^8.1.2",
+    "postcss-nested": "^1.0.0",
+    "sugarss": "^0.1.3",
+    "postcss-less": "^0.12.0",
+    "postcss-scss": "^0.1.8",
     "ava": "^0.15.1",
     "babel-core": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
