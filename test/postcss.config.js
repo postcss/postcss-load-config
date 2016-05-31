@@ -1,13 +1,12 @@
 module.exports = {
-  parser: 'postcss-scss',
-  from: 'fixtures/index.scss',
+  parser: 'postcss-less',
   map: 'inline',
-  to: 'result-scss.css',
+  from: 'fixtures/index.less',
+  to: 'results/index.less.css',
   plugins: {
     'postcss-import': null,
     'postcss-nested': null,
     'postcss-bem': {
-      defaultNamespace: 'undefined',
       style: 'bem',
       separators: {
         namespace: '-',

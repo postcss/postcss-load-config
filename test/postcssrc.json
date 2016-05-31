@@ -1,10 +1,10 @@
 {
   "parser": "postcss-scss",
-  "from": "fixtures/index.scss",
   "map": "inline",
-  "to": "result-scss.css",
+  "from": "fixtures/index.scss",
+  "to": "results/index.scss.css",
   "plugins": {
-    "potscss-import": {"path": "./imports/", "encoding": "utf8"},
+    "potscss-import": null,
     "postcss-nested": null,
     "postcss-bem": {
       "style": "bem",
