@@ -1,5 +1,5 @@
 {
-  "name": "postcss-loads-config",
+  "name": "postcss-load-config",
   "version": "1.0.0-alpha",
   "description": "Autoload Config for PostCSS",
   "engines": {
@@ -7,10 +7,10 @@
   },
   "main": "index.js",
   "scripts": {
-    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
-    "pretest": "echo '=> Linting' && standard",
+    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage test/node_modules",
+    "pretest": "echo '=> Linting' && npm run clean && standard",
     "test": "echo '=> Testing' && nyc ava './test/index.js'",
-    "start": "echo '=> Starting' && node ./test/index.js"
+    "start": "echo '=> Starting' && sudo npm test"
   },
   "dependencies": {
     "cosmiconfig": "^1.1.0"
@@ -61,7 +61,7 @@
   "keywords": [
     "PostCSS",
     "Autoload",
-    "Plugins"
+    "Config"
   ],
   "author": {
     "name": "Michael Ciniawky",
