@@ -9,7 +9,7 @@ const config = require('cosmiconfig')
 const loadPlugins = require('./lib/loadPlugins')
 const loadOptions = require('./lib/loadOptions')
 
-module.exports = function (options) {
+module.exports = function loadConfig (options) {
   return config('postcss')
     .catch((error) => console.log(error))
     .then((result) => {

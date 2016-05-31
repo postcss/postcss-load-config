@@ -8,22 +8,34 @@
   "main": "index.js",
   "scripts": {
     "pretest": "echo '=> Linting' && standard",
-    "test": "echo '=> Testing' && nyc ava '*.test.js'",
+    "test": "echo '=> Testing' && nyc ava './test/index.js'",
     "posttest": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
-    "start": "echo '=> Starting' && node index"
+    "start": "echo '=> Starting' && node ./test/index.js"
   },
   "dependencies": {
     "cosmiconfig": "^1.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "ava": "^0.15.1",
+    "babel-core": "^6.9.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "nyc": "^6.4.4",
+    "standard": "^7.1.1"
+  },
   "ava": {
     "babel": "inherit"
   },
   "nyc": {
     "all": true,
     "require": "babel-register",
-    "include": ["lib", "test"],
-    "extension": [".js"]
+    "include": [
+      "lib",
+      "test"
+    ],
+    "extension": [
+      ".js"
+    ]
   },
   "standard": {
     "ignore": []
@@ -34,7 +46,9 @@
         "sourceMaps": "inline"
       }
     },
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   },
   "keywords": [
     "PostCSS",
