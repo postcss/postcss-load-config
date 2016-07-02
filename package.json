@@ -1,34 +1,32 @@
 {
   "name": "postcss-load-config",
-  "version": "1.0.0-alpha",
+  "version": "1.0.1-alpha",
   "description": "Autoload Config for PostCSS",
-  "engines": {
-    "node": ">=4"
-  },
+  "engines": {"node": ">=4"},
   "main": "index.js",
   "scripts": {
-    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage test/node_modules",
+    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
     "pretest": "echo '=> Linting' && npm run clean && standard",
-    "test": "echo '=> Testing' && nyc ava './test/index.js'",
+    "test": "echo '=> Testing' && nyc ava 'test/index.js'",
     "start": "echo '=> Starting' && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^1.1.0"
+    "cosmiconfig": "^1.1.0",
+    "postcss-load-options": "^1.0.1-alpha",
+    "postcss-load-plugins": "^2.0.1-alpha"
   },
   "devDependencies": {
-    "ava": "^0.15.1",
-    "babel-core": "^6.9.1",
+    "ava": "^0.15.2",
+    "babel-core": "^6.10.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-register": "^6.9.0",
     "coveralls": "^2.11.9",
-    "nyc": "^6.4.4",
+    "nyc": "^6.6.1",
     "postcss": "^5.0.21",
     "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",
-    "postcss-less": "^0.12.0",
     "postcss-nested": "^1.0.0",
-    "postcss-scss": "^0.1.8",
-    "standard": "^7.1.1",
+    "standard": "^7.1.2",
     "sugarss": "^0.1.3"
   },
   "ava": {
@@ -37,16 +35,8 @@
   "nyc": {
     "all": true,
     "require": "babel-register",
-    "include": [
-      "lib",
-      "test"
-    ],
-    "extension": [
-      ".js"
-    ]
-  },
-  "standard": {
-    "ignore": []
+    "include": ["test"],
+    "extension": [".js"]
   },
   "babel": {
     "env": {
@@ -54,14 +44,11 @@
         "sourceMaps": "inline"
       }
     },
-    "presets": [
-      "es2015"
-    ]
+    "presets": ["es2015"]
   },
   "keywords": [
     "PostCSS",
-    "Autoload",
-    "Config"
+    "PostCSS Config"
   ],
   "author": {
     "name": "Michael Ciniawky",

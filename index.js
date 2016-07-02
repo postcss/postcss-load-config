@@ -6,8 +6,8 @@
 
 const config = require('cosmiconfig')
 
-const loadPlugins = require('./lib/loadPlugins')
-const loadOptions = require('./lib/loadOptions')
+const loadOptions = require('postcss-load-options/lib/loadOptions.js')
+const loadPlugins = require('postcss-load-plugins/lib/loadPlugins.js')
 
 module.exports = function loadConfig (options) {
   return config('postcss')
