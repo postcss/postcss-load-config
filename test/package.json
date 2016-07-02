@@ -2,26 +2,22 @@
   "name": "load-config-test",
   "version": "1.0.0-alpha",
   "private": true,
-  "description": "Autoload Plugins for PostCSS",
+  "description": "Load Config for PostCSS",
   "main": "index.js",
   "dependencies": {
     "postcss": "^5.0.21",
     "postcss-bem": "^0.4.1",
     "postcss-nested": "^1.0.0",
-    "postcss-import": "^8.1.2",
-    "postcss-nested": "^1.0.0"
+    "postcss-import": "^8.1.2"
   },
   "devDependencies": {
-    "sugarss": "^0.1.3",
-    "postcss-bem": "^0.4.1",
-    "postcss-less": "^0.12.0",
-    "postcss-scss": "^0.1.8"
+    "sugarss": "^0.1.3"
   },
   "postcss": {
     "parser": "sugarss",
-    "from": "fixtures/index.sss",
     "map": "inline",
-    "to": "result.css",
+    "from": "fixtures/index.sss",
+    "to": "expect/index.css",
     "plugins": {
       "postcss-import": null,
       "postcss-nested": null,

@@ -6,66 +6,77 @@
 
 const test = require('ava')
 
-const postcss = require('postcss')
-const postcssrc = require('../index')
-
+const { join } = require('path')
 const { readFileSync, writeFileSync } = require('fs')
 
-function readSync (path) {
-  return readFileSync(path, 'utf8')
-}
+const fixtures = (file) => readFileSync(join(__dirname, 'fixtures', file))
+const expected = (file) => readFileSync(join(__dirname, 'expects', file))
 
-function writeSync (path, file) {
-  return writeFileSync(path, file, 'utf8')
-}
+const postcss = require('postcss')
+const postcssrc = require('../')
 
-// Fixtures
-const css = readSync('./fixtures/index.css', 'utf8')
-const sss = readSync('./fixtures/index.sss', 'utf8')
-const less = readSync('./fixtures/index.scss', 'utf8')
-const scss = readSync('./fixtures/index.less', 'utf8')
-
-test('Process CSS with default config', (t) => {
-  postcssrc().then(({plugins, options}) => {
+test('1 - Process CSS with default config', (t) => {
+  postcssrc().then(({ plugins, options }) => {
     postcss(plugins)
-      .process(css)
+      .process(fixtures('index.css'), options)
       .then(result => {
-        writeSync('./expect/result.css')
-        t.equal(result.css, readSync('./expect/result-sss.css'))
-        writeSync('./results/result.css')
+        writeFileSync('./expects/index.css', result.css)
+        t.is(expected('index.css'), result.css)
       })
   })
 })
 
-test('Process SSS with default config', (t) => {
-  postcssrc().then(({plugins, options}) => {
+test('2 - Process SSS with default config', (t) => {
+  postcssrc().then(({ plugins, options }) => {
     postcss(plugins)
-      .process(sss, options)
+      .process(fixtures('index.sss'), options)
       .then(result => {
-        writeSync('./expect/index.sss.css')
-        t.equal(result.css, readSync('./expect/index.sss.css'))
+        writeFileSync('./expects/index.sss.css', result.css)
+        t.is(expected('index.sss.css'), result.css)
       })
   })
 })
 
-test('Process LESS with custom config provided as string', (t) => {
-  postcssrc('postcss.config.js').then(({plugins, options}) => {
+test('3 - Process CSS with custom config provided as string', (t) => {
+  postcssrc('postcssrc.json').then(({ plugins, options }) => {
     postcss(plugins)
-      .process(scss, options)
+      .process(fixtures('index.custom.css'), options)
       .then(result => {
-        writeSync('./expect/index.less.css')
-        t.equal(result.css, readSync('./expect/index.less.css'))
+        writeFileSync('./expects/index.custom.css', result.css)
+        t.is(expected('index.custom.css'), result.css)
       })
   })
 })
 
-test('Process SCSS with custom config provided as string', (t) => {
-  postcssrc('postcssrc.json').then(({plugins, options}) => {
+test('4 - Process SSS with custom config provided as string', (t) => {
+  postcssrc('postcssrc.json').then(({ plugins, options }) => {
     postcss(plugins)
-      .process(less, options)
+      .process(fixtures('index.custom.sss'), options)
       .then(result => {
-        writeSync('./expect/index.scss.css')
-        t.equal(result.css, readSync('./expect/index.scss.css'))
+        writeFileSync('./expects/index.custom.sss.css', result.css)
+        t.is(expected('index.custom.sss.css'), result.css)
+      })
+  })
+})
+
+test('5 - Process CSS with custom config provided as object', (t) => {
+  postcssrc('postcss.config.js').then(({ plugins, options }) => {
+    postcss(plugins)
+      .process(fixtures('index.custom.css'), options)
+      .then(result => {
+        writeFileSync('./expects/index.custom.sss.css', result.css)
+        t.is(expected('index.custom.sss.css'), result.css)
+      })
+  })
+})
+
+test('6 - Process SSS with custom config provided as object', (t) => {
+  postcssrc('postcss.config.js').then(({ plugins, options }) => {
+    postcss(plugins)
+      .process(fixtures('index.custom.sss'), options)
+      .then(result => {
+        writeFileSync('./expects/index.custom.sss.css', result.css)
+        t.is(expected('index.custom.sss.css'), result.css)
       })
   })
 })

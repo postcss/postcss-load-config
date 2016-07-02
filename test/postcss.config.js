@@ -1,8 +1,8 @@
 module.exports = {
-  parser: 'postcss-less',
+  parser: 'sugarss',
   map: 'inline',
-  from: 'fixtures/index.less',
-  to: 'results/index.less.css',
+  from: 'fixtures/index.sss',
+  to: 'expect/custom.sss.css',
   plugins: {
     'postcss-import': null,
     'postcss-nested': null,

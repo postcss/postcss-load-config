@@ -1,8 +1,8 @@
 {
-  "parser": "postcss-scss",
+  "parser": "sugarss",
   "map": "inline",
-  "from": "fixtures/index.scss",
-  "to": "results/index.scss.css",
+  "from": "fixtures/index.css",
+  "to": "results/custom.sss.css",
   "plugins": {
     "potscss-import": null,
     "postcss-nested": null,
