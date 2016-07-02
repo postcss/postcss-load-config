@@ -1,17 +1,16 @@
 [![NPM][npm]][npm-url]
-[![Node][node]][node-url]
-[![Dependencies][deps]][deps-url]
-[![DevDependencies][devdeps]][devdeps-url]
+[![Deps][deps]][deps-url]
+[![Tests][travis]][travis-url]
+[![Coverage][cover]][cover-url]
 [![Standard Code Style][style]][style-url]
 
-# PostCSS Load Config <img align="right" width="108" height="108" title="PostCSS" src="http://postcss.github.io/postcss/logo.svg" hspace="20">
-
-## Status
-
-| Branch               | Build                     | Coverage                 |
-|:--------------------:|:-------------------------:|:------------------------:|
-|  Master              | ![travis]                 | ![cover]                 |
-|  Release/v1.0.0      | ![travis-rel]             | ![cover-rel]             |
+<div align="center">
+  <a href="https://github.com/postcss/postcss">
+    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+  </a>
+  <h1>Load Config</h1>
+  <p>Autoload Config for PostCSS<p>
+</div>
 
 ## Install
 
@@ -20,50 +19,57 @@ npm i -D postcss-load-config
 ```
 
 ## Usage
-
-[PostCSS Plugins](https://postcss.parts)
-
-Plugins will be loaded directly from your projects ***package.json*** file.
-
-Install them as usual with as deps/devDeps.
+Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
 ```
 npm i -S postcss-plugin
-```
-```
 npm i -D postcss-plugin
 ```
 
 After installing your plugins there a two common ways to declare your plugins and options.
 
-- Create **postcss.plugins** section in your projects **package.json**.
+- Create **postcss** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
 ## Options
 
-Plugin **options** can either take ```null``` or an object ```{/* options */}```
+Plugin **options** can either take ```null``` or an object literal ```{}```
 as value.
 
-```null``` : Load plugin with no options (plugin defaults).
+```null``` : Plugin loads with no options (defaults).
 
-```[Object]``` : Load plugin with given options.
+```[Object]``` : Plugin loads with set options.
 
 ## Ordering
 
-Plugin **order** will be determined by declaration in plugins section.
+Plugin **order** is determined by declaration in the plugins section.
 
 ```js
-plugins: {
-  'postcss-plugin1': null,
-  'postcss-plugin2': null,
-  'postcss-plugin3': {/* options */}
+postcss: {
+  parser: require('sugarss'),
+  from: 'app.sss'
+  map: 'inline',
+  to: 'app.css'
+  plugins: {
+    'postcss-plugin1': null,
+    'postcss-plugin2': null,
+    'postcss-plugin3': {option1: '', option2: ''}
+  }
 }
 
-=> [
-    require('postcss-plugin1')(),
-    require('postcss-plugin2')(),
-    require('postcss-plugin3')(options)
-   ]
+// Loaded Options Setup
+{
+  parser: require('sugarss'),
+  from: 'app.sss'
+  map: 'inline',
+  to: 'app.css'
+}
+// Loaded Plugin Setup
+[
+  require('postcss-plugin1')(),
+  require('postcss-plugin2')(),
+  require('postcss-plugin3')(options)
+]
 ```
 
 ## Examples
@@ -79,7 +85,7 @@ plugins: {
  },
  "postcss": {
    "parser": "sugarss",
-   "from": "src/app.sss",
+   "from": "app.sss",
    "map": "inline",
    "to": "app.css",
    "plugins": {
@@ -108,7 +114,7 @@ plugins: {
 ```js
 module.exports = {
   parser: "sugarss",
-  from: 'src/app.sss',
+  from: 'app.sss',
   map: 'inline',
   to: 'app.css',
   plugins: {
@@ -135,7 +141,7 @@ module.exports = {
 ```json
 {
   "parser": "sugarss",
-  "from": "src/app.sss",
+  "from": "app.sss",
   "map": "inline",
   "to": "app.css",
   "plugins": {
@@ -164,12 +170,12 @@ module.exports = {
 ```js
 'use strict'
 
-const fs = require('fs')
+const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
 const postcssrc = require('postcss-load-config')()
 
-const css = fs.readFileSync('./index.css', 'utf-8')
+const css = readFileSync('./index.css', 'utf8')
 
 postcssrc.then(({ plugins, options }) => {
   postcss(plugins)
@@ -183,12 +189,12 @@ postcssrc.then(({ plugins, options }) => {
 ```js
 'use strict'
 
-const fs = require('fs')
+const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
 const postcssrc = require('postcss-load-config')('./path/to/postcssrc.json')
 
-const css = fs.readFileSync('./index.css', 'utf-8')
+const css = readFileSync('./index.css', 'utf8')
 
 postcssrc.then(({ plugins, options }) => {
   postcss(plugins)
@@ -197,7 +203,7 @@ postcssrc.then(({ plugins, options }) => {
 }))
 ```
 
-## LICENSE [![License MIT][license]][license-url]
+## LICENSE
 
 > License (MIT)
 
@@ -224,14 +230,8 @@ SOFTWARE.
 [npm]: https://img.shields.io/npm/v/postcss-load-config.svg
 [npm-url]: https://npmjs.com/package/postcss-load-config
 
-[node]: https://img.shields.io/node/v/gh-badges.svg?maxAge=2592000
-[node-url]: https://nodejs.org
-
 [deps]: https://david-dm.org/michael-ciniawsky/postcss-load-config.svg
 [deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-config
-
-[devdeps]: https://david-dm.org/michael-ciniawsky/postcss-load-config/dev-status.svg
-[devdeps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-config#info=devDependencies
 
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
@@ -239,20 +239,5 @@ SOFTWARE.
 [travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=master
 [travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=master
 
-[travis-rel]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=release/1.0.0
-[travis-rel-url]:https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=release/1.0.0
-
-[travis-dev]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=develop
-[travis-dev-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=develop
-
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=master
-
-[cover-rel]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg?branch=release/1.0.0
-[cover-rel-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=release/1.0.0
-
-[cover-dev]: https://coveralls.io/repos/github/michael-ciniawsk/postcss-load-config/badge.svg?branch=develop
-[cover-dev-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=develop
-
-[license]: https://img.shields.io/github/license/michael-ciniawsky/postcss-load-config.svg
-[license-url]: https://raw.githubusercontent.com/michael-ciniawsky/postcss-load-config/master/LICENSE
