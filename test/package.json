@@ -17,7 +17,7 @@
     "parser": "sugarss",
     "map": "inline",
     "from": "fixtures/index.sss",
-    "to": "expect/index.css",
+    "to": "expects/index.css",
     "plugins": {
       "postcss-import": null,
       "postcss-nested": null,

@@ -2,7 +2,7 @@ module.exports = {
   parser: 'sugarss',
   map: 'inline',
   from: 'fixtures/index.sss',
-  to: 'expect/custom.sss.css',
+  to: 'expects/custom.sss.css',
   plugins: {
     'postcss-import': null,
     'postcss-nested': null,

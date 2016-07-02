@@ -2,7 +2,7 @@
   "parser": "sugarss",
   "map": "inline",
   "from": "fixtures/index.css",
-  "to": "results/custom.sss.css",
+  "to": "expects/custom.sss.css",
   "plugins": {
     "potscss-import": null,
     "postcss-nested": null,
