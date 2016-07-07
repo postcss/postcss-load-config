@@ -1,7 +1,7 @@
 {
   "name": "postcss-load-config",
-  "version": "1.0.1-alpha",
-  "description": "Autoload Config for PostCSS",
+  "version": "1.0.0-alpha2",
+  "description": "Load Config for PostCSS",
   "engines": {"node": ">=4"},
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,6 @@
   },
   "devDependencies": {
     "ava": "^0.15.2",
-    "babel-core": "^6.10.1",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-register": "^6.9.0",
     "coveralls": "^2.11.9",
     "nyc": "^6.6.1",
     "postcss": "^5.0.21",
@@ -30,25 +27,18 @@
     "sugarss": "^0.1.3"
   },
   "ava": {
-    "babel": "inherit"
+    "babel": "inherit",
+    "verbose": "true"
   },
   "nyc": {
     "all": true,
-    "require": "babel-register",
     "include": ["test"],
     "extension": [".js"]
   },
-  "babel": {
-    "env": {
-      "development": {
-        "sourceMaps": "inline"
-      }
-    },
-    "presets": ["es2015"]
-  },
   "keywords": [
-    "PostCSS",
-    "PostCSS Config"
+    "postcss",
+    "postcssplugin",
+    "postcss load config"
   ],
   "author": {
     "name": "Michael Ciniawky",
