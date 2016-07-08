@@ -1,71 +1,75 @@
 // ------------------------------------
-// #POSTCSS - LOAD OPTIONS - TEST
+// #POSTCSS - LOAD CONFIG - TEST
 // ------------------------------------
 
 'use strict'
 
-const test = require('ava')
+var test = require('ava')
 
-const { join } = require('path')
-const { readFileSync, writeFileSync } = require('fs')
+var fs = require('fs')
+var path = require('path')
 
-const fixtures = (file) => readFileSync(join(__dirname, 'fixtures', file), 'utf8')
-const expected = (file) => readFileSync(join(__dirname, 'expects', file), 'utf8')
+function fixtures (file) {
+  return fs.readFileSync(path.join(__dirname, 'fixtures', file), 'utf8')
+}
+function expected (file) {
+  return fs.readFileSync(path.join(__dirname, 'expects', file), 'utf8')
+}
 
-const postcss = require('postcss')
-const postcssrc = require('../')
+var postcss = require('postcss')
+var postcssrc = require('..')
 
-test('1.0 - Load options && plugins with default config', (t) => {
-  postcssrc().then(({ plugins, options }) => {
-    console.log(plugins, '\n\n', options)
+test('1.0 - Load options && plugins with default config', function (t) {
+  postcssrc().then(function (config) {
+    console.log(config.plugins, '\n\n', config.options)
   })
 })
 
-test('1.1 - Load options && plugins with custom config', (t) => {
-  postcssrc('./postcss.config.js').then(({ plugins, options }) => {
-    console.log(plugins, '\n\n', options)
+test('1.1 - Load options && plugins with custom config', function (t) {
+  postcssrc('./postcss.config.js').then(function (config) {
+    console.log(config.plugins, '\n\n', config.options)
   })
 })
 
-test('2.0 - Process CSS with default config', (t) => {
-  postcssrc().then(({ plugins, options }) => {
-    postcss(plugins)
-      .process(fixtures('index.css'), options)
-      .then((result) => {
-        writeFileSync('expects/index.css', result.css, 'utf8')
+test('2.0 - Process CSS with default config', function (t) {
+  postcssrc().then(function (config) {
+    postcss(config.plugins)
+      .process(fixtures('index.css'), config.options)
+      .then(function (result) {
+        fs.writeFileSync('expects/index.css', result.css, 'utf8')
         t.is(expected('index.css'), result.css)
       })
   })
 })
 
-test('2.1 - Process SSS with default config', (t) => {
-  postcssrc().then(({ plugins, options }) => {
-    postcss(plugins)
-      .process(fixtures('index.sss'), options)
-      .then((result) => {
-        writeFileSync('expects/index.sss.css', result.css, 'utf8')
+test('2.1 - Process SSS with default config', function (t) {
+  postcssrc().then(function (config) {
+    postcss(config.plugins)
+      .process(fixtures('index.sss'), config.options)
+      .then(function (result) {
+        fs.writeFileSync('expects/index.sss.css', result.css, 'utf8')
         t.is(expected('index.sss.css'), result.css)
       })
   })
 })
 
-test('3.0 - Process CSS with custom config', (t) => {
-  postcssrc('./postcssrc.json').then(({ plugins, options }) => {
-    postcss(plugins)
-      .process(fixtures('index.css'), options)
-      .then((result) => {
-        writeFileSync('expects/custom.css', result.css, 'utf8')
+test('3.0 - Process CSS with custom config', function (t) {
+  postcssrc('./postcssrc.json').then(function (config) {
+    postcss(config.plugins)
+      .process(fixtures('index.css'), config.options)
+      .then(function (result) {
+        fs.writeFileSync('expects/custom.css', result.css, 'utf8')
         t.is(expected('custom.css'), result.css)
       })
   })
 })
 
-test('3.1 - Process SSS with custom config', (t) => {
-  postcssrc('./postcssrc.json').then(({ plugins, options }) => {
-    postcss(plugins)
-      .process(fixtures('index.sss'), options)
-      .then((result) => {
-        writeFileSync('expects/custom.sss.css', result.css, 'utf8')
+test('3.1 - Process SSS with custom config', function (t) {
+  postcssrc('./postcssrc.json').then(function (config) {
+    postcss(config.plugins)
+      .process(fixtures('index.sss'), config.options)
+      .then(function (result) {
+        fs.writeFileSync('expects/custom.sss.css', result.css, 'utf8')
         t.is(expected('custom.sss.css'), result.css)
       })
   })
