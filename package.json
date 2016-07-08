@@ -1,6 +1,6 @@
 {
   "name": "postcss-load-config",
-  "version": "1.0.0-alpha2",
+  "version": "1.0.0-alpha3",
   "description": "Autoload Config for PostCSS",
   "engines": {"node": ">=4"},
   "main": "index.js",
@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "cosmiconfig": "^1.1.0",
-    "postcss-load-options": "^1.0.0-alpha2",
-    "postcss-load-plugins": "^2.0.0-alpha2"
+    "postcss-load-options": "^1.0.0-alpha3",
+    "postcss-load-plugins": "^2.0.0-alpha3"
   },
   "devDependencies": {
     "ava": "^0.15.2",
