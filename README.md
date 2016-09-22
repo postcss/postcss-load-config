@@ -13,13 +13,13 @@
   <p>Autoload Config for PostCSS<p>
 </div>
 
-## Install
+<h2 align="center">Install</h2>
 
 ```bash
 npm i -D postcss-load-config
 ```
 
-<h2>Usage</h2>
+<h2 align="center">Usage</h2>
 
 Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
@@ -32,16 +32,16 @@ After installing your plugins there a two common ways to declare your plugins an
 - Create **postcss** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
-<h2>Options</h2>
+<h2 align="center">Options</h2>
 
 Plugin **options** can either take ```null``` or an object literal ```{}```
 as value.
 
-```null``` : Plugin loads with no options (defaults).
+```null```: Plugin loads with no options (defaults).
 
-```[Object]``` : Plugin loads with set options.
+```[Object]```: Plugin loads with set options.
 
-## Ordering
+### Ordering
 
 Plugin **order** is determined by declaration in the plugins section.
 
@@ -73,8 +73,7 @@ postcss: {
 ]
 ```
 
-## Examples
-#### package.json
+### package.json
 
 ```json
 {
@@ -98,7 +97,7 @@ postcss: {
 }
 ```
 
-#### postcss.config.js
+### postcss.config.js
 
 ```js
 module.exports = {
@@ -113,7 +112,7 @@ module.exports = {
   }
 }
 ```
-#### postcssrc.json
+### postcssrc.json
 
 ```js
 {
@@ -129,9 +128,9 @@ module.exports = {
 }
 ```
 
-<h2>Example</h2>
+<h2 align="center">Example</h2>
 
-#### Default
+### Default
 
 ```js
 const { readFileSync } = require('fs')
@@ -148,7 +147,7 @@ postcssrc.then(({ plugins, options }) => {
 }))
 ```
 
-#### Custom
+### Custom
 
 ```js
 const { readFileSync } = require('fs')
@@ -165,7 +164,7 @@ postcssrc.then(({ plugins, options }) => {
 }))
 ```
 
-<h2>Maintainers</h2>
+<h2 align="center">Maintainers</h2>
 
 <table>
   <tbody>
@@ -186,7 +185,7 @@ postcssrc.then(({ plugins, options }) => {
   <tbody>
 </table>
 
-<h2>LICENSE</h2>
+<h2 align="center">LICENSE</h2>
 
 > License (MIT)
 
