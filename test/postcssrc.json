@@ -4,7 +4,7 @@
   "from": "fixtures/index.css",
   "to": "expects/custom.sss.css",
   "plugins": {
-    "potscss-import": null,
+    "postcss-import": null,
     "postcss-nested": null,
     "postcss-bem": {
       "style": "bem",
