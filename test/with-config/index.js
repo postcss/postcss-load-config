@@ -17,7 +17,7 @@ function expected (file) {
 }
 
 var postcss = require('postcss')
-var postcssrc = require('..')
+var postcssrc = require('../..')
 
 test('1.0 - Load options && plugins with default config', function (t) {
   postcssrc().then(function (config) {
