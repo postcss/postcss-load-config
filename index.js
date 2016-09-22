@@ -15,9 +15,14 @@ module.exports = function loadConfig (options) {
       console.log(error)
     })
     .then(function (result) {
+      return result || {}
+    })
+    .then(function (result) {
+      var config = result.config || { plugins: [] }
+
       return {
-        plugins: loadPlugins(result.config, options),
-        options: loadOptions(result.config, options)
+        plugins: loadPlugins(config, options),
+        options: loadOptions(config, options)
       }
     })
 }
