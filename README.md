@@ -1,8 +1,9 @@
-[![NPM][npm]][npm-url]
-[![Deps][deps]][deps-url]
-[![Tests][travis]][travis-url]
-[![Coverage][cover]][cover-url]
-[![Standard Code Style][style]][style-url]
+[![npm][npm]][npm-url]
+[![deps][deps]][deps-url]
+[![tests][travis]][travis-url]
+[![coverage][cover]][cover-url]
+[![code style][style]][style-url]
+[![chat][chat]][chat-url]
 
 <div align="center">
   <a href="https://github.com/postcss/postcss">
@@ -18,12 +19,12 @@
 npm i -D postcss-load-config
 ```
 
-## Usage
+<h2>Usage</h2>
+
 Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
 
 ```
-npm i -S postcss-plugin
-npm i -D postcss-plugin
+npm i -S|-D postcss-plugin
 ```
 
 After installing your plugins there a two common ways to declare your plugins and options.
@@ -31,7 +32,7 @@ After installing your plugins there a two common ways to declare your plugins an
 - Create **postcss** section in your projects **package.json**.
 - Create a **postcss.config.js**  or  **postcssrc.json** file.
 
-## Options
+<h2>Options</h2>
 
 Plugin **options** can either take ```null``` or an object literal ```{}```
 as value.
@@ -53,7 +54,7 @@ postcss: {
   plugins: {
     'postcss-plugin1': null,
     'postcss-plugin2': null,
-    'postcss-plugin3': {option1: '', option2: ''}
+    'postcss-plugin3': { option1: '', option2: '' }
   }
 }
 
@@ -91,19 +92,7 @@ postcss: {
    "plugins": {
      "postcss-import": null,
      "postcss-nested": null,
-     "postcss-bem": {
-       "style": "bem",
-       "separators": {
-         "namespace": "-",
-         "descendent":"__",
-         "modifier": "--"
-       },
-       "shortcuts": {
-         "component": "block",
-         "descendent": "elem",
-         "modifier": "mods"
-        }
-      }  
+     "postcss-bem": { "style": "bem" }
     }
   }
 }
@@ -120,25 +109,13 @@ module.exports = {
   plugins: {
     'postcss-import': null,
     'postcss-nested': null,
-    'postcss-bem': {
-      style: 'bem',
-      separators: {
-        namespace: '-',
-        descendent: '__',
-        modifier: '--'
-      },
-      shortcuts: {
-        component: 'block',
-        descendent: 'elem',
-        modifier: 'mods'
-      }
-    }
+    'postcss-bem': { style: 'bem' }  
   }
 }
 ```
 #### postcssrc.json
 
-```json
+```js
 {
   "parser": "sugarss",
   "from": "app.sss",
@@ -147,29 +124,16 @@ module.exports = {
   "plugins": {
     "postcss-import": null,
     "postcss-nested": null,
-    "postcss-bem": {
-      "style": "bem",
-      "separators": {
-        "namespace": "-",
-        "descendent":"__",
-        "modifier": "--"
-      },
-      "shortcuts": {
-        "component": "block",
-        "descendent": "elem",
-        "modifier": "mods"
-      }
-    }
+    "postcss-bem": { "style": "bem" }
   }
 }
 ```
 
-## Usage
+<h2>Example</h2>
+
 #### Default
 
 ```js
-'use strict'
-
 const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
@@ -187,8 +151,6 @@ postcssrc.then(({ plugins, options }) => {
 #### Custom
 
 ```js
-'use strict'
-
 const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
@@ -203,7 +165,28 @@ postcssrc.then(({ plugins, options }) => {
 }))
 ```
 
-## LICENSE
+<h2>Maintainers</h2>
+
+<table>
+  <tbody>
+   <tr>
+    <td align="center">
+      <img width="150 height="150"
+      src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
+      <br />
+      <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
+    </td>
+    <td align="center">
+      <img width="150 height="150"
+      src="https://avatars.githubusercontent.com/u/2437969?v=3&s=150">
+      <br />
+      <a href="https://github.com/ertrzyiks">Mateusz Derks</a>
+    </td>
+  </tr>
+  <tbody>
+</table>
+
+<h2>LICENSE</h2>
 
 > License (MIT)
 
@@ -241,3 +224,6 @@ SOFTWARE.
 
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=master
+
+[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg?maxAge=2592000
+[chat-url]: https://gitter.im/postcss/postcss
