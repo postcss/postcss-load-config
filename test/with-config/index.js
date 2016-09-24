@@ -21,13 +21,29 @@ var postcssrc = require('../..')
 
 test('1.0 - Load options && plugins with default config', function (t) {
   return postcssrc().then(function (config) {
-    console.log(config.plugins, '\n\n', config.options)
+    t.is(config.plugins.length, 3)
+    t.is(config.plugins[0].postcssPlugin, 'postcss-import')
+    t.is(config.plugins[1].postcssPlugin, 'postcss-nested')
+    t.is(config.plugins[2].postcssPlugin, 'postcss-bem')
+
+    t.is(config.options.parser, require('sugarss'))
+    t.is(config.options.map, 'inline')
+    t.is(config.options.from, 'fixtures/index.sss')
+    t.is(config.options.to, 'expects/index.css')
   })
 })
 
 test('1.1 - Load options && plugins with custom config', function (t) {
   return postcssrc('./postcss.config.js').then(function (config) {
-    console.log(config.plugins, '\n\n', config.options)
+    t.is(config.plugins.length, 3)
+    t.is(config.plugins[0].postcssPlugin, 'postcss-import')
+    t.is(config.plugins[1].postcssPlugin, 'postcss-nested')
+    t.is(config.plugins[2].postcssPlugin, 'postcss-bem')
+
+    t.is(config.options.parser, require('sugarss'))
+    t.is(config.options.map, 'inline')
+    t.is(config.options.from, 'fixtures/index.sss')
+    t.is(config.options.to, 'expects/custom.sss.css')
   })
 })
 
