@@ -33,10 +33,9 @@ test('1.1 - Load options && plugins with custom config', function (t) {
 
 test('2.0 - Process CSS with default config', function (t) {
   return postcssrc().then(function (config) {
-    postcss(config.plugins)
+    return postcss(config.plugins)
       .process(fixtures('index.css'), config.options)
       .then(function (result) {
-        fs.writeFileSync('expects/index.css', result.css, 'utf8')
         t.is(expected('index.css'), result.css)
       })
   })
@@ -44,10 +43,9 @@ test('2.0 - Process CSS with default config', function (t) {
 
 test('2.1 - Process SSS with default config', function (t) {
   return postcssrc().then(function (config) {
-    postcss(config.plugins)
+    return postcss(config.plugins)
       .process(fixtures('index.sss'), config.options)
       .then(function (result) {
-        fs.writeFileSync('expects/index.sss.css', result.css, 'utf8')
         t.is(expected('index.sss.css'), result.css)
       })
   })
@@ -55,10 +53,9 @@ test('2.1 - Process SSS with default config', function (t) {
 
 test('3.0 - Process CSS with custom config', function (t) {
   return postcssrc('./postcssrc.json').then(function (config) {
-    postcss(config.plugins)
+    return postcss(config.plugins)
       .process(fixtures('index.css'), config.options)
       .then(function (result) {
-        fs.writeFileSync('expects/custom.css', result.css, 'utf8')
         t.is(expected('custom.css'), result.css)
       })
   })
@@ -66,10 +63,9 @@ test('3.0 - Process CSS with custom config', function (t) {
 
 test('3.1 - Process SSS with custom config', function (t) {
   return postcssrc('./postcssrc.json').then(function (config) {
-    postcss(config.plugins)
+    return postcss(config.plugins)
       .process(fixtures('index.sss'), config.options)
       .then(function (result) {
-        fs.writeFileSync('expects/custom.sss.css', result.css, 'utf8')
         t.is(expected('custom.sss.css'), result.css)
       })
   })
