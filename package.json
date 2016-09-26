@@ -23,7 +23,7 @@
     "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
-    "standard": "^8.1.0",
+    "standard": "^8.2.0",
     "sugarss": "^0.1.6"
   },
   "ava": {
