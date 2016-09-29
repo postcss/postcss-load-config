@@ -6,6 +6,7 @@
 [![chat][chat]][chat-url]
 
 <div align="center">
+  <img width="108" height="108" title="Load Config" src="http://michael-ciniawsky.github.io/postcss-load-config/logo.svg">
   <a href="https://github.com/postcss/postcss">
     <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
   </a>
@@ -34,12 +35,12 @@ After installing your plugins there a two common ways to declare your plugins an
 
 <h2 align="center">Options</h2>
 
-Plugin **options** can either take ```null``` or an object literal ```{}```
+Plugin **options** can either take `false` or an object literal `{}`
 as value.
 
-```null```: Plugin loads with no options (defaults).
+**`false`**: Plugin loads with no options (defaults).
 
-```[Object]```: Plugin loads with set options.
+**`[Object]`**: Plugin loads with set options.
 
 ### Ordering
 
@@ -52,9 +53,9 @@ postcss: {
   map: 'inline',
   to: 'app.css'
   plugins: {
-    'postcss-plugin1': null,
-    'postcss-plugin2': null,
-    'postcss-plugin3': { option1: '', option2: '' }
+    'postcss-plugin1': false,
+    'postcss-plugin2': false,
+    'postcss-plugin3': { option: '', option: '' }
   }
 }
 
@@ -89,8 +90,8 @@ postcss: {
    "map": "inline",
    "to": "app.css",
    "plugins": {
-     "postcss-import": null,
-     "postcss-nested": null,
+     "postcss-import": false,
+     "postcss-nested": false,
      "postcss-bem": { "style": "bem" }
     }
   }
@@ -106,8 +107,8 @@ module.exports = {
   map: 'inline',
   to: 'app.css',
   plugins: {
-    'postcss-import': null,
-    'postcss-nested': null,
+    'postcss-import': false,
+    'postcss-nested': false,
     'postcss-bem': { style: 'bem' }  
   }
 }
@@ -121,8 +122,8 @@ module.exports = {
   "map": "inline",
   "to": "app.css",
   "plugins": {
-    "postcss-import": null,
-    "postcss-nested": null,
+    "postcss-import": false,
+    "postcss-nested": false,
     "postcss-bem": { "style": "bem" }
   }
 }
