@@ -24,7 +24,7 @@
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
     "standard": "^8.3.0",
-    "sugarss": "^0.1.6"
+    "sugarss": "^0.2.0"
   },
   "ava": {
     "verbose": "true"
