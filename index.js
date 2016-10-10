@@ -18,7 +18,7 @@ module.exports = function loadConfig (options) {
       return result || {}
     })
     .then(function (result) {
-      var config = result.config || { plugins: [] }
+      var config = result.config || { plugins: {} }
 
       return {
         plugins: loadPlugins(config, options),
