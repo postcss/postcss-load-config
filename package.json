@@ -11,7 +11,7 @@
     "start": "echo '=> Starting' && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^1.1.0",
+    "cosmiconfig": "^2.0.2",
     "postcss-load-options": "^1.0.0-alpha4",
     "postcss-load-plugins": "^2.0.0-alpha4"
   },
