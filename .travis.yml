@@ -3,7 +3,6 @@ language: node_js
 node_js:
   - v6
   - v4
-  - v0.12
 cache:
   directories:
     - node_modules
@@ -13,3 +12,5 @@ script:
   - npm test
 after_success:
 - './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+notifications:
+  email: false
