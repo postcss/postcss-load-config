@@ -1,15 +1,17 @@
 [![npm][npm]][npm-url]
+[![node][node]][node-url]
 [![deps][deps]][deps-url]
-[![tests][travis]][travis-url]
+[![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![code style][style]][style-url]
 [![chat][chat]][chat-url]
 
 <div align="center">
-  <img width="108" height="108" title="Load Config" src="http://michael-ciniawsky.github.io/postcss-load-config/logo.svg">
+  <img width="100" height="100" title="Load Options" src="http://michael-ciniawsky.github.io/postcss-load-options/logo.svg">
   <a href="https://github.com/postcss/postcss">
-    <img width="108" height="108" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="20">
+    <img width="110" height="110" title="PostCSS"           src="http://postcss.github.io/postcss/logo.svg" hspace="10">
   </a>
+  <img width="100" height="100" title="Load Plugins" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
   <h1>Load Config</h1>
   <p>Autoload Config for PostCSS<p>
 </div>
@@ -22,147 +24,236 @@ npm i -D postcss-load-config
 
 <h2 align="center">Usage</h2>
 
-Install plugin as usual and make sure saving them to your ***package.json*** dependencies and/or devDependencies.
-
 ```
 npm i -S|-D postcss-plugin
 ```
 
-After installing your plugins there a two common ways to declare your plugins and options.
+Install plugins and save them to your ***package.json*** dependencies/devDependencies.
 
-- Create **postcss** section in your projects **package.json**.
-- Create a **postcss.config.js**  or  **postcssrc.json** file.
+### `package.json`
 
-<h2 align="center">Options</h2>
+Create **`postcss`** section in your projects **`package.json`**.
 
-Plugin **options** can either take `false` or an object literal `{}`
-as value.
-
-**`false`**: Plugin loads with no options (defaults).
-
-**`[Object]`**: Plugin loads with set options.
-
-### Ordering
-
-Plugin **order** is determined by declaration in the plugins section.
-
-```js
-postcss: {
-  parser: require('sugarss'),
-  from: 'app.sss'
-  map: 'inline',
-  to: 'app.css'
-  plugins: {
-    'postcss-plugin1': false,
-    'postcss-plugin2': false,
-    'postcss-plugin3': { option: '', option: '' }
-  }
-}
-
-// Loaded Options Setup
-{
-  parser: require('sugarss'),
-  from: 'app.sss'
-  map: 'inline',
-  to: 'app.css'
-}
-// Loaded Plugin Setup
-[
-  require('postcss-plugin1')(),
-  require('postcss-plugin2')(),
-  require('postcss-plugin3')(options)
-]
 ```
-
-### package.json
+App
+  |– client
+  |– public
+  |
+  |- package.json
+```
 
 ```json
 {
- "dependencies": {
-   "sugarss": "^0.1.4",
-   "postcss-bem": "^0.2.2",
-   "postcss-nested": "^1.0.0",
-   "postcss-import": "^8.1.2"
- },
- "postcss": {
-   "parser": "sugarss",
-   "from": "app.sss",
-   "map": "inline",
-   "to": "app.css",
-   "plugins": {
-     "postcss-import": false,
-     "postcss-nested": false,
-     "postcss-bem": { "style": "bem" }
+  "postcss": {
+    "parser": "sugarss",
+    "map": false,
+    "from": "/path/to/src.sss",
+    "to": "/path/to/dest.css",
+    "plugins": {
+      "postcss-plugin": {}
     }
   }
 }
 ```
 
-### postcss.config.js
+### `.postcssrc`
 
-```js
-module.exports = {
-  parser: "sugarss",
-  from: 'app.sss',
-  map: 'inline',
-  to: 'app.css',
-  plugins: {
-    'postcss-import': false,
-    'postcss-nested': false,
-    'postcss-bem': { style: 'bem' }  
+Create a **`.postcssrc`** file.
+
+```
+App
+  |– client
+  |– public
+  |
+  |-.postcssrc
+  |- package.json
+```
+
+```json
+{
+  "parser": "sugarss",
+  "map": false,
+  "from": "/path/to/src.sss",
+  "to": "/path/to/dest.css",
+  "plugins": {
+    "postcss-plugin": {}
   }
 }
 ```
-### postcssrc.json
+
+### `postcss.config.js`
+
+Create a **`postcss.config.js`** file.
+
+```
+App
+  |– client
+  |– public
+  |
+  |- postcss.config.js
+  |- package.json
+```
+
+```js
+module.exports = (ctx) => {
+  parser: ctx.sugar ? 'sugarss' : false,
+  map: ctx.env === 'development' ? ctx.map : false,
+  from: ctx.from
+  to: ctx.to
+  plugins: {
+    'postcss-plugin': ctx.plugin
+  }
+}
+```
+
+```js
+module.exports = (ctx) => {
+  parser: ctx.sugar ? 'sugarss' : false,
+  map: ctx.env === 'development' ? ctx.map : false,
+  from: ctx.from
+  to: ctx.to
+  plugins: [
+    require('postcss-plugin')(ctx.plugin)
+  ]
+}
+```
+
+<h2 align="center">Options</h2>
+
+Plugin **options** can take the following values.
+
+
+
+**`null`**: Plugin loads with defaults.
+
+```js
+'postcss-plugin': null
+```
+
+**`[Object]`**: Plugin loads with given options.
+
+```js
+'postcss-plugin': { option: '', option: '' }
+```
+
+**`false`**: Plugin will not be loaded.
+
+```js
+'postcss-plugin': false
+```
+
+### Order
+
+Plugin **order** is determined by declaration in the plugins section.
 
 ```js
 {
-  "parser": "sugarss",
-  "from": "app.sss",
-  "map": "inline",
-  "to": "app.css",
-  "plugins": {
-    "postcss-import": false,
-    "postcss-nested": false,
-    "postcss-bem": { "style": "bem" }
+  plugins: {
+    'postcss-plugin': false, // plugins[0]
+    'postcss-plugin': false, // plugins[1]
+    'postcss-plugin': {}     // plugins[2]
   }
 }
 ```
 
-<h2 align="center">Example</h2>
+### Context
 
-### Default
+When using a function `(postcss.config.js)`, it is possible to pass context to `postcss-load-plugins`, which will be evaluated before loading your plugins. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
+
+<h2 align="center">Examples</h2>
+
+**postcss.config.js**
+
+```js
+module.exports = (ctx) => {
+  parser: ctx.sugar ? 'sugarss' : false,
+  map: ctx.env === 'development' ? ctx.map : false,
+  from: ctx.from
+  to: ctx.to
+  plugins: {
+    postcss-import: null,
+    postcss-nested: null,
+    cssnano: ctx.env === 'development' ? false : null
+  }
+}
+```
+
+### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg">
+
+```json
+"scripts": {
+  "build": "NODE_ENV=production node postcss",
+  "start": "NODE_ENV=development node postcss"
+}
+```
 
 ```js
 const { readFileSync } = require('fs')
 
 const postcss = require('postcss')
-const postcssrc = require('postcss-load-config')()
+const postcssrc = require('postcss-load-config')
 
-const css = readFileSync('./index.css', 'utf8')
+const css = readFileSync('index.sss', 'utf8')
 
-postcssrc.then(({ plugins, options }) => {
+const ctx = { map: 'inline' from: '/index.sss', to: '/index.css' }
+
+postcssrc(ctx).then(({ plugins, options }) => {
   postcss(plugins)
     .process(css, options)
-    .then(result => console.log(result.css))
+    .then(({ css }) => console.log(css))
 }))
 ```
 
-### Custom
+### <img width="80" height="80" src="https://worldvectorlogo.com/logos/gulp.svg">
+
+```json
+"scripts": {
+  "build": "NODE_ENV=production gulp",
+  "start": "NODE_ENV=development gulp"
+}
+```
 
 ```js
-const { readFileSync } = require('fs')
+const { task, src, dest } = require('gulp')
 
-const postcss = require('postcss')
-const postcssrc = require('postcss-load-config')('./path/to/postcssrc.json')
+const postcss = require('gulp-postcssrc')
 
-const css = readFileSync('./index.css', 'utf8')
+task('css', () => {
+  src('src/*.css')
+    .pipe(postcss())
+    .pipe(dest('dest'))
+})
 
-postcssrc.then(({ plugins, options }) => {
-  postcss(plugins)
-    .process(css, options)
-    .then(result => console.log(result.css))
-}))
+task('default', ['css'])
+```
+
+### <img width="80" height="80" src="https://worldvectorlogo.com/logos/webpack.svg">
+
+```json
+"scripts": {
+  "build": "NODE_ENV=production webpack",
+  "start": "NODE_ENV=development webpack-dev-server"
+}
+```
+
+```js
+module.exports = (env) => {
+  module: {
+    rules: [
+      {
+        test: /\.css$/
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 } }
+          },
+          'postcss-loader'
+        ]
+      }
+    ]
+  }
+}
 ```
 
 <h2 align="center">Maintainers</h2>
@@ -186,32 +277,12 @@ postcssrc.then(({ plugins, options }) => {
   <tbody>
 </table>
 
-<h2 align="center">LICENSE</h2>
-
-> License (MIT)
-
-> Copyright (c) 2016 Michael Ciniawsky
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-> The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
 
 [npm]: https://img.shields.io/npm/v/postcss-load-config.svg
 [npm-url]: https://npmjs.com/package/postcss-load-config
+
+[node]: https://img.shields.io/node/v/postcss-load-plugins.svg
+[node-url]: https://nodejs.org/
 
 [deps]: https://david-dm.org/michael-ciniawsky/postcss-load-config.svg
 [deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-config
@@ -219,8 +290,8 @@ SOFTWARE.
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
 
-[travis]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=master
-[travis-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=master
+[tests]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=master
+[tests-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=master
 
 [cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg?branch=master
 [cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=master
