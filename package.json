@@ -1,42 +1,46 @@
 {
   "name": "postcss-load-config",
-  "version": "1.0.0-alpha4",
+  "version": "1.0.0-beta",
   "description": "Autoload Config for PostCSS",
-  "engines": {"node": ">=4", "npm": ">=3"},
+  "engines": { "node": ">=4", "npm": ">=3" },
   "main": "index.js",
   "scripts": {
-    "clean": "echo '=> Cleaning' && rm -rf .nyc_output coverage",
-    "pretest": "echo '=> Linting' && npm run clean && standard",
-    "test": "echo '=> Testing' && nyc ava 'test/with-config/index.js' 'test/without-config/index.js'",
-    "start": "echo '=> Starting' && sudo npm test"
+    "lint": "standard",
+    "test": "nyc ava test/pkg/index.js test/rc/index.js test/js/index.js",
+    "logs": "standard-changelog > CHANGELOG.md",
+    "docs": "jsdoc2md index.js > INDEX.md",
+    "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
+    "start": "sudo npm run clean && npm run lint && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^1.1.0",
-    "postcss-load-options": "^1.0.0-alpha4",
-    "postcss-load-plugins": "^2.0.0-alpha4"
+    "cosmiconfig": "^2.0.2",
+    "postcss-load-options": "^1.0.1",
+    "postcss-load-plugins": "^2.0.0-beta"
   },
   "devDependencies": {
     "ava": "^0.16.0",
     "coveralls": "^2.11.14",
-    "nyc": "^8.3.0",
+    "cssnano": "^3.7.7",
+    "jsdoc-to-markdown": "^2.0.0",
+    "nyc": "^8.3.1",
     "postcss": "^5.2.4",
-    "postcss-bem": "^0.4.1",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
-    "standard": "^8.3.0",
-    "sugarss": "^0.1.6"
+    "postcss-scss": "^0.3.1",
+    "standard": "^8.4.0",
+    "sugarss": "^0.2.0"
   },
   "ava": {
     "verbose": "true"
   },
   "nyc": {
     "all": true,
-    "include": ["test"],
+    "include": ["index.js"],
     "extension": [".js"]
   },
   "keywords": [
     "postcss",
-    "postcssconfig"
+    "postcss-config"
   ],
   "author": {
     "name": "Michael Ciniawky",
@@ -44,8 +48,8 @@
   },
   "contributors": [
     {
-     "name": "Mateusz Derks",
-     "url": "http://ertrzyiks.me"
+      "name": "Mateusz Derks",
+      "url": "http://ertrzyiks.me"
     }
   ],
   "repository": {
