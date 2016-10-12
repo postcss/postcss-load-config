@@ -8,9 +8,6 @@ CHANGELOG.md
 CONTRIBUTING.md
 README.md
 
-exec.js
-*.test.js
-
 npm-debug.log
 
 # DIRECTORIES
@@ -18,6 +15,8 @@ npm-debug.log
 .github
 .nyc_output
 
+dmd
 test
 coverage
+jsdoc-api
 node_modules
