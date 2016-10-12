@@ -1,0 +1,17 @@
+{
+  "name": "postcss-config",
+  "version": "1.0.0",
+  "description": "Autoload Config for PostCSS",
+  "postcss": {
+    "parser": "sugarss",
+    "syntax": "postcss-scss",
+    "map": false,
+    "from": "fixtures/index.css",
+    "to": "expect/index.css",
+    "plugins": {
+      "postcss-import": null,
+      "postcss-nested": null,
+      "cssnano": false
+    }
+  }
+}
