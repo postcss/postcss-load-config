@@ -106,29 +106,78 @@ module.exports = (ctx) => {
 }
 ```
 
+Plugins can be loaded in either using an `{Object}` or an `{Array}`.
+
+##### `{Object}`
+
 ```js
 module.exports = (ctx) => {
-  parser: ctx.sugar ? 'sugarss' : false,
-  map: ctx.env === 'development' ? ctx.map : false,
-  from: ctx.from
-  to: ctx.to
+  ...options
+  plugins: {
+    'postcss-plugin': ctx.plugin
+  }
+}
+```
+
+##### `{Array}`
+
+```js
+module.exports = (ctx) => {
+  ...options
   plugins: [
     require('postcss-plugin')(ctx.plugin)
   ]
 }
 ```
+> :warning: When using an Array, make sure to `require()` them.
 
 <h2 align="center">Options</h2>
 
-Plugin **options** can take the following values.
-
-
-
-**`null`**: Plugin loads with defaults.
+**`parser`**:
 
 ```js
-'postcss-plugin': null
+'parser': 'sugarss'
 ```
+
+**`syntax`**:
+
+```js
+'syntax': 'postcss-scss'
+```
+**`stringifier`**:
+
+```js
+'stringifier': 'midas'
+```
+
+[**`map`**:](https://github.com/postcss/postcss/blob/master/docs/source-maps.md)
+
+```js
+'map': 'inline'
+```
+
+**`from`**:
+
+```js
+from: 'path/to/src.css'
+```
+
+**`to`**:
+
+```js
+to: 'path/to/dest.css'
+```
+
+<h2 align="center">Plugins</h2>
+
+### Options
+
+**`{} || null`**: Plugin loads with defaults.
+
+```js
+'postcss-plugin': {} || null
+```
+> :warning: `{}` must be an **empty** object
 
 **`[Object]`**: Plugin loads with given options.
 
@@ -149,16 +198,16 @@ Plugin **order** is determined by declaration in the plugins section.
 ```js
 {
   plugins: {
-    'postcss-plugin': false, // plugins[0]
-    'postcss-plugin': false, // plugins[1]
-    'postcss-plugin': {}     // plugins[2]
+    'postcss-plugin': {}, // plugins[0]
+    'postcss-plugin': {}, // plugins[1]
+    'postcss-plugin': {}  // plugins[2]
   }
 }
 ```
 
-### Context
+<h2 align="center">Context</h2>
 
-When using a function `(postcss.config.js)`, it is possible to pass context to `postcss-load-plugins`, which will be evaluated before loading your plugins. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
+When using a function `(postcss.config.js)`, it is possible to pass context to `postcss-load-config`, which will be evaluated while loading your config. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
 
 <h2 align="center">Examples</h2>
 
@@ -277,6 +326,20 @@ module.exports = (env) => {
   <tbody>
 </table>
 
+<h2 align="center">Contributors</h2>
+
+<table>
+  <tbody>
+   <tr>
+    <td align="center">
+      <img width="150 height="150"
+      src="https://avatars.githubusercontent.com/u/1483538?v=3&s=150">
+      <br />
+      <a href="https://github.com/sparty02">Ryan Dunckel</a>
+    </td>
+  </tr>
+  <tbody>
+</table>
 
 [npm]: https://img.shields.io/npm/v/postcss-load-config.svg
 [npm-url]: https://npmjs.com/package/postcss-load-config
