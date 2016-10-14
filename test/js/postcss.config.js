@@ -1,4 +1,4 @@
-module.exports = (ctx) => {
+module.exports = function (ctx) {
   return {
     parser: ctx.sugar ? 'sugarss' : false,
     syntax: 'postcss-scss',
@@ -6,9 +6,9 @@ module.exports = (ctx) => {
     from: 'fixtures/index.css',
     to: 'expect/index.css',
     plugins: {
-      'postcss-import': null,
-      'postcss-nested': null,
-      'cssnano': ctx.env === 'production' ? null : false
+      'postcss-import': {},
+      'postcss-nested': {},
+      'cssnano': ctx.env === 'production' ? {} : false
     }
   }
 }

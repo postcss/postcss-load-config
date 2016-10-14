@@ -1,19 +1,27 @@
+// ------------------------------------
+// #POSTCSS - LOAD CONFIG - TEST - RC
+// ------------------------------------
+
 'use strict'
 
-const test = require('ava')
+var test = require('ava')
 
-const read = require('fs').readFileSync
-const join = require('path').join
+var read = require('fs').readFileSync
+var join = require('path').join
 
-const fixture = (file) => read(join(__dirname, 'fixtures', file), 'utf8')
+var fixture = function (file) {
+  return read(join(__dirname, 'fixtures', file), 'utf8')
+}
 
-const expect = (file) => read(join(__dirname, 'expect', file), 'utf8')
+var expect = function (file) {
+  return read(join(__dirname, 'expect', file), 'utf8')
+}
 
-const postcss = require('postcss')
-const postcssrc = require('../..')
+var postcss = require('postcss')
+var postcssrc = require('../..')
 
-test('.postcssrc - {Object} - Load Config', (t) => {
-  return postcssrc().then((config) => {
+test('.postcssrc - {Object} - Load Config', function (t) {
+  return postcssrc().then(function (config) {
     t.is(config.plugins.length, 2)
 
     t.is(config.options.parser, require('sugarss'))
@@ -27,25 +35,25 @@ test('.postcssrc - {Object} - Load Config', (t) => {
   })
 })
 
-test('.postcssrc - {Object} - Process CSS', (t) => {
-  const ctx = { parser: false }
+test('.postcssrc - {Object} - Process CSS', function (t) {
+  var ctx = { parser: false }
 
-  return postcssrc(ctx).then((config) => {
+  return postcssrc(ctx).then(function (config) {
     return postcss(config.plugins)
       .process(fixture('index.css'), config.options)
-      .then((result) => {
+      .then(function (result) {
         t.is(expect('index.css'), result.css)
       })
   })
 })
 
-test('.postcssrc - {Object} - Process SSS', (t) => {
-  const ctx = { from: 'fixtures/index.sss' }
+test('.postcssrc - {Object} - Process SSS', function (t) {
+  var ctx = { from: 'fixtures/index.sss' }
 
-  return postcssrc(ctx).then((config) => {
+  return postcssrc(ctx).then(function (config) {
     return postcss(config.plugins)
       .process(fixture('index.sss'), config.options)
-      .then((result) => {
+      .then(function (result) {
         t.is(expect('index.sss'), result.css)
       })
   })

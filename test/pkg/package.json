@@ -9,8 +9,8 @@
     "from": "fixtures/index.css",
     "to": "expect/index.css",
     "plugins": {
-      "postcss-import": null,
-      "postcss-nested": null,
+      "postcss-import": {},
+      "postcss-nested": {},
       "cssnano": false
     }
   }
