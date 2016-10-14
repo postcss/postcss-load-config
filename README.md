@@ -195,13 +195,13 @@ const postcssrc = require('postcss-load-config')
 
 const css = readFileSync('index.sss', 'utf8')
 
-const ctx = { map: 'inline' from: '/index.sss', to: '/index.css' }
+const ctx = { map: 'inline', from: '/index.sss', to: '/index.css' }
 
 postcssrc(ctx).then(({ plugins, options }) => {
   postcss(plugins)
     .process(css, options)
     .then(({ css }) => console.log(css))
-}))
+})
 ```
 
 ### <img width="80" height="80" src="https://worldvectorlogo.com/logos/gulp.svg">
