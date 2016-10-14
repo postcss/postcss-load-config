@@ -4,10 +4,11 @@
 
 'use strict'
 
-const config = require('cosmiconfig')
+var config = require('cosmiconfig')
+var assign = require('object-assign')
 
-const loadOptions = require('postcss-load-options/lib/options.js')
-const loadPlugins = require('postcss-load-plugins/lib/plugins.js')
+var loadOptions = require('postcss-load-options/lib/options.js')
+var loadPlugins = require('postcss-load-plugins/lib/plugins.js')
 
 /**
  * @author Michael Ciniawsky (@michael-ciniawsky) <michael.ciniawsky@gmail.com>
@@ -17,6 +18,7 @@ const loadPlugins = require('postcss-load-plugins/lib/plugins.js')
  * @version 1.0.0
  *
  * @requires comsiconfig
+ * @requires object-assign
  * @requires postcss-load-options
  * @requires postcss-load-plugins
  *
@@ -29,26 +31,31 @@ const loadPlugins = require('postcss-load-plugins/lib/plugins.js')
  * @return {Promise} config  PostCSS Plugins, PostCSS Options
  */
 module.exports = function postcssrc (ctx, path, options) {
-  const defaults = {
-    cwd: process.cwd(),
-    env: process.env.NODE_ENV
-  }
+  var defaults = { cwd: process.cwd(), env: process.env.NODE_ENV }
 
-  ctx = Object.assign(defaults, ctx) || defaults
+  ctx = assign(defaults, ctx) || defaults
   path = path || process.cwd()
   options = options || {}
 
   return config('postcss', options)
     .load(path)
     .then(function (result) {
-      result = result.config || {}
+      if (result === undefined) {
+        console.log(
+          'PostCSS Config could not be loaded. Please check your PostCSS Config.'
+        )
+      }
+
+      result === undefined ? { config: {} } : result
+      result = result.config
+
       return result
     })
     .then(function (config) {
       if (typeof config === 'function') {
         config = config(ctx)
       } else {
-        config = Object.assign(config, ctx)
+        config = assign(config, ctx)
       }
 
       if (!config.plugins) {
