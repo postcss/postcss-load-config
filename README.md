@@ -201,7 +201,7 @@ postcssrc(ctx).then(({ plugins, options }) => {
   postcss(plugins)
     .process(css, options)
     .then(({ css }) => console.log(css))
-}))
+})
 ```
 
 ### <img width="80" height="80" src="https://worldvectorlogo.com/logos/gulp.svg">
