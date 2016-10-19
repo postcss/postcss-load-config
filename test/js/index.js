@@ -21,8 +21,6 @@ var postcss = require('postcss')
 var postcssrc = require('../..')
 
 test('postcss.config.js - {Function} - Load Config', function (t) {
-  process.env.NODE_ENV = 'development'
-
   var ctx = { sugar: true }
 
   return postcssrc(ctx).then(function (config) {
@@ -60,14 +58,5 @@ test('postcss.config.js - {Function} - Process SSS', function (t) {
       .then(function (result) {
         t.is(expect('index.sss'), result.css)
       })
-  })
-})
-
-test('postcssrc- {Function} - Load only defaults when no config exists', function (t) {
-  return postcssrc({}, '../').then(function (config) {
-    t.deepEqual(config.plugins, [])
-    t.true('cwd' in config.options)
-    t.true('env' in config.options)
-    t.is(Object.keys(config.options).length, 2)
   })
 })
