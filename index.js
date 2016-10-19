@@ -37,6 +37,10 @@ module.exports = function postcssrc (ctx, path, options) {
   path = path || process.cwd()
   options = options || {}
 
+  if (ctx.env === undefined) {
+    process.env.NODE_ENV = 'development'
+  }
+
   return config('postcss', options)
     .load(path)
     .then(function (result) {
