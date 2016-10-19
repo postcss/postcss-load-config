@@ -62,3 +62,12 @@ test('postcss.config.js - {Function} - Process SSS', function (t) {
       })
   })
 })
+
+test('postcssrc- {Function} - Load only defaults when no config exists', function (t) {
+  return postcssrc({}, '../').then(function (config) {
+    t.deepEqual(config.plugins, [])
+    t.true('cwd' in config.options)
+    t.true('env' in config.options)
+    t.is(Object.keys(config.options).length, 2)
+  })
+})
