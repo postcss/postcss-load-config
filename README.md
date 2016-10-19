@@ -220,9 +220,9 @@ module.exports = (ctx) => {
   from: ctx.from
   to: ctx.to
   plugins: {
-    postcss-import: null,
-    postcss-nested: null,
-    cssnano: ctx.env === 'development' ? false : null
+    postcss-import: {},
+    postcss-nested: {},
+    cssnano: ctx.env === 'production' ? {} : false
   }
 }
 ```
@@ -312,13 +312,13 @@ module.exports = (env) => {
    <tr>
     <td align="center">
       <img width="150 height="150"
-      src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
+        src="https://avatars.githubusercontent.com/u/5419992?v=3&s=150">
       <br />
       <a href="https://github.com/michael-ciniawsky">Michael Ciniawsky</a>
     </td>
     <td align="center">
       <img width="150 height="150"
-      src="https://avatars.githubusercontent.com/u/2437969?v=3&s=150">
+        src="https://avatars.githubusercontent.com/u/2437969?v=3&s=150">
       <br />
       <a href="https://github.com/ertrzyiks">Mateusz Derks</a>
     </td>
@@ -333,14 +333,12 @@ module.exports = (env) => {
    <tr>
     <td align="center">
       <img width="150" height="150"
-      src="https://avatars.githubusercontent.com/u/1483538?v=3&s=150">
+        src="https://avatars.githubusercontent.com/u/1483538?v=3&s=150">
       <br />
       <a href="https://github.com/sparty02">Ryan Dunckel</a>
     </td>
     <td align="center">
-      <img
-        width="150"
-        height="150"
+      <img width="150" height="150"
         src="https://avatars.githubusercontent.com/u/6249643?v=3&s=150">
       <br />
       <a href="https://github.com/pcgilday">Patrick Gilday</a>
