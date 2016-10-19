@@ -33,22 +33,20 @@ var loadPlugins = require('postcss-load-plugins/lib/plugins.js')
 module.exports = function postcssrc (ctx, path, options) {
   var defaults = { cwd: process.cwd(), env: process.env.NODE_ENV }
 
-  ctx = assign(defaults, ctx) || defaults
+  ctx = assign(defaults, ctx)
   path = path || process.cwd()
   options = options || {}
 
   return config('postcss', options)
     .load(path)
     .then(function (result) {
-      if (result === undefined) {
+      if (!result) {
         console.log(
           'PostCSS Config could not be loaded. Please check your PostCSS Config.'
         )
       }
 
-      result = result ? result.config : {}
-
-      return result
+      return result ? result.config : {}
     })
     .then(function (config) {
       if (typeof config === 'function') {
