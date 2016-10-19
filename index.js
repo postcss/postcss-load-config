@@ -46,8 +46,7 @@ module.exports = function postcssrc (ctx, path, options) {
         )
       }
 
-      result === undefined ? { config: {} } : result
-      result = result.config
+      result = result ? result.config : {}
 
       return result
     })
