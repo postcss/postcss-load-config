@@ -1,7 +1,6 @@
 {
   "name": "postcss-config",
   "version": "1.0.0",
-  "description": "Autoload Config for PostCSS",
   "postcss": {
     "parser": "sugarss",
     "syntax": "postcss-scss",
@@ -11,6 +10,7 @@
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
+      "postcss-sprites": {},
       "cssnano": false
     }
   }

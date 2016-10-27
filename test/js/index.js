@@ -24,7 +24,7 @@ test('postcss.config.js - {Function} - Load Config', function (t) {
   var ctx = { sugar: true }
 
   return postcssrc(ctx).then(function (config) {
-    t.is(config.plugins.length, 2)
+    t.is(config.plugins.length, 3)
 
     t.is(config.options.parser, require('sugarss'))
     t.is(config.options.syntax, require('postcss-scss'))
@@ -34,6 +34,7 @@ test('postcss.config.js - {Function} - Load Config', function (t) {
 
     t.is(config.plugins[0], require('postcss-import'))
     t.is(config.plugins[1], require('postcss-nested'))
+    t.is(config.plugins[2], require('postcss-sprites'))
   })
 })
 
