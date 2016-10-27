@@ -1,12 +1,12 @@
 {
   "name": "postcss-load-config",
-  "version": "1.0.0-rc",
+  "version": "1.0.0",
   "description": "Autoload Config for PostCSS",
   "engines": { "node": ">=0.12", "npm": ">=3" },
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "nyc ava test/pkg/index.js test/rc/index.js test/js/index.js",
+    "test": "nyc ava test/err/index.js test/pkg/index.js test/rc/index.js test/js/index.js",
     "logs": "standard-changelog > CHANGELOG.md",
     "docs": "jsdoc2md index.js > INDEX.md",
     "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
@@ -16,7 +16,7 @@
     "cosmiconfig": "^2.1.0",
     "object-assign": "^4.1.0",
     "postcss-load-options": "^1.0.2",
-    "postcss-load-plugins": "^2.0.0-rc"
+    "postcss-load-plugins": "^2.0.0"
   },
   "devDependencies": {
     "ava": "^0.16.0",
@@ -27,6 +27,7 @@
     "postcss": "^5.2.4",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
+    "postcss-sprites": "^4.0.0",
     "postcss-scss": "^0.3.1",
     "standard": "^8.4.0",
     "sugarss": "^0.2.0"
@@ -55,6 +56,10 @@
     {
       "name": "Ryan Dunckel",
       "email": "sparty02@gmail.com"
+    },
+    {
+      "name": "Patrick Gilday",
+      "email": ""
     }
   ],
   "repository": {
