@@ -95,7 +95,7 @@ App
 ```
 
 ```js
-module.exports = (ctx) => {
+module.exports = (ctx) => ({
   parser: ctx.sugar ? 'sugarss' : false,
   map: ctx.env === 'development' ? ctx.map : false,
   from: ctx.from
@@ -103,7 +103,7 @@ module.exports = (ctx) => {
   plugins: {
     'postcss-plugin': ctx.plugin
   }
-}
+})
 ```
 
 Plugins can be loaded in either using an `{Object}` or an `{Array}`.
@@ -111,23 +111,23 @@ Plugins can be loaded in either using an `{Object}` or an `{Array}`.
 ##### `{Object}`
 
 ```js
-module.exports = (ctx) => {
+module.exports = (ctx) => ({
   ...options
   plugins: {
     'postcss-plugin': ctx.plugin
   }
-}
+})
 ```
 
 ##### `{Array}`
 
 ```js
-module.exports = (ctx) => {
+module.exports = (ctx) => ({
   ...options
   plugins: [
     require('postcss-plugin')(ctx.plugin)
   ]
-}
+})
 ```
 > :warning: When using an Array, make sure to `require()` them.
 
@@ -214,7 +214,7 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 **postcss.config.js**
 
 ```js
-module.exports = (ctx) => {
+module.exports = (ctx) => ({
   parser: ctx.sugar ? 'sugarss' : false,
   map: ctx.env === 'development' ? ctx.map : false,
   from: ctx.from
@@ -224,7 +224,7 @@ module.exports = (ctx) => {
     postcss-nested: {},
     cssnano: ctx.env === 'production' ? {} : false
   }
-}
+})
 ```
 
 ### <img width="80" height="80" src="https://worldvectorlogo.com/logos/nodejs-icon.svg">
