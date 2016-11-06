@@ -220,8 +220,8 @@ module.exports = (ctx) => ({
   from: ctx.from
   to: ctx.to
   plugins: {
-    postcss-import: {},
-    postcss-nested: {},
+    'postcss-import': {},
+    'postcss-nested': {},
     cssnano: ctx.env === 'production' ? {} : false
   }
 })
@@ -286,7 +286,7 @@ task('default', ['css'])
 ```
 
 ```js
-module.exports = (env) => {
+module.exports = (env) => ({
   module: {
     rules: [
       {
@@ -302,7 +302,7 @@ module.exports = (env) => {
       }
     ]
   }
-}
+})
 ```
 
 <h2 align="center">Maintainers</h2>
