@@ -19,11 +19,11 @@
     "postcss-load-plugins": "^2.0.0"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "^0.17.0",
     "coveralls": "^2.11.14",
     "cssnano": "^3.7.7",
     "jsdoc-to-markdown": "^2.0.0",
-    "nyc": "^8.3.1",
+    "nyc": "^9.0.1",
     "postcss": "^5.2.4",
     "postcss-import": "^8.1.2",
     "postcss-nested": "^1.0.0",
