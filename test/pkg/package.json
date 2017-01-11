@@ -5,12 +5,13 @@
     "parser": "sugarss",
     "syntax": "postcss-scss",
     "map": false,
-    "from": "fixtures/index.css",
-    "to": "expect/index.css",
+    "from": "./test/pkg/fixtures/index.css",
+    "to": "./test/pkg/expect/index.css",
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
       "postcss-sprites": {},
+      "postcss-cssnext": {},
       "cssnano": false
     }
   }
