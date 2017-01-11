@@ -13,7 +13,6 @@
   </a>
   <img width="100" height="100" title="Load Plugins" src="http://michael-ciniawsky.github.io/postcss-load-plugins/logo.svg">
   <h1>Load Config</h1>
-  <p>Autoload Config for PostCSS<p>
 </div>
 
 <h2 align="center">Install</h2>
@@ -96,7 +95,7 @@ App
 
 ```js
 module.exports = (ctx) => ({
-  parser: ctx.sugar ? 'sugarss' : false,
+  parser: ctx.parser ? 'sugarss' : false,
   map: ctx.env === 'development' ? ctx.map : false,
   from: ctx.from
   to: ctx.to
@@ -215,10 +214,8 @@ When using a function `(postcss.config.js)`, it is possible to pass context to `
 
 ```js
 module.exports = (ctx) => ({
-  parser: ctx.sugar ? 'sugarss' : false,
+  parser: ctx.parser ? 'sugarss' : false,
   map: ctx.env === 'development' ? ctx.map : false,
-  from: ctx.from
-  to: ctx.to
   plugins: {
     'postcss-import': {},
     'postcss-nested': {},
@@ -244,12 +241,12 @@ const postcssrc = require('postcss-load-config')
 
 const css = readFileSync('index.sss', 'utf8')
 
-const ctx = { map: 'inline', from: '/index.sss', to: '/index.css' }
+const ctx = { parser: true, map: 'inline' }
 
 postcssrc(ctx).then(({ plugins, options }) => {
   postcss(plugins)
     .process(css, options)
-    .then(({ css }) => console.log(css))
+    .then((result) => console.log(result.css))
 })
 ```
 
@@ -263,17 +260,21 @@ postcssrc(ctx).then(({ plugins, options }) => {
 ```
 
 ```js
-const { task, src, dest } = require('gulp')
+const { task, src, dest, series, watch } = require('gulp')
 
 const postcss = require('gulp-postcssrc')
 
-task('css', () => {
+const css = () => {
   src('src/*.css')
     .pipe(postcss())
     .pipe(dest('dest'))
 })
 
-task('default', ['css'])
+task('watch', () => {
+  watch(['src/*.css', 'postcss.config.js'], css)
+})
+
+task('default', series(css, 'watch'))
 ```
 
 ### <img width="80" height="80" src="https://worldvectorlogo.com/logos/webpack.svg">
@@ -359,11 +360,11 @@ module.exports = (env) => ({
 [style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
 [style-url]: http://standardjs.com/
 
-[tests]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg?branch=master
-[tests-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config?branch=master
+[tests]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg
+[tests-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config
 
-[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg?branch=master
-[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config?branch=master
+[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg
+[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config
 
-[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg?maxAge=2592000
+[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg
 [chat-url]: https://gitter.im/postcss/postcss
