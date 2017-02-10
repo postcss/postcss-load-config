@@ -22,7 +22,7 @@
     "ava": "^0.17.0",
     "coveralls": "^2.11.15",
     "cssnano": "^3.10.0",
-    "jsdoc-to-markdown": "^2.0.0",
+    "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^10.0.0",
     "postcss": "^5.2.8",
     "postcss-cssnext": "^2.8.0",
