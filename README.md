@@ -57,17 +57,20 @@ App
 
 ### `.postcssrc`
 
-Create a **`.postcssrc`** file.
+Create a **`.postcssrc`** file in JSON or YAML format.
+
+It's also allowed to use extensions (**`.postcssrc.json`** or **`.postcssrc.yaml`**). That could help your text editor to properly interpret the file.
 
 ```
 App
   |– client
   |– public
   |
-  |-.postcssrc
+  |- (.postcssrc|.postcssrc.json|.postcssrc.yaml)
   |- package.json
 ```
 
+JSON:
 ```json
 {
   "parser": "sugarss",
@@ -79,20 +82,43 @@ App
   }
 }
 ```
+YAML:
+```yaml
+parser: sugarss
+map: false
+from: "/path/to/src.sss"
+to: "/path/to/dest.css"
+plugins:
+  postcss-plugin: {}
+```
 
-### `postcss.config.js`
+### `postcss.config.js` or `.postcssrc.js`
 
-Create a **`postcss.config.js`** file.
+You may need some JavaScript logic to generate your config. For this case you can use a file named **`postcss.config.js`** or **`.postcssrc.js`**.
 
 ```
 App
   |– client
   |– public
   |
-  |- postcss.config.js
+  |- (postcss.config.js|.postcssrc.js)
   |- package.json
 ```
 
+You can simply export the config as a plain object:
+```js
+module.exports = {
+  parser: 'sugarss',
+  map: false,
+  from: '/path/to/src.sss',
+  to: '/path/to/dest.css',
+  plugins: {
+    'postcss-plugin': {}
+  }
+}
+```
+
+Or export a function that returns the config (more about param `ctx` below):
 ```js
 module.exports = (ctx) => ({
   parser: ctx.parser ? 'sugarss' : false,
@@ -206,7 +232,7 @@ Plugin **order** is determined by declaration in the plugins section.
 
 <h2 align="center">Context</h2>
 
-When using a function `(postcss.config.js)`, it is possible to pass context to `postcss-load-config`, which will be evaluated while loading your config. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
+When using a function (`postcss.config.js` or `.postcssrc.js`), it is possible to pass context to `postcss-load-config`, which will be evaluated while loading your config. By default `ctx.env (process.env.NODE_ENV)` and `ctx.cwd (process.cwd())` are available.
 
 <h2 align="center">Examples</h2>
 
