@@ -6,7 +6,7 @@ Autoload Config for PostCSS
 **Kind**: global function  
 **Returns**: <code>Promise</code> - config PostCSS Config  
 **Requires**: <code>module:comsiconfig</code>, <code>module:object-assign</code>, <code>module:postcss-load-options</code>, <code>module:postcss-load-plugins</code>  
-**Version**: 1.1.0  
+**Version**: 1.2.0  
 **Author:** Michael Ciniawsky (@michael-ciniawsky) <michael.ciniawsky@gmail.com>  
 **License**: MIT  
 
