@@ -70,7 +70,7 @@ App
   |- package.json
 ```
 
-JSON:
+**`JSON`**
 ```json
 {
   "parser": "sugarss",
@@ -82,7 +82,8 @@ JSON:
   }
 }
 ```
-YAML:
+
+**`YAML`**
 ```yaml
 parser: sugarss
 map: false
@@ -105,7 +106,8 @@ App
   |- package.json
 ```
 
-You can simply export the config as a plain object:
+You can export the config as an `{Object}`
+
 ```js
 module.exports = {
   parser: 'sugarss',
@@ -118,7 +120,8 @@ module.exports = {
 }
 ```
 
-Or export a function that returns the config (more about param `ctx` below):
+Or export a `{Function}` that returns the config (more about the param `ctx` below)
+
 ```js
 module.exports = (ctx) => ({
   parser: ctx.parser ? 'sugarss' : false,
