@@ -1,6 +1,6 @@
 {
   "name": "postcss-load-config",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Autoload Config for PostCSS",
   "engines": { "node": ">=0.12" },
   "main": "index.js",
@@ -15,21 +15,21 @@
   "dependencies": {
     "cosmiconfig": "^2.1.0",
     "object-assign": "^4.1.0",
-    "postcss-load-options": "^1.1.0",
-    "postcss-load-plugins": "^2.2.0"
+    "postcss-load-options": "^1.2.0",
+    "postcss-load-plugins": "^2.3.0"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
-    "coveralls": "^2.11.15",
+    "ava": "^0.18.1",
+    "coveralls": "^2.11.16",
     "cssnano": "^3.10.0",
     "jsdoc-to-markdown": "^3.0.0",
-    "nyc": "^10.0.0",
-    "postcss": "^5.2.8",
+    "nyc": "^10.1.0",
+    "postcss": "^5.2.12",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^9.1.0",
     "postcss-nested": "^1.0.0",
     "postcss-scss": "^0.4.0",
-    "postcss-sprites": "^4.1.1",
+    "postcss-sprites": "^4.2.0",
     "standard": "^8.6.0",
     "standard-changelog": "0.0.1",
     "sugarss": "^0.2.0"
@@ -55,8 +55,10 @@
       "email": "sparty02@gmail.com"
     },
     {
-      "name": "Patrick Gilday",
-      "email": ""
+      "name": "Patrick Gilday"
+    },
+    {
+      "name": "Dalton Santos"
     }
   ],
   "repository": {

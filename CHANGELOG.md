@@ -1,3 +1,13 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/michael-ciniawsky/postcss-load-config/compare/v1.1.0...v1.2.0) (2017-02-13)
+
+
+### Features
+
+* **index:** allow extensions for .postcssrc ([0d3bf35](https://github.com/michael-ciniawsky/postcss-load-config/commit/0d3bf35))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/michael-ciniawsky/postcss-load-config/compare/v1.0.0...v1.1.0) (2017-01-11)
 
@@ -9,7 +19,7 @@
 
 
 <a name="1.0.0"></a>
-# [1.0.0]((https://github.com/michael-ciniawsky/postcss-load-config/compare/v1.0.0-rc...v1.0.0)) (2016-10-27)
+# [1.0.0]((https://github.com/michael-ciniawsky/postcss-load-config/compare/v1.0.0-rc...1.0.0)) (2016-10-27)
 
 
 ### Bug Fixes
