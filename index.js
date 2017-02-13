@@ -19,7 +19,7 @@ var loadPlugins = require('postcss-load-plugins/lib/plugins.js')
  * @license MIT
  *
  * @module postcss-load-config
- * @version 1.1.0
+ * @version 1.2.0
  *
  * @requires comsiconfig
  * @requires object-assign
@@ -39,7 +39,7 @@ module.exports = function postcssrc (ctx, path, options) {
 
   path = path ? resolve(path) : process.cwd()
 
-  options = assign({rcExtensions: true}, options)
+  options = assign({ rcExtensions: true }, options)
 
   if (!ctx.env) process.env.NODE_ENV = 'development'
 
