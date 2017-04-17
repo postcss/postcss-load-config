@@ -134,7 +134,7 @@ module.exports = (ctx) => ({
 })
 ```
 
-Plugins can be loaded in either using an `{Object}` or an `{Array}`.
+Plugins can be loaded in either using an `{Object}` or an `[Array]`.
 
 ##### `{Object}`
 
