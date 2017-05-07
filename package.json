@@ -32,7 +32,7 @@
     "postcss-sprites": "^4.2.0",
     "standard": "^9.0.0",
     "standard-changelog": "1.0.1",
-    "sugarss": "^0.2.0"
+    "sugarss": "^1.0.0"
   },
   "files": [
     "index.js"
