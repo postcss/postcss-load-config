@@ -23,7 +23,7 @@
     "coveralls": "^2.11.16",
     "cssnano": "^3.10.0",
     "jsdoc-to-markdown": "^3.0.0",
-    "nyc": "^10.1.0",
+    "nyc": "^11.0.1",
     "postcss": "^5.2.12",
     "postcss-cssnext": "^2.8.0",
     "postcss-import": "^9.1.0",
