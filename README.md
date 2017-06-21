@@ -320,7 +320,7 @@ module.exports = (env) => ({
   module: {
     rules: [
       {
-        test: /\.css$/
+        test: /\.css$/,
         use: [
           'style-loader',
           {
