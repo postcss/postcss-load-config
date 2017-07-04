@@ -19,7 +19,7 @@
     "postcss-load-plugins": "^2.3.0"
   },
   "devDependencies": {
-    "ava": "^0.18.1",
+    "ava": "^0.20.0",
     "coveralls": "^2.11.16",
     "cssnano": "^3.10.0",
     "jsdoc-to-markdown": "^3.0.0",
