@@ -27,7 +27,7 @@
     "postcss": "^6.0.3",
     "postcss-cssnext": "^3.0.0",
     "postcss-import": "^9.1.0",
-    "postcss-nested": "^1.0.0",
+    "postcss-nested": "^2.0.3",
     "postcss-scss": "^1.0.2",
     "postcss-sprites": "^4.2.0",
     "standard": "^9.0.0",
