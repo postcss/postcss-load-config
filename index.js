@@ -39,7 +39,7 @@ module.exports = function postcssrc (ctx, path, options) {
 
   path = path ? resolve(path) : process.cwd()
 
-  options = assign({ rcExtensions: true }, options)
+  options = assign({ rcExtensions: true, argv: false }, options)
 
   if (!ctx.env) process.env.NODE_ENV = 'development'
 
