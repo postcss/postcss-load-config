@@ -30,7 +30,7 @@
     "postcss-nested": "^2.0.3",
     "postcss-scss": "^1.0.2",
     "postcss-sprites": "^4.2.0",
-    "standard": "^9.0.0",
+    "standard": "^10.0.3",
     "standard-changelog": "1.0.2",
     "sugarss": "^0.2.0"
   },
