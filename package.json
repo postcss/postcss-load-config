@@ -13,7 +13,7 @@
     "start": "sudo npm run clean && npm run lint && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^2.1.0",
+    "cosmiconfig": "^5.0.0",
     "object-assign": "^4.1.0",
     "postcss-load-options": "^1.2.0",
     "postcss-load-plugins": "^2.3.0"
