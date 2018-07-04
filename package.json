@@ -21,7 +21,7 @@
   "devDependencies": {
     "ava": "^0.22.0",
     "coveralls": "^2.11.16",
-    "cssnano": "^3.10.0",
+    "cssnano": "^4.0.0",
     "jsdoc-to-markdown": "^3.0.0",
     "nyc": "^10.1.0",
     "postcss": "^6.0.3",
