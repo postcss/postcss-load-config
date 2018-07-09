@@ -17,7 +17,8 @@
     "release": "commitlint --to 'HEAD' && standard-version"
   },
   "dependencies": {
-    "cosmiconfig": "^2.1.0"
+    "cosmiconfig": "^2.1.0",
+    "import-cwd": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",

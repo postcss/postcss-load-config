@@ -1,5 +1,7 @@
 'use strict'
 
+const req = require('import-cwd')
+
 /**
  * Plugin Loader
  *
@@ -14,13 +16,13 @@
 const load = (plugin, options, file) => {
   if (options === null || Object.keys(options).length === 0) {
     try {
-      return require(plugin)
+      return req(plugin)
     } catch (err) {
       throw new Error(`Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`)
     }
   } else {
     try {
-      return require(plugin)(options)
+      return req(plugin)(options)
     } catch (err) {
       throw new Error(`Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`)
     }
