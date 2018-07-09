@@ -2,72 +2,51 @@
   "name": "postcss-load-config",
   "version": "1.2.0",
   "description": "Autoload Config for PostCSS",
-  "engines": { "node": ">=0.12" },
-  "main": "index.js",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">= 4"
+  },
   "scripts": {
-    "lint": "standard",
-    "test": "nyc ava -v test/err/index.js test/pkg/index.js test/rc/index.js test/js/**/index.js",
-    "logs": "standard-changelog -i CHANGELOG.md -w",
-    "docs": "jsdoc2md index.js > INDEX.md",
-    "clean": "rm -rf .nyc_output coverage jsdoc-api dmd",
-    "start": "sudo npm run clean && npm run lint && sudo npm test"
+    "lint": "standard --env jest",
+    "test": "jest --verbose --coverage",
+    "docs": "jsdoc2md src/*.js > DOCS.md",
+    "clean": "del-cli coverage",
+    "release": "commitlint --to 'HEAD' && standard-version"
   },
   "dependencies": {
-    "cosmiconfig": "^2.1.0",
-    "object-assign": "^4.1.0",
-    "postcss-load-options": "^1.2.0",
-    "postcss-load-plugins": "^2.3.0"
+    "cosmiconfig": "^2.1.0"
   },
   "devDependencies": {
-    "ava": "^0.22.0",
-    "coveralls": "^2.11.16",
-    "cssnano": "^3.10.0",
-    "jsdoc-to-markdown": "^3.0.0",
-    "nyc": "^10.1.0",
-    "postcss": "^6.0.3",
-    "postcss-cssnext": "^3.0.0",
-    "postcss-import": "^9.1.0",
-    "postcss-nested": "^2.0.3",
-    "postcss-scss": "^1.0.2",
-    "postcss-sprites": "^4.2.0",
-    "standard": "^10.0.3",
-    "standard-changelog": "1.0.3",
-    "sugarss": "^0.2.0"
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.0",
+    "cssnano": "^4.0.0",
+    "del-cli": "^1.0.0",
+    "jest": "^22.0.0",
+    "jsdoc-to-markdown": "^4.0.0",
+    "postcss": "^6.0.0",
+    "postcss-import": "^11.0.0",
+    "postcss-nested": "^3.0.0",
+    "standard": "^11.0.0",
+    "standard-version": "4.0.0",
+    "sugarss": "^1.0.0"
   },
-  "files": [
-    "index.js"
-  ],
   "keywords": [
     "postcss",
-    "postcss-config"
+    "postcssrc",
+    "postcss.config.js"
   ],
-  "author": {
-    "name": "Michael Ciniawky",
-    "email": "michael.ciniawsky@gmail.com"
-  },
+  "author": "Michael Ciniawky <michael.ciniawsky@gmail.com>",
   "contributors": [
-    {
-      "name": "Mateusz Derks",
-      "url": "http://ertrzyiks.me"
-    },
-    {
-      "name": "Ryan Dunckel",
-      "email": "sparty02@gmail.com"
-    },
-    {
-      "name": "Patrick Gilday"
-    },
-    {
-      "name": "Dalton Santos"
-    }
+    "Ryan Dunckel",
+    "Mateusz Derks",
+    "Dalton Santos",
+    "Patrick Gilday"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/michael-ciniawsky/postcss-load-config.git"
-  },
-  "bugs": {
-    "url": "https://github.com/michael-ciniawsky/postcss-load-config/issues"
-  },
+  "repository": "https://github.com/michael-ciniawsky/postcss-load-config.git",
+  "bugs": "https://github.com/michael-ciniawsky/postcss-load-config/issues",
   "homepage": "https://github.com/michael-ciniawsky/postcss-load-config#readme",
   "license": "MIT"
 }
