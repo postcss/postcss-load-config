@@ -61,7 +61,7 @@ const rc = (ctx, path, options) => {
       if (typeof config === 'function') {
         config = config(ctx)
       } else {
-        config = Object.assign(config, ctx)
+        config = Object.assign({}, config, ctx)
       }
 
       if (!config.plugins) {
