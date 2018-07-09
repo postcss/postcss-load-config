@@ -1,15 +1,26 @@
 # OS
 
-.DS_Store
-._*
+DS_Store
+Thumbs.db
 
-# NODEJS
+# Logs
 
-.nyc_output
+*.log
+npm-debug.log*
+yarn-debug.log*
 
-npm-debug.log
+# Build
 
-dmd
-coverage
-jsdoc-api
-node_modules
+/logs
+/dist
+/local
+/reports
+/coverage
+/node_modules
+
+# Editor
+
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
