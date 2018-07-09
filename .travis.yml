@@ -1,16 +1,14 @@
 language: node_js
 
 node_js:
-  - node
+  - 'stable'
+  - 'lts/*'
   - 6
   - 4
 
-cache:
-  directories:
-    - node_modules
+script: npm run lint && npm t
 
-after_success:
-- './node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls'
+after_success: npm i -D coveralls && cat ./coverage/lcov.info | node_modules/.bin/coveralls
 
 notifications:
   email: false
