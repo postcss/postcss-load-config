@@ -9,10 +9,9 @@ npm-debug.log
 # DIRECTORIES
 
 .github
-.nyc_output
 
 dmd
-test
+jest*
 coverage
 jsdoc-api
 node_modules
