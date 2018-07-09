@@ -2,7 +2,7 @@
   "name": "postcss-load-config",
   "version": "1.2.0",
   "description": "Autoload Config for PostCSS",
-  "engines": { "node": ">=0.12" },
+  "engines": { "node": ">=4" },
   "main": "index.js",
   "scripts": {
     "lint": "standard",
@@ -13,7 +13,7 @@
     "start": "sudo npm run clean && npm run lint && sudo npm test"
   },
   "dependencies": {
-    "cosmiconfig": "^2.1.0",
+    "cosmiconfig": "^3.1.0",
     "object-assign": "^4.1.0",
     "postcss-load-options": "^1.2.0",
     "postcss-load-plugins": "^2.3.0"
