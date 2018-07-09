@@ -19,11 +19,5 @@ test_script:
 environment:
   matrix:
     - nodejs_version: 'stable'
-    - nodejs_version: 'lts/*'
+    - nodejs_version: 'lts'
     - nodejs_version: '6'
-    - nodejs_version: '4'
-
-notifications:
-  - on_build_success: false
-  - on_build_failure: false
-  - on_build_status_changed: false
