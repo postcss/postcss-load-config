@@ -46,7 +46,7 @@ const plugins = (config, file) => {
     plugins = config.plugins.filter(Boolean)
   } else {
     plugins = Object.keys(config.plugins)
-      .filter((plugin) =>{
+      .filter((plugin) => {
         return config.plugins[plugin] !== false ? plugin : ''
       })
       .map((plugin) => {
