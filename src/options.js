@@ -1,5 +1,7 @@
 'use strict'
 
+const req = require('import-cwd')
+
 /**
  * Load Options
  *
@@ -13,7 +15,7 @@
 const options = (config, file) => {
   if (config.parser && typeof config.parser === 'string') {
     try {
-      config.parser = require(config.parser)
+      config.parser = req(config.parser)
     } catch (err) {
       throw new Error(`Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`)
     }
@@ -21,7 +23,7 @@ const options = (config, file) => {
 
   if (config.syntax && typeof config.syntax === 'string') {
     try {
-      config.syntax = require(config.syntax)
+      config.syntax = req(config.syntax)
     } catch (err) {
       throw new Error(`Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`)
     }
@@ -29,7 +31,7 @@ const options = (config, file) => {
 
   if (config.stringifier && typeof config.stringifier === 'string') {
     try {
-      config.stringifier = require(config.stringifier)
+      config.stringifier = req(config.stringifier)
     } catch (err) {
       throw new Error(`Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`)
     }
