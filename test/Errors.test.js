@@ -5,7 +5,7 @@ const postcssrc = require('../src/index.js')
 test('Loading Config - {Error}', () => {
   return postcssrc({}, 'test/err').catch((err) => {
     expect(err.message).toMatch(
-      /^No PostCSS Config found in: .*\/postcss-load-config\/test\/err$/
+      /^No PostCSS Config found in: (.*)$/
     )
   })
 })

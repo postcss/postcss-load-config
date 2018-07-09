@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "postcss": {
     "parser": "sugarss",
-    "syntax": "postcss-scss",
+    "syntax": "sugarss",
     "map": false,
     "from": "./test/pkg/fixtures/index.css",
     "to": "./test/pkg/expect/index.css",
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
-      "postcss-sprites": {},
-      "postcss-cssnext": {},
       "cssnano": false
     }
   }
