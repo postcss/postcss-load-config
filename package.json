@@ -25,7 +25,7 @@
     "del-cli": "^1.0.0",
     "jest": "^22.0.0",
     "jsdoc-to-markdown": "^4.0.0",
-    "postcss": "^6.0.0",
+    "postcss": "^7.0.0",
     "postcss-import": "^11.0.0",
     "postcss-nested": "^3.0.0",
     "standard": "^11.0.0",
