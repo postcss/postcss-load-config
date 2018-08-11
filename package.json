@@ -30,7 +30,7 @@
     "postcss-nested": "^3.0.0",
     "standard": "^11.0.0",
     "standard-version": "4.0.0",
-    "sugarss": "^1.0.0"
+    "sugarss": "^2.0.0"
   },
   "keywords": [
     "postcss",
