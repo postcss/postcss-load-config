@@ -128,6 +128,22 @@ module.exports = (ctx) => ({
 })
 ```
 
+You also can export a `{Promise}` that resolves the config either as an `{Object}`
+or a `{Function}` that returns the config.
+
+**.postcssrc.js**
+```js
+module.exports = readFile(file, 'utf8')
+  .then(JSON.parse)
+  .then((data) => (ctx) => ({
+    parser: data.parser,
+    map: ctx.env === 'development' ? ctx.map : false,
+    plugins: {
+      'postcss-plugin': ctx.options.plugin
+    }
+  }))
+```
+
 Plugins can be loaded either using an `{Object}` or an `{Array}`
 
 #### `{Object}`

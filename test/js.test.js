@@ -112,3 +112,44 @@ test('postcss.config.js - {Array} - Process SSS', () => {
       })
   })
 })
+
+test('postcss.config.js - {Promise<Function>} - Load Config', () => {
+  const ctx = {
+    parser: true,
+    syntax: true
+  }
+
+  return postcssrc(ctx, 'test/js/promise/function').then((config) => {
+    expect(config.options.parser).toEqual(require('sugarss'))
+    expect(config.options.syntax).toEqual(require('sugarss'))
+    expect(config.options.map).toEqual(false)
+    expect(config.options.from).toEqual('./test/js/promise/function/fixtures/index.css')
+    expect(config.options.to).toEqual('./test/js/promise/function/expect/index.css')
+
+    expect(config.plugins.length).toEqual(2)
+    expect(typeof config.plugins[0]).toBe('function')
+    expect(typeof config.plugins[1]).toBe('function')
+
+    expect(config.file).toEqual(
+      path.resolve('test/js/promise/function', 'postcss.config.js')
+    )
+  })
+})
+
+test('postcss.config.js - {Promise<Object>} - Load Config', () => {
+  return postcssrc({}, 'test/js/promise/object').then((config) => {
+    expect(config.options.parser).toEqual(require('sugarss'))
+    expect(config.options.syntax).toEqual(require('sugarss'))
+    expect(config.options.map).toEqual('inline')
+    expect(config.options.from).toEqual('./test/js/promise/object/fixtures/index.css')
+    expect(config.options.to).toEqual('./test/js/promise/object/expect/index.css')
+
+    expect(config.plugins.length).toEqual(2)
+    expect(typeof config.plugins[0]).toBe('function')
+    expect(typeof config.plugins[1]).toBe('function')
+
+    expect(config.file).toEqual(
+      path.resolve('test/js/promise/object', 'postcss.config.js')
+    )
+  })
+})

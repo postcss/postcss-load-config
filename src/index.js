@@ -55,6 +55,10 @@ const rc = (ctx, path, options) => {
         throw new Error(`No PostCSS Config found in: ${path}`)
       }
 
+      return Promise.resolve(result.config)
+        .then((config) => Object.assign({}, result, { config }))
+    })
+    .then((result) => {
       let file = result.filepath || ''
       let config = result.config || {}
 
