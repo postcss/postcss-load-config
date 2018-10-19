@@ -1,13 +1,62 @@
 language: node_js
 
-node_js:
-  - 'stable'
-  - 'lts/*'
-  - 6
+jobs:
+  fast_finish: true
 
-script: npm run lint && npm t
+  include:
+    - stage: Lint
+      os: linux
+      env: SCRIPT=lint
+      node_js: stable
 
-after_success: npm i -D coveralls && cat ./coverage/lcov.info | node_modules/.bin/coveralls
+    - &test
+      stage: Test
+      env: SCRIPT=test
+      node_js: stable
+
+    # Linux
+    - <<: *test
+      node_js: lts/*
+    - <<: *test
+      node_js: 8
+    - <<: *test
+      node_js: 6
+
+    # MacOS
+    - <<: *test
+      os: osx
+      node_js: stable
+    - <<: *test
+      os: osx
+      node_js: lts/*
+    - <<: *test
+      os: osx
+      node_js: 8
+    - <<: *test
+      os: osx
+      node_js: 6
+
+    # Windows
+    - <<: *test
+      os: windows
+      node_js: latest
+    - <<: *test
+      os: windows
+      node_js: lts
+    - <<: *test
+      os: windows
+      node_js: 8
+    - <<: *test
+      os: windows
+      node_js: 6
+
+install:
+  - if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
+      npm i -g npm;
+    fi
+  - npm i
+
+script: npm run $SCRIPT
 
 notifications:
   email: false
