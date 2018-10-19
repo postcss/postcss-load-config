@@ -1,13 +1,54 @@
 language: node_js
 
-node_js:
-  - 'stable'
-  - 'lts/*'
-  - 6
+jobs:
+  fast_finish: true
 
-script: npm run lint && npm t
+  allow_failures:
+    - os: 'windows'
 
-after_success: npm i -D coveralls && cat ./coverage/lcov.info | node_modules/.bin/coveralls
+  include:
+    - stage: Lint
+      env: SCRIPT=lint
+      node_js: 'stable'
+
+    - stage: Test
+      env: SCRIPT=test
+      - &osx
+        os: 'osx'
+        node_js: 'stable'
+      - <<: *osx
+        node_js: 'lts/*'
+      - <<: *osx
+        node_js: 6
+      - &linux
+        os: 'linux'
+        node_js: 'stable'
+      - <<: *linux
+        node_js: 'lts/*'
+      - <<: *linux
+        node_js: 6
+      - &windows
+        os: 'windows'
+        node_js: 'latest'
+      - <<: *windows
+        node_js: 'lts'
+      - <<: *windows
+        node_js: 6
+
+install:
+  # EPERM on windows
+  - if [[ "$TRAVIS_OS_NAME" != 'windows' ]]; then
+      npm i -g npm@latest;
+    fi
+  - npm i
+
+script: npm run $SCRIPT
+
+after_success:
+  - if [[ "$TRAVIS_OS_NAME" == 'linux' ]]; then
+      npm i coveralls;
+      cat ./coverage/lcov.info | $(npm bin)/coveralls;
+    fi
 
 notifications:
   email: false
