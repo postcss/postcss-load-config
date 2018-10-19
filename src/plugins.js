@@ -14,7 +14,11 @@ const req = require('import-cwd')
  * @return {Function} PostCSS Plugin
  */
 const load = (plugin, options, file) => {
-  if (options === null || Object.keys(options).length === 0) {
+  if (
+    options === null ||
+    options === undefined ||
+    Object.keys(options).length === 0
+  ) {
     try {
       return req(plugin)
     } catch (err) {
