@@ -377,6 +377,11 @@ task('default', series(css, 'watch'))
   "build": "NODE_ENV=production webpack",
   "start": "NODE_ENV=development webpack-dev-server"
 }
+if you're using windows, use this below
+"scripts": {
+  "build": "set NODE_ENV=production && webpack",
+  "start": "set NODE_ENV=development && webpack-dev-server"
+}
 ```
 
 **webpack.config.js**
