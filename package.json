@@ -17,7 +17,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "cosmiconfig": "^4.0.0",
+    "cosmiconfig": "^5.2.1",
     "import-cwd": "^2.0.0"
   },
   "devDependencies": {
