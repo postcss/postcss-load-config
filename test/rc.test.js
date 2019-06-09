@@ -7,8 +7,8 @@ const postcssrc = require('../src/index.js')
 
 const { fixture, expected } = require('./utils.js')
 
-test('.postcssrc - {Object} - Load Config', () => {
-  return postcssrc({}, 'test/rc').then((config) => {
+describe('.postcssrc - {Object} - Load Config', () => {
+  const expected = (config) => {
     expect(config.options.parser).toEqual(require('sugarss'))
     expect(config.options.syntax).toEqual(require('sugarss'))
     expect(config.options.map).toEqual(false)
@@ -21,6 +21,16 @@ test('.postcssrc - {Object} - Load Config', () => {
 
     expect(config.file)
       .toEqual(path.resolve('test/rc', '.postcssrc'))
+  }
+
+  test('Async', () => {
+    return postcssrc({}, 'test/rc').then(expected)
+  })
+
+  test('Sync', () => {
+    const config = postcssrc.sync({}, 'test/rc')
+
+    expected(config)
   })
 })
 

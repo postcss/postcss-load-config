@@ -7,13 +7,13 @@ const postcssrc = require('../src/index.js')
 
 const { fixture, expected } = require('./utils.js')
 
-test('postcss.config.js - {Object} - Load Config', () => {
+describe('postcss.config.js - {Object} - Load Config', () => {
   const ctx = {
     parser: true,
     syntax: true
   }
 
-  return postcssrc(ctx, 'test/js/object').then((config) => {
+  const expected = (config) => {
     expect(config.options.parser).toEqual(require('sugarss'))
     expect(config.options.syntax).toEqual(require('sugarss'))
     expect(config.options.map).toEqual(false)
@@ -26,6 +26,16 @@ test('postcss.config.js - {Object} - Load Config', () => {
 
     expect(config.file)
       .toEqual(path.resolve('test/js/object', 'postcss.config.js'))
+  }
+
+  test('Async', () => {
+    return postcssrc(ctx, 'test/js/object').then(expected)
+  })
+
+  test('Sync', () => {
+    const config = postcssrc.sync(ctx, 'test/js/object')
+
+    expected(config)
   })
 })
 
@@ -60,13 +70,13 @@ test('postcss.config.js - {Object} - Process SSS', () => {
   })
 })
 
-test('postcss.config.js - {Array} - Load Config', () => {
+describe('postcss.config.js - {Array} - Load Config', () => {
   const ctx = {
     parser: true,
     syntax: true
   }
 
-  return postcssrc(ctx, 'test/js/array').then((config) => {
+  const expected = (config) => {
     expect(config.options.parser).toEqual(require('sugarss'))
     expect(config.options.syntax).toEqual(require('sugarss'))
     expect(config.options.map).toEqual(false)
@@ -79,6 +89,16 @@ test('postcss.config.js - {Array} - Load Config', () => {
 
     expect(config.file)
       .toEqual(path.resolve('test/js/array', 'postcss.config.js'))
+  }
+
+  test('Async', () => {
+    return postcssrc(ctx, 'test/js/array').then(expected)
+  })
+
+  test('Sync', () => {
+    const config = postcssrc.sync(ctx, 'test/js/array')
+
+    expected(config)
   })
 })
 
