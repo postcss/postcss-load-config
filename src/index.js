@@ -49,7 +49,7 @@ const rc = (ctx, path, options) => {
   }
 
   return config('postcss', options)
-    .load(path)
+    .search(path)
     .then((result) => {
       if (!result) {
         throw new Error(`No PostCSS Config found in: ${path}`)
