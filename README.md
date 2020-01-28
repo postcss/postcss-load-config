@@ -160,7 +160,7 @@ module.exports = ({ env }) => ({
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[**`to`**](#to)|`{String}`|`undefined`|Destination File Path|
-|[**`map`**](#map)|`{String\|Object}`|`false`|Enable/Disable Source Maps|
+|[**`map`**](#map)|`{String\|Boolean}`|`false`|Enable/Disable Source Maps|
 |[**`from`**](#from)|`{String}`|`undefined`|Source File Path|
 |[**`parser`**](#parser)|`{String\|Function}`|`false`|Custom PostCSS Parser|
 |[**`syntax`**](#syntax)|`{String\|Function}`|`false`|Custom PostCSS Syntax|
