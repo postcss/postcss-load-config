@@ -64,11 +64,7 @@ const plugins = (config, file) => {
         plugin = plugin.default
       }
 
-      if (
-        // eslint-disable-next-line
-        !(typeof plugin === 'object' && Array.isArray(plugin.plugins) ||
-        typeof plugin === 'function')
-      ) {
+      if (!!plugin.plugins && Array.isArray(plugin.plugins)) {
         throw new TypeError(`Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`)
       }
     })
