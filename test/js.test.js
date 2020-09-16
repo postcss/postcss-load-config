@@ -4,6 +4,7 @@ const path = require('path')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
+const loadPlugins = require('../src/plugins.js')
 
 const { fixture, expected } = require('./utils.js')
 
@@ -35,7 +36,19 @@ describe('postcss.config.js - {Object} - Load Config', () => {
   test('Sync', () => {
     const config = postcssrc.sync(ctx, 'test/js/object')
 
-    expected(config)
+    expect(() => {
+      expected(config)
+    }).not.toThrowError()
+  })
+
+  test('Throw error if plugin has plugins too', () => {
+    expect(() => {
+      loadPlugins({
+        plugins: [{
+          plugins: ['postcssPlugin']
+        }]
+      }, undefined)
+    }).toThrowError()
   })
 })
 
