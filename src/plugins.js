@@ -60,7 +60,7 @@ const plugins = (config, file) => {
         plugin = plugin.default
       }
 
-      if (plugin.postcss === 1) {
+      if (plugin.postcss === true) {
         plugin = plugin()
       } else if (plugin.postcss) {
         plugin = plugin.postcss
