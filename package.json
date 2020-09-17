@@ -1,6 +1,6 @@
 {
   "name": "postcss-load-config",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Autoload Config for PostCSS",
   "main": "src/index.js",
   "files": [
