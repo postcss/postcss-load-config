@@ -36,13 +36,13 @@ describe('postcss.config.js - {Object} - Load Config', () => {
   test('Sync', () => {
     const config = postcssrc.sync(ctx, 'test/js/object')
 
-    expect(() => {
+    expect(() => {
       expected(config)
     }).not.toThrowError()
   })
 
-  test('Throw error if plugin has plugins too', () => {
-    expect(() => {
+  test('Throw error if plugin has plugins too', () => {
+    expect(() => {
       loadPlugins({
         plugins: [{
           plugins: ['postcssPlugin']
