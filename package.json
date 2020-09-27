@@ -16,6 +16,10 @@
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
   },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/postcss/"
+  },
   "dependencies": {
     "cosmiconfig": "^5.0.0",
     "import-cwd": "^2.0.0"
@@ -44,8 +48,6 @@
     "Dalton Santos",
     "Patrick Gilday"
   ],
-  "repository": "https://github.com/michael-ciniawsky/postcss-load-config.git",
-  "bugs": "https://github.com/michael-ciniawsky/postcss-load-config/issues",
-  "homepage": "https://github.com/michael-ciniawsky/postcss-load-config#readme",
+  "repository": "postcss/postcss-load-config.git",
   "license": "MIT"
 }
