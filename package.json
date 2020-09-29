@@ -48,6 +48,6 @@
     "Dalton Santos",
     "Patrick Gilday"
   ],
-  "repository": "postcss/postcss-load-config.git",
+  "repository": "postcss/postcss-load-config",
   "license": "MIT"
 }
