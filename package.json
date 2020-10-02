@@ -21,7 +21,7 @@
     "url": "https://opencollective.com/postcss/"
   },
   "dependencies": {
-    "cosmiconfig": "^5.0.0",
+    "cosmiconfig": "^7.0.0",
     "import-cwd": "^2.0.0"
   },
   "devDependencies": {

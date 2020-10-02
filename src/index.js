@@ -84,7 +84,7 @@ const rc = (ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  return config('postcss', options)
+  return config.cosmiconfig('postcss', options)
     .search(path)
     .then((result) => {
       if (!result) {
@@ -106,7 +106,7 @@ rc.sync = (ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  const result = config('postcss', options).searchSync(path)
+  const result = config.cosmiconfigSync('postcss', options).search(path)
 
   if (!result) {
     throw new Error(`No PostCSS Config found in: ${path}`)
