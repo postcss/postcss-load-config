@@ -3,10 +3,15 @@ node_js:
   - stable
   - "12"
   - "10"
-script: npm run lint && npm t
 matrix:
   include:
     os: windows
     cache: false
     node_js: node
-    script: npm t
+    script: npx jest
+    before_install:
+      - cd ../..
+      - mv $TRAVIS_REPO_SLUG _old
+      - git config --global core.autocrlf false
+      - git clone --depth=5 _old $TRAVIS_REPO_SLUG
+      - cd $TRAVIS_REPO_SLUG
