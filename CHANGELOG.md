@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/postcss/postcss-load-config/compare/v2.1.2...v3.0.0) (2020-09-26)
+
+### Features
+
+* **src/index:** Add `.cjs` config support.
+
+
+### BREAKING CHANGES
+
+* **package:** requires `node >= v10.0.0`
+
 ## [2.1.2](https://github.com/michael-ciniawsky/postcss-load-config/compare/v2.1.1...v2.1.2) (2020-09-26)
 
 
