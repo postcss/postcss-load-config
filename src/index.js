@@ -16,7 +16,7 @@ const loadPlugins = require('./plugins.js')
  * @return {Object} PostCSS Config
  */
 const processResult = (ctx, result) => {
-  let file = result.filepath || ''
+  const file = result.filepath || ''
   let config = result.config || {}
 
   if (typeof config === 'function') {
