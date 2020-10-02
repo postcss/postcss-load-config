@@ -1,13 +1,9 @@
 language: node_js
-
 node_js:
   - stable
   - "12"
   - "10"
-
+os:
+  - windows
+  - linux
 script: npm run lint && npm t
-
-after_success: npm i -D coveralls && cat ./coverage/lcov.info | node_modules/.bin/coveralls
-
-notifications:
-  email: false
