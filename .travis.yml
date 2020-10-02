@@ -3,7 +3,10 @@ node_js:
   - stable
   - "12"
   - "10"
-os:
-  - windows
-  - linux
 script: npm run lint && npm t
+matrix:
+  include:
+    os: windows
+    cache: false
+    node_js: node
+    script: npm t
