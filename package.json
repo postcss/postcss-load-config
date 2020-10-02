@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "standard --env jest",
-    "test": "npm lint && jest --verbose --coverage",
+    "test": "npm run lint && jest --verbose --coverage",
     "docs": "jsdoc2md src/*.js > DOCS.md",
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"

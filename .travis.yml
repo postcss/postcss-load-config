@@ -13,5 +13,5 @@ matrix:
       - cd ../..
       - mv $TRAVIS_REPO_SLUG _old
       - git config --global core.autocrlf false
-      - git clone --depth=5 _old $TRAVIS_REPO_SLUG
+      - git clone _old $TRAVIS_REPO_SLUG
       - cd $TRAVIS_REPO_SLUG
