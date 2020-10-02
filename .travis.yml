@@ -9,4 +9,4 @@ matrix:
     os: windows
     cache: false
     node_js: node
-    script: git config --global core.autocrlf input && npm t
+    script: npm t

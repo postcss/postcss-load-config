@@ -65,7 +65,9 @@ test('postcss.config.js - {Object} - Process SSS', () => {
     return postcss(config.plugins)
       .process(fixture('js/object', 'index.sss'), config.options)
       .then((result) => {
-        expect(result.css).toEqual(expected('js/object', 'index.sss'))
+        expect(result.css.replace(/\r\n/g, '\n')).toEqual(
+          expected('js/object', 'index.sss')
+        )
       })
   })
 })
@@ -128,7 +130,9 @@ test('postcss.config.js - {Array} - Process SSS', () => {
     return postcss(config.plugins)
       .process(fixture('js/array', 'index.sss'), config.options)
       .then((result) => {
-        expect(result.css).toEqual(expected('js/array', 'index.sss'))
+        expect(result.css.replace(/\r\n/g, '\n')).toEqual(
+          expected('js/array', 'index.sss')
+        )
       })
   })
 })
