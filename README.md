@@ -483,3 +483,10 @@ module.exports = (env) => ({
 
 [chat]: https://img.shields.io/gitter/room/postcss/postcss.svg
 [chat-url]: https://gitter.im/postcss/postcss
+
+## Security Contact
+
+To report a security vulnerability, please use the [Tidelift security contact].
+Tidelift will coordinate the fix and disclosure.
+
+[Tidelift security contact]: https://tidelift.com/security
