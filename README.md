@@ -135,7 +135,7 @@ Plugins can be loaded either using an `{Object}` or an `{Array}`
 **.postcssrc.js**
 ```js
 module.exports = ({ env }) => ({
-  ...options
+  ...options,
   plugins: {
     'postcss-plugin': env === 'production' ? {} : false
   }
@@ -147,7 +147,7 @@ module.exports = ({ env }) => ({
 **.postcssrc.js**
 ```js
 module.exports = ({ env }) => ({
-  ...options
+  ...options,
   plugins: [
     env === 'production' ? require('postcss-plugin')() : false
   ]
