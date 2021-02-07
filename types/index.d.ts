@@ -1,3 +1,4 @@
+// based on @types/postcss-load-config@2.0.1
 // Type definitions for postcss-load-config 2.1
 import Processor from 'postcss/lib/processor'
 import { Plugin, ProcessOptions, Transformer } from "postcss";

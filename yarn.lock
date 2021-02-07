@@ -1297,8 +1297,8 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.7:
 
 cosmiconfig@^7.0.0:
   version "7.0.0"
-  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.0.tgz#ef9b44d773959cae63ddecd122de23853b60f8d3"
-  integrity sha512-pondGvTuVYDk++upghXJabWzL6Kxu6f26ljFw64Swq9v6sQPUL3EUlVDV56diOjpCayKihL6hVe8exIACU4XcA==
+  resolved "https://npm.corp.kuaishou.com/cosmiconfig/-/cosmiconfig-7.0.0.tgz#ef9b44d773959cae63ddecd122de23853b60f8d3"
+  integrity sha1-75tE13OVnK5j3ezRIt4jhTtg+NM=
   dependencies:
     "@types/parse-json" "^4.0.0"
     import-fresh "^3.2.1"
