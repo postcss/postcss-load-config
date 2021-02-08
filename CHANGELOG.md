@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.1](https://github.com/postcss/postcss-load-config/compare/v3.0.0...v3.0.1) (2021-02-07)
+
+### Features
+
+* **src/index:** Add type definition ([#211](https://github.com/postcss/postcss-load-config/pull/211))
+
+
 ## [3.0.0](https://github.com/postcss/postcss-load-config/compare/v2.1.2...v3.0.0) (2020-09-26)
 
 ### Features
