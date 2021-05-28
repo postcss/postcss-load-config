@@ -1,4 +1,6 @@
-const config = ctx => ({
+import { ConfigFn } from '../../../src';
+
+const config: ConfigFn = ctx => ({
   parser: ctx.parser ? 'sugarss' : false,
   syntax: ctx.syntax ? 'sugarss' : false,
   map: ctx.map ? 'inline' : false,

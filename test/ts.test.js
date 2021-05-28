@@ -7,6 +7,10 @@ const postcssrc = require('../src/index.js')
 
 const { fixture, expected } = require('./utils.js')
 
+// beforeEach(() => {
+// jest.mockModule
+// })
+
 describe('postcss.config.ts - {Object} - Load Config', () => {
   const ctx = {
     parser: true,

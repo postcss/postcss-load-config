@@ -1,8 +1,9 @@
 import postcssImport from 'postcss-import';
 import postcssNested from 'postcss-nested';
 import cssnano from 'cssnano';
+import { ConfigFn } from '../../../src';
 
-const config = ctx => ({
+const config: ConfigFn = ctx => ({
   parser: ctx.parser ? 'sugarss' : false,
   syntax: ctx.syntax ? 'sugarss' : false,
   map: ctx.map ? 'inline' : false,
@@ -10,9 +11,9 @@ const config = ctx => ({
   to: './test/ts/array/expect/index.css',
   plugins: [
     postcssImport(),
-    postcssNested(),
+    postcssNested({ preserveEmpty: true }),
     ctx.env === 'production' ? cssnano() : false
   ]
-})
+});
 
 export = config;
