@@ -11,4 +11,4 @@ const config = ctx => ({
   }
 })
 
-export default config;
+export = config;
