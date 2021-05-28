@@ -16,4 +16,4 @@ const config: ConfigFn = ctx => ({
   ]
 });
 
-export = config;
+export default config;

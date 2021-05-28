@@ -7,6 +7,9 @@ const config = require('cosmiconfig')
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
 
+/* istanbul ignore next */
+const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: obj }
+
 /**
  * Process the result from cosmiconfig
  *
@@ -17,7 +20,7 @@ const loadPlugins = require('./plugins.js')
  */
 const processResult = (ctx, result) => {
   const file = result.filepath || ''
-  let config = result.config || {}
+  let config = interopRequireDefault(result.config).default || {}
 
   if (typeof config === 'function') {
     config = config(ctx)
