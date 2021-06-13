@@ -92,40 +92,27 @@ const addTypeScriptLoader = (options = {}, loader) => {
 }
 
 const withTypeScriptLoader = (rcFunc) => {
-  let registerer
-
-  // Register TypeScript compiler instance
-  try {
-    registerer = require('ts-node').register()
-  } catch (err) {
-    registerer = err
-    registerer.enabled = () => {}
-  }
-
-  registerer.enabled(true)
-
-  const loader = registerer instanceof Error
-    ? () => {
-      if (registerer.code === 'MODULE_NOT_FOUND') {
-        throw new Error(
-          `'ts-node' is required for the TypeScript configuration files. Make sure it is installed\nError: ${registerer.message}`
-        )
-      }
-
-      throw registerer
-    }
-    : require
-
   return (ctx, path, options) => {
-    const configObject = rcFunc(ctx, path, addTypeScriptLoader(options, loader))
+    return rcFunc(ctx, path, addTypeScriptLoader(options, (configFile) => {
+      let registerer = { enabled () {} }
 
-    if (configObject instanceof Promise) {
-      return configObject.finally(() => registerer.enabled(false))
-    }
+      try {
+        // Register TypeScript compiler instance
+        registerer = require('ts-node').register()
 
-    registerer.enabled(false)
+        return require(configFile)
+      } catch (err) {
+        if (err.code === 'MODULE_NOT_FOUND') {
+          throw new Error(
+            `'ts-node' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
+          )
+        }
 
-    return configObject
+        throw err
+      } finally {
+        registerer.enabled(false)
+      }
+    }))
   }
 }
 
