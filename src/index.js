@@ -79,8 +79,10 @@ const addTypeScriptLoader = (options = {}, loader) => {
       `.${moduleName}rc.yml`,
       `.${moduleName}rc.ts`,
       `.${moduleName}rc.js`,
+      `.${moduleName}rc.cjs`,
       `${moduleName}.config.ts`,
-      `${moduleName}.config.js`
+      `${moduleName}.config.js`,
+      `${moduleName}.config.cjs`
     ],
     loaders: {
       ...options.loaders,
