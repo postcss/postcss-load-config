@@ -84,7 +84,7 @@ describe('postcss.config.js - {Array} - Load Config', () => {
     expect(config.options.to).toEqual('./test/js/array/expect/index.css')
 
     expect(config.plugins.length).toEqual(2)
-    expect(typeof config.plugins[0]).toBe('function')
+    expect(typeof config.plugins[0]).toBe("object");
     expect(typeof config.plugins[1]).toBe('object')
 
     expect(config.file)
