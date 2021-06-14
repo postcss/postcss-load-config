@@ -2,19 +2,19 @@
 // Type definitions for postcss-load-config 2.1
 import Processor from 'postcss/lib/processor';
 import { Plugin, ProcessOptions, Transformer } from 'postcss';
-import { Options as CosmiconfigOptions } from 'cosmiconfig';
+import { Options as ConfigOptions } from "lilconfig";
 
 declare function postcssrc(
   ctx?: postcssrc.ConfigContext,
   path?: string,
-  options?: CosmiconfigOptions
+  options?: ConfigOptions
 ): Promise<postcssrc.Result>;
 
 declare namespace postcssrc {
   function sync(
     ctx?: ConfigContext,
     path?: string,
-    options?: CosmiconfigOptions
+    options?: ConfigOptions
   ): Result;
 
   // In the ConfigContext, these three options can be instances of the

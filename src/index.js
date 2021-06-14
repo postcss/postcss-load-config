@@ -2,7 +2,8 @@
 
 const resolve = require('path').resolve
 
-const config = require('cosmiconfig')
+const config = require('lilconfig')
+const yaml = require('yaml')
 
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
@@ -86,6 +87,8 @@ const addTypeScriptLoader = (options = {}, loader) => {
     ],
     loaders: {
       ...options.loaders,
+      '.yaml': (filepath, content) => yaml.parse(content),
+      '.yml': (filepath, content) => yaml.parse(content),
       '.ts': loader
     }
   }
@@ -138,7 +141,7 @@ const rc = withTypeScriptLoader((ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  return config.cosmiconfig('postcss', options)
+  return config.lilconfig('postcss', options)
     .search(path)
     .then((result) => {
       if (!result) {
@@ -160,7 +163,7 @@ rc.sync = withTypeScriptLoader((ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  const result = config.cosmiconfigSync('postcss', options).search(path)
+  const result = config.lilconfigSync('postcss', options).search(path)
 
   if (!result) {
     throw new Error(`No PostCSS Config found in: ${path}`)
