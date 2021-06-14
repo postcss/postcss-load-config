@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/postcss/postcss-load-config/compare/v3.0.1...v3.1.0) (2021-06-14)
+
+### Features
+
+* Add `.cjs` config support ([#218](https://github.com/postcss/postcss-load-config/pull/218))
+* Add `.ts` config support ([#218](https://github.com/postcss/postcss-load-config/pull/218))
+
+
+### Bug Fixes
+
+* **deps:** Reduce dependencies by moving from `cosmiconfig` to `lilconfig`
+
+
 ## [3.0.1](https://github.com/postcss/postcss-load-config/compare/v3.0.0...v3.0.1) (2021-02-07)
 
 ### Features
