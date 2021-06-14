@@ -7,6 +7,9 @@ const config = require('cosmiconfig')
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
 
+/* istanbul ignore next */
+const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: obj }
+
 /**
  * Process the result from cosmiconfig
  *
@@ -17,7 +20,7 @@ const loadPlugins = require('./plugins.js')
  */
 const processResult = (ctx, result) => {
   const file = result.filepath || ''
-  let config = result.config || {}
+  let config = interopRequireDefault(result.config).default || {}
 
   if (typeof config === 'function') {
     config = config(ctx)
@@ -62,6 +65,57 @@ const createContext = (ctx) => {
   return ctx
 }
 
+const addTypeScriptLoader = (options = {}, loader) => {
+  const moduleName = 'postcss'
+
+  return {
+    ...options,
+    searchPlaces: [
+      ...(options.searchPlaces || []),
+      'package.json',
+      `.${moduleName}rc`,
+      `.${moduleName}rc.json`,
+      `.${moduleName}rc.yaml`,
+      `.${moduleName}rc.yml`,
+      `.${moduleName}rc.ts`,
+      `.${moduleName}rc.js`,
+      `.${moduleName}rc.cjs`,
+      `${moduleName}.config.ts`,
+      `${moduleName}.config.js`,
+      `${moduleName}.config.cjs`
+    ],
+    loaders: {
+      ...options.loaders,
+      '.ts': loader
+    }
+  }
+}
+
+const withTypeScriptLoader = (rcFunc) => {
+  return (ctx, path, options) => {
+    return rcFunc(ctx, path, addTypeScriptLoader(options, (configFile) => {
+      let registerer = { enabled () {} }
+
+      try {
+        // Register TypeScript compiler instance
+        registerer = require('ts-node').register()
+
+        return require(configFile)
+      } catch (err) {
+        if (err.code === 'MODULE_NOT_FOUND') {
+          throw new Error(
+            `'ts-node' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
+          )
+        }
+
+        throw err
+      } finally {
+        registerer.enabled(false)
+      }
+    }))
+  }
+}
+
 /**
  * Load Config
  *
@@ -73,7 +127,7 @@ const createContext = (ctx) => {
  *
  * @return {Promise} config PostCSS Config
  */
-const rc = (ctx, path, options) => {
+const rc = withTypeScriptLoader((ctx, path, options) => {
   /**
    * @type {Object} The full Config Context
    */
@@ -93,9 +147,9 @@ const rc = (ctx, path, options) => {
 
       return processResult(ctx, result)
     })
-}
+})
 
-rc.sync = (ctx, path, options) => {
+rc.sync = withTypeScriptLoader((ctx, path, options) => {
   /**
    * @type {Object} The full Config Context
    */
@@ -113,7 +167,7 @@ rc.sync = (ctx, path, options) => {
   }
 
   return processResult(ctx, result)
-}
+})
 
 /**
  * Autoload Config for PostCSS
