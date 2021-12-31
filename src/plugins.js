@@ -1,6 +1,8 @@
 'use strict'
 
-const req = require('import-cwd')
+const { createRequire } = require('module')
+const path = require('path')
+const req = createRequire(path.resolve(process.cwd(), '_'))
 
 /**
  * Plugin Loader
