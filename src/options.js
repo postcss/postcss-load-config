@@ -1,6 +1,9 @@
 'use strict'
 
-const req = require('import-cwd')
+// eslint-disable-next-line node/no-deprecated-api
+const { createRequire, createRequireFromPath } = require('module')
+const path = require('path')
+const req = (createRequire || createRequireFromPath)(path.resolve(process.cwd(), '_'))
 
 /**
  * Load Options
