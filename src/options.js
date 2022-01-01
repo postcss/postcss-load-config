@@ -1,8 +1,9 @@
 'use strict'
 
-const { createRequire } = require('module')
+// eslint-disable-next-line node/no-deprecated-api
+const { createRequire, createRequireFromPath } = require('module')
 const path = require('path')
-const req = createRequire(path.resolve(process.cwd(), '_'))
+const req = (createRequire || createRequireFromPath)(path.resolve(process.cwd(), '_'))
 
 /**
  * Load Options
