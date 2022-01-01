@@ -13,6 +13,7 @@
   "scripts": {
     "lint": "standard --env jest",
     "test": "npm run lint && jest --verbose --coverage",
+    "unit": "jest --verbose",
     "docs": "jsdoc2md src/*.js > DOCS.md",
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
