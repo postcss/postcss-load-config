@@ -1,9 +1,6 @@
 'use strict'
 
-// eslint-disable-next-line node/no-deprecated-api
-const { createRequire, createRequireFromPath } = require('module')
-const path = require('path')
-const req = (createRequire || createRequireFromPath)(path.resolve(process.cwd(), '_'))
+const req = require('./req.js')
 
 /**
  * Plugin Loader
@@ -23,9 +20,9 @@ const load = (plugin, options, file) => {
       options === undefined ||
       Object.keys(options).length === 0
     ) {
-      return req(plugin)
+      return req(plugin, file)
     } else {
-      return req(plugin)(options)
+      return req(plugin, file)(options)
     }
   } catch (err) {
     throw new Error(`Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`)

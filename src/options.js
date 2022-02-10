@@ -1,9 +1,6 @@
 'use strict'
 
-// eslint-disable-next-line node/no-deprecated-api
-const { createRequire, createRequireFromPath } = require('module')
-const path = require('path')
-const req = (createRequire || createRequireFromPath)(path.resolve(process.cwd(), '_'))
+const req = require('./req.js')
 
 /**
  * Load Options
@@ -18,7 +15,7 @@ const req = (createRequire || createRequireFromPath)(path.resolve(process.cwd(),
 const options = (config, file) => {
   if (config.parser && typeof config.parser === 'string') {
     try {
-      config.parser = req(config.parser)
+      config.parser = req(config.parser, file)
     } catch (err) {
       throw new Error(`Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`)
     }
@@ -26,7 +23,7 @@ const options = (config, file) => {
 
   if (config.syntax && typeof config.syntax === 'string') {
     try {
-      config.syntax = req(config.syntax)
+      config.syntax = req(config.syntax, file)
     } catch (err) {
       throw new Error(`Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`)
     }
@@ -34,7 +31,7 @@ const options = (config, file) => {
 
   if (config.stringifier && typeof config.stringifier === 'string') {
     try {
-      config.stringifier = req(config.stringifier)
+      config.stringifier = req(config.stringifier, file)
     } catch (err) {
       throw new Error(`Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`)
     }

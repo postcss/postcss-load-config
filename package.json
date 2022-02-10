@@ -60,7 +60,8 @@
     "Ryan Dunckel",
     "Mateusz Derks",
     "Dalton Santos",
-    "Patrick Gilday"
+    "Patrick Gilday",
+    "François Wouts"
   ],
   "repository": "postcss/postcss-load-config",
   "license": "MIT"
