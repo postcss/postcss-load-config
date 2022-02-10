@@ -2,6 +2,10 @@
 const { createRequire, createRequireFromPath } = require('module')
 const path = require('path')
 
-const req = (moduleId, file) => (createRequire || createRequireFromPath)(path.resolve(file, '_'))(moduleId)
+function req (name, rootFile) {
+  const create = createRequire || createRequireFromPath
+  const require = create(path.resolve(rootFile, '_'))
+  return require(name)
+}
 
 module.exports = req
