@@ -28,19 +28,19 @@
   },
   "devDependencies": {
     "@types/cssnano": "^5.0.0",
-    "@types/node": "^17.0.6",
+    "@types/node": "^17.0.17",
     "@types/postcss-import": "^14.0.0",
-    "clean-publish": "^3.4.4",
-    "cssnano": "^5.0.14",
-    "jest": "^27.4.5",
-    "jsdoc-to-markdown": "^7.1.0",
-    "postcss": "^8.4.5",
+    "clean-publish": "^4.0.0",
+    "cssnano": "^5.0.17",
+    "jest": "^27.5.1",
+    "jsdoc-to-markdown": "^7.1.1",
+    "postcss": "^8.4.6",
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
     "standard": "^16.0.4",
     "sugarss": "^4.0.1",
-    "ts-node": "^10.4.0",
-    "typescript": "4.5.4"
+    "ts-node": "^10.5.0",
+    "typescript": "4.5.5"
   },
   "peerDependencies": {
     "ts-node": ">=9.0.0"
