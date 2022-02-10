@@ -458,6 +458,12 @@ module.exports = (env) => ({
       <br />
       <a href="https://github.com/daltones">Dalton Santos</a>
     </td>
+    <td align="center">
+      <img width="150" height="150"
+        src="https://github.com/fwouts.png?v=3&s=150">
+      <br />
+      <a href="https://github.com/fwouts">François Wouts</a>
+    </td>
   </tr>
   <tbody>
 </table>
