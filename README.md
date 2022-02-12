@@ -27,9 +27,9 @@ npm i -D postcss-load-config
 npm i -S|-D postcss-plugin
 ```
 
-Install all required postcss plugins and save them to your **package.json** `dependencies`/`devDependencies`
+Install all required PostCSS plugins and save them to your **package.json** `dependencies`/`devDependencies`
 
-Then create a postcss config file by choosing one of the following formats
+Then create a PostCSS config file by choosing one of the following formats
 
 ### `package.json`
 
@@ -142,7 +142,7 @@ module.exports = ({ env }) => ({
 })
 ```
 
-> ℹ️ When using an `{Object}`, the key can be a Node.js module name, a path to a JavaScript file that is relative to the directory of the postcss config file, or an absolute path to a JavaScript file.
+> ℹ️ When using an `{Object}`, the key can be a Node.js module name, a path to a JavaScript file that is relative to the directory of the PostCSS config file, or an absolute path to a JavaScript file.
 
 #### `{Array}`
 
