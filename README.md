@@ -142,6 +142,8 @@ module.exports = ({ env }) => ({
 })
 ```
 
+> ℹ️ When using an `{Object}`, the key can be a Node.js module name, a path to a JavaScript file that is relative to the directory of the postcss config file, or an absolute path to a JavaScript file.
+
 #### `{Array}`
 
 **.postcssrc.js**
