@@ -26,12 +26,6 @@ describe('package.json - {Object} - Load Config', test => {
     return postcssrc({}, 'test/pkg').then(expected)
   })
 
-  test('Sync', () => {
-    const config = postcssrc.sync({}, 'test/pkg')
-
-    expected(config)
-  })
-
   test.run()
 })
 

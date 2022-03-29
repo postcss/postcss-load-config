@@ -11,12 +11,6 @@ declare function postcssrc(
 ): Promise<postcssrc.Result>;
 
 declare namespace postcssrc {
-  function sync(
-    ctx?: ConfigContext,
-    path?: string,
-    options?: ConfigOptions
-  ): Result;
-
   // In the ConfigContext, these three options can be instances of the
   // appropriate class, or strings. If they are strings, postcss-load-config will
   // require() them and pass the instances along.
