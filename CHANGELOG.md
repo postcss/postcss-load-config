@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.4](https://github.com/postcss/postcss-load-config/compare/v3.1.3...v3.1.4) (2022-03-29)
+
+### Bug Fixes
+
+* **deps:** Add `postcss` to optional peer dependencies to fix types ([#233](https://github.com/postcss/postcss-load-config/pull/233))
+
 ## [3.1.3](https://github.com/postcss/postcss-load-config/compare/v3.1.2...v3.1.3) (2022-01-02)
 
 ### Bug Fixes
@@ -13,7 +19,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * **src/index:** Load plugins from PostCSS config location instead of current working directory ([#229](https://github.com/postcss/postcss-load-config/pull/229))
-
 
 ## [3.1.1](https://github.com/postcss/postcss-load-config/compare/v3.1.0...v3.1.1) (2022-01-02)
 
