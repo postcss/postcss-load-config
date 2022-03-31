@@ -1,12 +1,12 @@
-'use strict'
+const { test } = require('uvu')
+const { match } = require('uvu/assert')
 
 const postcssrc = require('../src/index.js')
+const { describe } = require('./utils.js')
 
 test('Loading Config - {Error}', () => {
-  return postcssrc({}, 'test/err').catch((err) => {
-    expect(err.message).toMatch(
-      /^No PostCSS Config found in: (.*)$/
-    )
+  return postcssrc({}, 'test/err').catch(err => {
+    match(err.message, /^No PostCSS Config found in: (.*)$/)
   })
 })
 
@@ -14,62 +14,50 @@ test('Loading Config - Sync - {Error}', () => {
   try {
     postcssrc.sync({}, 'test/err')
   } catch (err) {
-    expect(err.message).toMatch(
-      /^No PostCSS Config found in: (.*)$/
-    )
+    match(err.message, /^No PostCSS Config found in: (.*)$/)
   }
 })
 
-describe('Loading Plugins - {Error}', () => {
+describe('Loading Plugins - {Error}', test => {
   test('Plugin - {Type} - Invalid', () => {
-    return postcssrc({}, 'test/err/plugins').catch((err) => {
-      expect(err.message).toMatch(
-        /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/
-      )
+    return postcssrc({}, 'test/err/plugins').catch(err => {
+      match(err.message, /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/)
     })
   })
 
   test('Plugin - {Object}', () => {
-    return postcssrc({}, 'test/err/plugins/object').catch((err) => {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Plugin failed: .*$/m
-      )
+    return postcssrc({}, 'test/err/plugins/object').catch(err => {
+      match(err.message, /^Loading PostCSS Plugin failed: .*$/m)
     })
   })
 
   test('Plugin - {Object} - Options', () => {
-    return postcssrc({}, 'test/err/plugins/object/options').catch((err) => {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Plugin failed: .*$/m
-      )
+    return postcssrc({}, 'test/err/plugins/object/options').catch(err => {
+      match(err.message, /^Loading PostCSS Plugin failed: .*$/m)
     })
   })
 
   test('Plugin - {Array}', () => {
-    return postcssrc({}, 'test/err/plugins/array').catch((err) => {
-      expect(err.message).toMatch(
-        /^Cannot find (.*)$/
-      )
+    return postcssrc({}, 'test/err/plugins/array').catch(err => {
+      match(err.message, /^Cannot find (.*)$/m)
     })
   })
 
   test('Plugin - {Array} - Options', () => {
-    return postcssrc({}, 'test/err/plugins/array/options').catch((err) => {
-      expect(err.message).toMatch(
-        /^Cannot find (.*)$/
-      )
+    return postcssrc({}, 'test/err/plugins/array/options').catch(err => {
+      match(err.message, /^Cannot find (.*)$/m)
     })
   })
+
+  test.run()
 })
 
-describe('Loading Plugins - Sync - {Error}', () => {
+describe('Loading Plugins - Sync - {Error}', test => {
   test('Plugin - {Type} - Invalid', () => {
     try {
       postcssrc.sync({}, 'test/err/plugins')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/
-      )
+      match(err.message, /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/)
     }
   })
 
@@ -77,9 +65,7 @@ describe('Loading Plugins - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/plugins/object')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Plugin failed: .*$/m
-      )
+      match(err.message, /^Loading PostCSS Plugin failed: .*$/m)
     }
   })
 
@@ -87,9 +73,7 @@ describe('Loading Plugins - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/plugins/object/options')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Plugin failed: .*$/m
-      )
+      match(err.message, /^Loading PostCSS Plugin failed: .*$/m)
     }
   })
 
@@ -97,9 +81,7 @@ describe('Loading Plugins - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/plugins/array')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Cannot find (.*)$/
-      )
+      match(err.message, /^Cannot find (.*)$/m)
     }
   })
 
@@ -107,47 +89,41 @@ describe('Loading Plugins - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/plugins/array/options')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Cannot find (.*)$/
-      )
+      match(err.message, /^Cannot find (.*)$/m)
     }
   })
+
+  test.run()
 })
 
-describe('Loading Options - {Error}', () => {
+describe('Loading Options - {Error}', test => {
   test('Parser - {String}', () => {
-    return postcssrc({}, 'test/err/options/parser').catch((err) => {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Parser failed: .*$/m
-      )
+    return postcssrc({}, 'test/err/options/parser').catch(err => {
+      match(err.message, /^Loading PostCSS Parser failed: .*$/m)
     })
   })
 
   test('Syntax - {String}', () => {
-    return postcssrc({}, 'test/err/options/syntax').catch((err) => {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Syntax failed: .*$/m
-      )
+    return postcssrc({}, 'test/err/options/syntax').catch(err => {
+      match(err.message, /^Loading PostCSS Syntax failed: .*$/m)
     })
   })
 
   test('Stringifier - {String}', () => {
-    return postcssrc({}, 'test/err/options/stringifier').catch((err) => {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Stringifier failed: .*$/m
-      )
+    return postcssrc({}, 'test/err/options/stringifier').catch(err => {
+      match(err.message, /^Loading PostCSS Stringifier failed: .*$/m)
     })
   })
+
+  test.run()
 })
 
-describe('Loading Options - Sync - {Error}', () => {
+describe('Loading Options - Sync - {Error}', test => {
   test('Parser - {String}', () => {
     try {
       postcssrc.sync({}, 'test/err/options/parser')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Parser failed: .*$/m
-      )
+      match(err.message, /^Loading PostCSS Parser failed: .*$/m)
     }
   })
 
@@ -155,9 +131,7 @@ describe('Loading Options - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/options/syntax')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Syntax failed: .*$/m
-      )
+      match(err.message, /^Loading PostCSS Syntax failed: .*$/m)
     }
   })
 
@@ -165,9 +139,11 @@ describe('Loading Options - Sync - {Error}', () => {
     try {
       postcssrc.sync({}, 'test/err/options/stringifier')
     } catch (err) {
-      expect(err.message).toMatch(
-        /^Loading PostCSS Stringifier failed: .*$/m
-      )
+      match(err.message, /^Loading PostCSS Stringifier failed: .*$/m)
     }
   })
+
+  test.run()
 })
+
+test.run()

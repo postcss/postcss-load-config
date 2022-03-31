@@ -11,9 +11,9 @@
     "node": ">= 10"
   },
   "scripts": {
-    "lint": "standard --env jest",
-    "test": "npm run lint && jest --verbose --coverage",
-    "unit": "jest --verbose",
+    "lint": "standard",
+    "test": "pnpm lint && c8 pnpm unit",
+    "unit": "tsm node_modules/uvu/bin.js . '\\.test\\.(ts|js)$'",
     "docs": "jsdoc2md src/*.js > DOCS.md",
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
@@ -29,9 +29,9 @@
   "devDependencies": {
     "@types/node": "^17.0.23",
     "@types/postcss-import": "^14.0.0",
+    "c8": "^7.11.0",
     "clean-publish": "^4.0.0",
     "cssnano": "^5.1.5",
-    "jest": "^27.5.1",
     "jsdoc-to-markdown": "^7.1.1",
     "postcss": "^8.4.12",
     "postcss-import": "^14.1.0",
@@ -39,7 +39,9 @@
     "standard": "^16.0.4",
     "sugarss": "^4.0.1",
     "ts-node": "^10.7.0",
-    "typescript": "4.6.3"
+    "tsm": "^2.2.1",
+    "typescript": "4.6.3",
+    "uvu": "^0.5.3"
   },
   "peerDependencies": {
     "postcss": ">=8.0.9",
@@ -52,6 +54,13 @@
     "postcss": {
       "optional": true
     }
+  },
+  "c8": {
+    "exclude": [
+      "**/*.test.*"
+    ],
+    "lines": 97.64,
+    "check-coverage": true
   },
   "keywords": [
     "postcss",
