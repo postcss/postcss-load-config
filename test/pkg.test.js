@@ -1,26 +1,25 @@
-'use strict'
-
 const path = require('path')
+const { test } = require('uvu')
+const { is } = require('uvu/assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected } = require('./utils.js')
+const { fixture, expected, describe } = require('./utils.js')
 
-describe('package.json - {Object} - Load Config', () => {
-  const expected = (config) => {
-    expect(config.options.parser).toEqual(require('sugarss'))
-    expect(config.options.syntax).toEqual(require('sugarss'))
-    expect(config.options.map).toEqual(false)
-    expect(config.options.from).toEqual('./test/pkg/fixtures/index.css')
-    expect(config.options.to).toEqual('./test/pkg/expect/index.css')
+describe('package.json - {Object} - Load Config', test => {
+  const expected = config => {
+    is(config.options.parser, require('sugarss'))
+    is(config.options.syntax, require('sugarss'))
+    is(config.options.map, false)
+    is(config.options.from, './test/pkg/fixtures/index.css')
+    is(config.options.to, './test/pkg/expect/index.css')
 
-    expect(config.plugins.length).toEqual(2)
-    expect(typeof config.plugins[0]).toBe('function')
-    expect(typeof config.plugins[1]).toBe('function')
+    is(config.plugins.length, 2)
+    is(typeof config.plugins[0], 'function')
+    is(typeof config.plugins[1], 'function')
 
-    expect(config.file)
-      .toEqual(path.resolve('test/pkg', 'package.json'))
+    is(config.file, path.resolve('test/pkg', 'package.json'))
   }
 
   test('Async', () => {
@@ -32,6 +31,8 @@ describe('package.json - {Object} - Load Config', () => {
 
     expected(config)
   })
+
+  test.run()
 })
 
 test('package.json - {Object} - Process CSS', () => {
@@ -40,11 +41,11 @@ test('package.json - {Object} - Process CSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/pkg').then((config) => {
+  return postcssrc(ctx, 'test/pkg').then(config => {
     return postcss(config.plugins)
       .process(fixture('pkg', 'index.css'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('pkg', 'index.css'))
+      .then(result => {
+        is(result.css, expected('pkg', 'index.css'))
       })
   })
 })
@@ -55,11 +56,13 @@ test('package.json - {Object} - Process SSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/pkg').then((config) => {
+  return postcssrc(ctx, 'test/pkg').then(config => {
     return postcss(config.plugins)
       .process(fixture('pkg', 'index.sss'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('pkg', 'index.sss'))
+      .then(result => {
+        is(result.css, expected('pkg', 'index.sss'))
       })
   })
 })
+
+test.run()

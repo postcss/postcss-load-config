@@ -1,31 +1,30 @@
-'use strict'
-
 const path = require('path')
+const { test } = require('uvu')
+const { is } = require('uvu/assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected } = require('./utils.js')
+const { fixture, expected, describe } = require('./utils.js')
 
-describe('postcss.config.ts - {Object} - Load Config', () => {
+describe('postcss.config.ts - {Object} - Load Config', test => {
   const ctx = {
     parser: true,
     syntax: true
   }
 
-  const expected = (config) => {
-    expect(config.options.parser).toEqual(require('sugarss'))
-    expect(config.options.syntax).toEqual(require('sugarss'))
-    expect(config.options.map).toEqual(false)
-    expect(config.options.from).toEqual('./test/ts/object/fixtures/index.css')
-    expect(config.options.to).toEqual('./test/ts/object/expect/index.css')
+  const expected = config => {
+    is(config.options.parser, require('sugarss'))
+    is(config.options.syntax, require('sugarss'))
+    is(config.options.map, false)
+    is(config.options.from, './test/ts/object/fixtures/index.css')
+    is(config.options.to, './test/ts/object/expect/index.css')
 
-    expect(config.plugins.length).toEqual(2)
-    expect(typeof config.plugins[0]).toBe('function')
-    expect(typeof config.plugins[1]).toBe('function')
+    is(config.plugins.length, 2)
+    is(typeof config.plugins[0], 'function')
+    is(typeof config.plugins[1], 'function')
 
-    expect(config.file)
-      .toEqual(path.resolve('test/ts/object', 'postcss.config.ts'))
+    is(config.file, path.resolve('test/ts/object', 'postcss.config.ts'))
   }
 
   test('Async', () => {
@@ -37,6 +36,8 @@ describe('postcss.config.ts - {Object} - Load Config', () => {
 
     expected(config)
   })
+
+  test.run()
 })
 
 test('postcss.config.ts - {Object} - Process CSS', () => {
@@ -45,11 +46,11 @@ test('postcss.config.ts - {Object} - Process CSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/object').then((config) => {
+  return postcssrc(ctx, 'test/ts/object').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/object', 'index.css'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('ts/object', 'index.css'))
+      .then(result => {
+        is(result.css, expected('ts/object', 'index.css'))
       })
   })
 })
@@ -61,11 +62,11 @@ test('postcss.config.ts - {Object} - Process SSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/object').then((config) => {
+  return postcssrc(ctx, 'test/ts/object').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/object', 'index.sss'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('ts/object', 'index.sss'))
+      .then(result => {
+        is(result.css, expected('ts/object', 'index.sss'))
       })
   })
 })
@@ -76,19 +77,18 @@ describe('postcss.config.ts - {Array} - Load Config', () => {
     syntax: true
   }
 
-  const expected = (config) => {
-    expect(config.options.parser).toEqual(require('sugarss'))
-    expect(config.options.syntax).toEqual(require('sugarss'))
-    expect(config.options.map).toEqual(false)
-    expect(config.options.from).toEqual('./test/ts/array/fixtures/index.css')
-    expect(config.options.to).toEqual('./test/ts/array/expect/index.css')
+  const expected = config => {
+    is(config.options.parser, require('sugarss'))
+    is(config.options.syntax, require('sugarss'))
+    is(config.options.map, false)
+    is(config.options.from, './test/ts/array/fixtures/index.css')
+    is(config.options.to, './test/ts/array/expect/index.css')
 
-    expect(config.plugins.length).toEqual(2)
-    expect(typeof config.plugins[0]).toBe('object')
-    expect(typeof config.plugins[1]).toBe('object')
+    is(config.plugins.length, 2)
+    is(typeof config.plugins[0], 'object')
+    is(typeof config.plugins[1], 'object')
 
-    expect(config.file)
-      .toEqual(path.resolve('test/ts/array', 'postcss.config.ts'))
+    is(config.file, path.resolve('test/ts/array', 'postcss.config.ts'))
   }
 
   test('Async', () => {
@@ -100,6 +100,8 @@ describe('postcss.config.ts - {Array} - Load Config', () => {
 
     expected(config)
   })
+
+  test.run()
 })
 
 test('postcss.config.ts - {Array} - Process CSS', () => {
@@ -108,11 +110,11 @@ test('postcss.config.ts - {Array} - Process CSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/array').then((config) => {
+  return postcssrc(ctx, 'test/ts/array').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/array', 'index.css'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('ts/array', 'index.css'))
+      .then(result => {
+        is(result.css, expected('ts/array', 'index.css'))
       })
   })
 })
@@ -124,11 +126,13 @@ test('postcss.config.ts - {Array} - Process SSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/array').then((config) => {
+  return postcssrc(ctx, 'test/ts/array').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/array', 'index.sss'), config.options)
-      .then((result) => {
-        expect(result.css).toEqual(expected('ts/array', 'index.sss'))
+      .then(result => {
+        is(result.css, expected('ts/array', 'index.sss'))
       })
   })
 })
+
+test.run()
