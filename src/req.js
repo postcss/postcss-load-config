@@ -1,4 +1,4 @@
-// eslint-disable-next-line node/no-deprecated-api
+// eslint-disable-next-line n/no-deprecated-api
 const { createRequire, createRequireFromPath } = require('module')
 
 function req (name, rootFile) {

@@ -36,7 +36,7 @@ const processResult = (ctx, result) => {
   return {
     plugins: loadPlugins(config, file),
     options: loadOptions(config, file),
-    file: file
+    file
   }
 }
 
