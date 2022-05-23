@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0](https://github.com/postcss/postcss-load-config/compare/v3.1.4...v4.0.0) (2022-05-23)
+
+### Features
+
+* Added support for ESM configs ([#234](https://github.com/postcss/postcss-load-config/pull/234))
+
+### BREAKING CHANGES
+
+* Dropped sync API.
+* Dropped Node.js 12 & 10 support.
+
 ## [3.1.4](https://github.com/postcss/postcss-load-config/compare/v3.1.3...v3.1.4) (2022-03-29)
 
 ### Bug Fixes
