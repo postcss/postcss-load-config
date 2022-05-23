@@ -66,6 +66,11 @@ const createContext = (ctx) => {
   return ctx
 }
 
+const importDefault = async filepath => {
+  const module = await import(filepath)
+  return module.default
+}
+
 const addTypeScriptLoader = (options = {}, loader) => {
   const moduleName = 'postcss'
 
@@ -81,14 +86,19 @@ const addTypeScriptLoader = (options = {}, loader) => {
       `.${moduleName}rc.ts`,
       `.${moduleName}rc.js`,
       `.${moduleName}rc.cjs`,
+      `.${moduleName}rc.mjs`,
       `${moduleName}.config.ts`,
       `${moduleName}.config.js`,
-      `${moduleName}.config.cjs`
+      `${moduleName}.config.cjs`,
+      `${moduleName}.config.mjs`
     ],
     loaders: {
       ...options.loaders,
       '.yaml': (filepath, content) => yaml.parse(content),
       '.yml': (filepath, content) => yaml.parse(content),
+      '.js': importDefault,
+      '.cjs': importDefault,
+      '.mjs': importDefault,
       '.ts': loader
     }
   }
@@ -150,26 +160,6 @@ const rc = withTypeScriptLoader((ctx, path, options) => {
 
       return processResult(ctx, result)
     })
-})
-
-rc.sync = withTypeScriptLoader((ctx, path, options) => {
-  /**
-   * @type {Object} The full Config Context
-   */
-  ctx = createContext(ctx)
-
-  /**
-   * @type {String} `process.cwd()`
-   */
-  path = path ? resolve(path) : process.cwd()
-
-  const result = config.lilconfigSync('postcss', options).search(path)
-
-  if (!result) {
-    throw new Error(`No PostCSS Config found in: ${path}`)
-  }
-
-  return processResult(ctx, result)
 })
 
 /**

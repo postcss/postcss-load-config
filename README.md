@@ -91,14 +91,22 @@ plugins:
 
 ### `.postcssrc.js` or `postcss.config.js`
 
-You may need some logic within your config. In this case create JS file named **`.postcssrc.js`** or **`postcss.config.js`**
+You may need some logic within your config.
+In this case create JS file named:
+- `.postcssrc.js`
+- `.postcssrc.mjs`
+- `.postcssrc.cjs`
+- `.postcssrc.ts`
+- `postcss.config.js`
+- `postcss.config.mjs`
+- `postcss.config.cjs`
+- `postcss.config.ts`
 
 ```
 Project (Root)
   |– client
   |– public
-  |
-  |- (.postcssrc.js|postcss.config.js)
+  |- (.postcssrc|postcss.config).(js|mjs|cjs|ts)
   |- package.json
 ```
 
@@ -324,8 +332,6 @@ module.exports = (ctx) => ({
 }
 ```
 
-### `Async`
-
 ```js
 const { readFileSync } = require('fs')
 
@@ -341,21 +347,6 @@ postcssrc(ctx).then(({ plugins, options }) => {
     .process(css, options)
     .then((result) => console.log(result.css))
 })
-```
-
-### `Sync`
-
-```js
-const { readFileSync } = require('fs')
-
-const postcss = require('postcss')
-const postcssrc = require('postcss-load-config')
-
-const css = readFileSync('index.sss', 'utf8')
-
-const ctx = { parser: true, map: 'inline' }
-
-const { plugins, options } = postcssrc.sync(ctx)
 ```
 
 <div align="center">

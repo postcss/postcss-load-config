@@ -31,12 +31,6 @@ describe('postcss.config.ts - {Object} - Load Config', test => {
     return postcssrc(ctx, 'test/ts/object').then(expected)
   })
 
-  test('Sync', () => {
-    const config = postcssrc.sync(ctx, 'test/ts/object')
-
-    expected(config)
-  })
-
   test.run()
 })
 
@@ -93,12 +87,6 @@ describe('postcss.config.ts - {Array} - Load Config', () => {
 
   test('Async', () => {
     return postcssrc(ctx, 'test/ts/array').then(expected)
-  })
-
-  test('Sync', () => {
-    const config = postcssrc.sync(ctx, 'test/ts/array')
-
-    expected(config)
   })
 
   test.run()
