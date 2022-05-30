@@ -1,6 +1,7 @@
 'use strict'
 
 const resolve = require('path').resolve
+const url = require('url')
 
 const config = require('lilconfig')
 const yaml = require('yaml')
@@ -67,7 +68,7 @@ const createContext = (ctx) => {
 }
 
 const importDefault = async filepath => {
-  const module = await import(filepath)
+  const module = await import(url.pathToFileURL(filepath).href)
   return module.default
 }
 
