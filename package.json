@@ -18,10 +18,16 @@
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
   },
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/postcss/"
-  },
+  "funding": [
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/postcss/"
+    },
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/ai"
+    }
+  ],
   "dependencies": {
     "lilconfig": "^2.0.5",
     "yaml": "^2.1.1"
