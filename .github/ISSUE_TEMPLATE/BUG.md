@@ -3,7 +3,7 @@ name: 🐛 Bug
 about: Report a Bug
 ---
 
-<!-- ✏️ Briefly describe the issue you are experiencing (or the feature you want to see added to the plugin). Tell us what you were trying to do and what happened instead. Remember, this is _not_ a place to ask questions. For that, go to http://gitter.im/postcss/postcss -->
+<!-- ✏️ Briefly describe the issue you are experiencing (or the feature you want to see added to the plugin). Tell us what you were trying to do and what happened instead. Remember, this is _not_ a place to ask questions. -->
 
 ### `Details`
 

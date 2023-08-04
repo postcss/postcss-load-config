@@ -1,10 +1,4 @@
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![deps][deps]][deps-url]
-[![test][test]][test-url]
-[![coverage][cover]][cover-url]
-[![code style][style]][style-url]
-[![chat][chat]][chat-url]
+
 
 <div align="center">
   <img width="100" height="100" title="Load Options" src="http://michael-ciniawsky.github.io/postcss-load-options/logo.svg">
@@ -459,29 +453,8 @@ module.exports = (env) => ({
     </td>
   </tr>
   <tbody>
-</table>
+</table
 
-
-[npm]: https://img.shields.io/npm/v/postcss-load-config.svg
-[npm-url]: https://npmjs.com/package/postcss-load-config
-
-[node]: https://img.shields.io/node/v/postcss-load-plugins.svg
-[node-url]: https://nodejs.org/
-
-[deps]: https://david-dm.org/michael-ciniawsky/postcss-load-config.svg
-[deps-url]: https://david-dm.org/michael-ciniawsky/postcss-load-config
-
-[test]: http://img.shields.io/travis/michael-ciniawsky/postcss-load-config.svg
-[test-url]: https://travis-ci.org/michael-ciniawsky/postcss-load-config
-
-[cover]: https://coveralls.io/repos/github/michael-ciniawsky/postcss-load-config/badge.svg
-[cover-url]: https://coveralls.io/github/michael-ciniawsky/postcss-load-config
-
-[style]: https://img.shields.io/badge/code%20style-standard-yellow.svg
-[style-url]: http://standardjs.com/
-
-[chat]: https://img.shields.io/gitter/room/postcss/postcss.svg
-[chat-url]: https://gitter.im/postcss/postcss
 
 ## Security Contact
 
