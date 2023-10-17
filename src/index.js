@@ -85,10 +85,12 @@ const addTypeScriptLoader = (options = {}, loader) => {
       `.${moduleName}rc.yaml`,
       `.${moduleName}rc.yml`,
       `.${moduleName}rc.ts`,
+      `.${moduleName}rc.cts`,
       `.${moduleName}rc.js`,
       `.${moduleName}rc.cjs`,
       `.${moduleName}rc.mjs`,
       `${moduleName}.config.ts`,
+      `${moduleName}.config.cts`,
       `${moduleName}.config.js`,
       `${moduleName}.config.cjs`,
       `${moduleName}.config.mjs`
@@ -100,7 +102,8 @@ const addTypeScriptLoader = (options = {}, loader) => {
       '.js': importDefault,
       '.cjs': importDefault,
       '.mjs': importDefault,
-      '.ts': loader
+      '.ts': loader,
+      '.cts': loader
     }
   }
 }
@@ -112,7 +115,10 @@ const withTypeScriptLoader = (rcFunc) => {
 
       try {
         // Register TypeScript compiler instance
-        registerer = require('ts-node').register()
+        registerer = require('ts-node').register({
+          // transpile to cjs even if compilerOptions.module in tsconfig is not Node16/NodeNext.
+          moduleTypes: { '**/*.cts': 'cjs' }
+        })
 
         return require(configFile)
       } catch (err) {

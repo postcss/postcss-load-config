@@ -13,7 +13,17 @@ describe('postcss.config.ts - {Object} - Load Config', test => {
     syntax: true
   }
 
-  const expected = config => {
+  test('Load Config - postcss.config.ts (CommonJS)', async () => {
+    const config = await postcssrc(ctx, 'test/ts/object/cjs-in-ts')
+    assertExpectedConfig(config, 'test/ts/object/cjs-in-ts/postcss.config.ts')
+  })
+
+  test('Load Config - postcss.config.cts', async () => {
+    const config = await postcssrc(ctx, 'test/ts/object/cts')
+    assertExpectedConfig(config, 'test/ts/object/cts/postcss.config.cts')
+  })
+
+  function assertExpectedConfig (config, expectedPath) {
     is(config.options.parser, require('sugarss'))
     is(config.options.syntax, require('sugarss'))
     is(config.options.map, false)
@@ -24,12 +34,8 @@ describe('postcss.config.ts - {Object} - Load Config', test => {
     is(typeof config.plugins[0], 'function')
     is(typeof config.plugins[1], 'function')
 
-    is(config.file, path.resolve('test/ts/object', 'postcss.config.ts'))
+    is(config.file, path.resolve(expectedPath))
   }
-
-  test('Async', () => {
-    return postcssrc(ctx, 'test/ts/object').then(expected)
-  })
 
   test.run()
 })
@@ -40,7 +46,7 @@ test('postcss.config.ts - {Object} - Process CSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/object').then(config => {
+  return postcssrc(ctx, 'test/ts/object/cjs-in-ts').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/object', 'index.css'), config.options)
       .then(result => {
@@ -56,7 +62,7 @@ test('postcss.config.ts - {Object} - Process SSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/object').then(config => {
+  return postcssrc(ctx, 'test/ts/object/cjs-in-ts').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/object', 'index.sss'), config.options)
       .then(result => {
@@ -71,7 +77,17 @@ describe('postcss.config.ts - {Array} - Load Config', () => {
     syntax: true
   }
 
-  const expected = config => {
+  test('Load Config - postcss.config.ts (CommonJS)', async () => {
+    const config = await postcssrc(ctx, 'test/ts/array/cjs-in-ts')
+    assertExpectedConfig(config, 'test/ts/array/cjs-in-ts/postcss.config.ts')
+  })
+
+  test('Load Config - postcss.config.cts', async () => {
+    const config = await postcssrc(ctx, 'test/ts/array/cts')
+    assertExpectedConfig(config, 'test/ts/array/cts/postcss.config.cts')
+  })
+
+  function assertExpectedConfig (config, expectedPath) {
     is(config.options.parser, require('sugarss'))
     is(config.options.syntax, require('sugarss'))
     is(config.options.map, false)
@@ -82,12 +98,8 @@ describe('postcss.config.ts - {Array} - Load Config', () => {
     is(typeof config.plugins[0], 'object')
     is(typeof config.plugins[1], 'object')
 
-    is(config.file, path.resolve('test/ts/array', 'postcss.config.ts'))
+    is(config.file, path.resolve(expectedPath))
   }
-
-  test('Async', () => {
-    return postcssrc(ctx, 'test/ts/array').then(expected)
-  })
 
   test.run()
 })
@@ -98,7 +110,7 @@ test('postcss.config.ts - {Array} - Process CSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/array').then(config => {
+  return postcssrc(ctx, 'test/ts/array/cjs-in-ts').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/array', 'index.css'), config.options)
       .then(result => {
@@ -114,7 +126,7 @@ test('postcss.config.ts - {Array} - Process SSS', () => {
     syntax: false
   }
 
-  return postcssrc(ctx, 'test/ts/array').then(config => {
+  return postcssrc(ctx, 'test/ts/array/cjs-in-ts').then(config => {
     return postcss(config.plugins)
       .process(fixture('ts/array', 'index.sss'), config.options)
       .then(result => {
