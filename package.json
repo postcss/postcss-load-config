@@ -65,7 +65,7 @@
     "exclude": [
       "**/*.test.*"
     ],
-    "lines": 97.64,
+    "lines": 97.8,
     "check-coverage": true
   },
   "prettier": {

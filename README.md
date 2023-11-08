@@ -91,16 +91,18 @@ In this case create JS file named:
 - `.postcssrc.mjs`
 - `.postcssrc.cjs`
 - `.postcssrc.ts`
+- `.postcssrc.cts`
 - `postcss.config.js`
 - `postcss.config.mjs`
 - `postcss.config.cjs`
 - `postcss.config.ts`
+- `postcss.config.cts`
 
 ```
 Project (Root)
   |– client
   |– public
-  |- (.postcssrc|postcss.config).(js|mjs|cjs|ts)
+  |- (.postcssrc|postcss.config).(js|mjs|cjs|ts|cts)
   |- package.json
 ```
 
