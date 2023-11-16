@@ -8,12 +8,12 @@
     "src"
   ],
   "engines": {
-    "node": ">= 14"
+    "node": ">= 16"
   },
   "scripts": {
     "lint": "standard",
     "test": "pnpm lint && c8 pnpm unit",
-    "unit": "tsm node_modules/uvu/bin.js . '\\.test\\.(ts|js)$'",
+    "unit": "uvu . '\\.test\\.js$'",
     "docs": "jsdoc2md src/*.js > DOCS.md",
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
@@ -30,31 +30,30 @@
   ],
   "dependencies": {
     "lilconfig": "^2.1.0",
-    "yaml": "^2.3.2"
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.8.3",
-    "@types/postcss-import": "^14.0.1",
+    "@types/node": "^20.9.0",
+    "@types/postcss-import": "^14.0.3",
     "c8": "^8.0.1",
     "clean-publish": "^4.2.0",
     "cssnano": "^6.0.1",
+    "jiti": "^1.19.1",
     "jsdoc-to-markdown": "^8.0.0",
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.1",
     "standard": "^17.1.0",
     "sugarss": "^4.0.1",
-    "ts-node": "^10.9.1",
-    "tsm": "^2.3.0",
     "typescript": "5.2.2",
     "uvu": "^0.5.6"
   },
   "peerDependencies": {
-    "postcss": ">=8.0.9",
-    "ts-node": ">=9.0.0"
+    "jiti": ">=1.21.0",
+    "postcss": ">=8.0.9"
   },
   "peerDependenciesMeta": {
-    "ts-node": {
+    "jiti": {
       "optional": true
     },
     "postcss": {
@@ -63,9 +62,9 @@
   },
   "c8": {
     "exclude": [
-      "**/*.test.*"
+      "test/**/*"
     ],
-    "lines": 97.8,
+    "lines": 100,
     "check-coverage": true
   },
   "prettier": {

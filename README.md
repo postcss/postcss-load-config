@@ -86,23 +86,25 @@ plugins:
 ### `.postcssrc.js` or `postcss.config.js`
 
 You may need some logic within your config.
-In this case create JS file named:
+In this case create JS/TS file named:
 - `.postcssrc.js`
 - `.postcssrc.mjs`
 - `.postcssrc.cjs`
 - `.postcssrc.ts`
+- `.postcssrc.mts`
 - `.postcssrc.cts`
 - `postcss.config.js`
 - `postcss.config.mjs`
 - `postcss.config.cjs`
 - `postcss.config.ts`
+- `postcss.config.mts`
 - `postcss.config.cts`
 
 ```
 Project (Root)
   |– client
   |– public
-  |- (.postcssrc|postcss.config).(js|mjs|cjs|ts|cts)
+  |- (.postcssrc|postcss.config).(js|mjs|cjs|ts|mts|cts)
   |- package.json
 ```
 

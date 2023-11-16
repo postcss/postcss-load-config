@@ -9,7 +9,6 @@ const yaml = require('yaml')
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
 
-/* istanbul ignore next */
 const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: obj }
 
 /**
@@ -67,12 +66,29 @@ const createContext = (ctx) => {
   return ctx
 }
 
-const importDefault = async filepath => {
-  const module = await import(url.pathToFileURL(filepath).href)
-  return module.default
+/** @type {import('jiti').JITI | null} */
+let jiti = null
+
+const loader = async filepath => {
+  try {
+    const module = await import(url.pathToFileURL(filepath).href)
+    return module.default
+  } catch {
+    if (!jiti) {
+      try {
+        jiti = (await import('jiti')).default(__filename, { interopDefault: true })
+      } catch (err) {
+        /* c8 ignore next 4 */
+        throw new Error(
+          `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
+        )
+      }
+    }
+    return jiti(filepath)
+  }
 }
 
-const addTypeScriptLoader = (options = {}, loader) => {
+const withLoaders = (options = {}) => {
   const moduleName = 'postcss'
 
   return {
@@ -86,11 +102,13 @@ const addTypeScriptLoader = (options = {}, loader) => {
       `.${moduleName}rc.yml`,
       `.${moduleName}rc.ts`,
       `.${moduleName}rc.cts`,
+      `.${moduleName}rc.mts`,
       `.${moduleName}rc.js`,
       `.${moduleName}rc.cjs`,
       `.${moduleName}rc.mjs`,
       `${moduleName}.config.ts`,
       `${moduleName}.config.cts`,
+      `${moduleName}.config.mts`,
       `${moduleName}.config.js`,
       `${moduleName}.config.cjs`,
       `${moduleName}.config.mjs`
@@ -99,40 +117,13 @@ const addTypeScriptLoader = (options = {}, loader) => {
       ...options.loaders,
       '.yaml': (filepath, content) => yaml.parse(content),
       '.yml': (filepath, content) => yaml.parse(content),
-      '.js': importDefault,
-      '.cjs': importDefault,
-      '.mjs': importDefault,
+      '.js': loader,
+      '.cjs': loader,
+      '.mjs': loader,
       '.ts': loader,
-      '.cts': loader
+      '.cts': loader,
+      '.mts': loader
     }
-  }
-}
-
-const withTypeScriptLoader = (rcFunc) => {
-  return (ctx, path, options) => {
-    return rcFunc(ctx, path, addTypeScriptLoader(options, (configFile) => {
-      let registerer = { enabled () {} }
-
-      try {
-        // Register TypeScript compiler instance
-        registerer = require('ts-node').register({
-          // transpile to cjs even if compilerOptions.module in tsconfig is not Node16/NodeNext.
-          moduleTypes: { '**/*.cts': 'cjs' }
-        })
-
-        return require(configFile)
-      } catch (err) {
-        if (err.code === 'MODULE_NOT_FOUND') {
-          throw new Error(
-            `'ts-node' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
-          )
-        }
-
-        throw err
-      } finally {
-        registerer.enabled(false)
-      }
-    }))
   }
 }
 
@@ -147,7 +138,7 @@ const withTypeScriptLoader = (rcFunc) => {
  *
  * @return {Promise} config PostCSS Config
  */
-const rc = withTypeScriptLoader((ctx, path, options) => {
+const rc = (ctx, path, options) => {
   /**
    * @type {Object} The full Config Context
    */
@@ -158,7 +149,7 @@ const rc = withTypeScriptLoader((ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  return config.lilconfig('postcss', options)
+  return config.lilconfig('postcss', withLoaders(options))
     .search(path)
     .then((result) => {
       if (!result) {
@@ -167,7 +158,7 @@ const rc = withTypeScriptLoader((ctx, path, options) => {
 
       return processResult(ctx, result)
     })
-})
+}
 
 /**
  * Autoload Config for PostCSS
