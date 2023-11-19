@@ -29,7 +29,7 @@
     }
   ],
   "dependencies": {
-    "lilconfig": "^2.1.0",
+    "lilconfig": "^3.0.0",
     "yaml": "^2.3.2"
   },
   "devDependencies": {
