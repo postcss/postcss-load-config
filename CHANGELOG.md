@@ -4,12 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [4.0.2](https://github.com/postcss/postcss-load-config/compare/v4.0.1...v4.0.2) (2023-11-20)
 
-### Features
-
-* **src/index:** added support for `.cts` files ([#252](https://github.com/postcss/postcss-load-config/pull/252))
-
 ### Bug Fixes
 
+* **src/index:** added support for `.cts` files ([#252](https://github.com/postcss/postcss-load-config/pull/252))
 * **deps:** updated `lilconfig` ([#253](https://github.com/postcss/postcss-load-config/pull/253))
 
 ## [4.0.1](https://github.com/postcss/postcss-load-config/compare/v4.0.0...v4.0.1) (2022-05-31)
