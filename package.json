@@ -30,11 +30,11 @@
   ],
   "dependencies": {
     "lilconfig": "^3.0.0",
-    "yaml": "^2.3.2"
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.8.3",
-    "@types/postcss-import": "^14.0.1",
+    "@types/node": "^20.9.2",
+    "@types/postcss-import": "^14.0.3",
     "c8": "^8.0.1",
     "clean-publish": "^4.2.0",
     "cssnano": "^6.0.1",
