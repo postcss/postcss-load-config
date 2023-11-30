@@ -150,3 +150,20 @@ describe('Array', () => {
     equal(config.file, resolve(expectedPath))
   }
 })
+
+describe('JSON', () => {
+  test('Load Config - postcss.config.mts', async () => {
+    let { plugins } = await postcssrc(ctx, 'test/ts/json')
+    equal(plugins.length, 6)
+    plugins.forEach((plugin, index) => {
+      equal(
+        // normalize for simplicity
+        plugin.path
+          .replace(/^.*?:\/\//, '')
+          .replace(/\\/g, '/')
+          .replace(/\.[^.]+$/, ''),
+        resolve(process.cwd(), `test/ts/json/postcss/${index + 1}`)
+      )
+    })
+  })
+})

@@ -1,13 +1,12 @@
+// @ts-check
 const { resolve } = require('node:path')
-const { pathToFileURL } = require('node:url')
 
 const config = require('lilconfig')
 const yaml = require('yaml')
 
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
-
-const TS_EXT_RE = /\.(c|m)?ts$/
+const req = require('./req.js')
 
 const interopRequireDefault = obj =>
   obj && obj.__esModule ? obj : { default: obj }
@@ -18,9 +17,9 @@ const interopRequireDefault = obj =>
  * @param  {Object} ctx Config Context
  * @param  {Object} result Cosmiconfig result
  *
- * @return {Object} PostCSS Config
+ * @return {Promise<Object>} PostCSS Config
  */
-function processResult(ctx, result) {
+async function processResult(ctx, result) {
   let file = result.filepath || ''
   let projectConfig = interopRequireDefault(result.config).default || {}
 
@@ -36,8 +35,8 @@ function processResult(ctx, result) {
 
   let res = {
     file,
-    options: loadOptions(projectConfig, file),
-    plugins: loadPlugins(projectConfig, file)
+    options: await loadOptions(projectConfig, file),
+    plugins: await loadPlugins(projectConfig, file)
   }
   delete projectConfig.plugins
   return res
@@ -72,38 +71,8 @@ function createContext(ctx) {
   return ctx
 }
 
-/** @type {import('jiti').JITI | null} */
-let jiti = null
-
 async function loader(filepath) {
-  try {
-    let module = await import(pathToFileURL(filepath).href)
-    return module.default
-  } catch (err) {
-    /* c8 ignore start */
-    if (!TS_EXT_RE.test(filepath)) {
-      throw err
-    }
-    if (!jiti) {
-      try {
-        jiti = (await import('jiti')).default(__filename, {
-          interopDefault: true
-        })
-      } catch (jitiErr) {
-        if (
-          jitiErr.code === 'ERR_MODULE_NOT_FOUND' &&
-          jitiErr.message.includes("Cannot find package 'jiti'")
-        ) {
-          throw new Error(
-            `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${jitiErr.message}`
-          )
-        }
-        throw jitiErr
-      }
-      /* c8 ignore stop */
-    }
-    return jiti(filepath)
-  }
+  return req(filepath)
 }
 
 const withLoaders = (options = {}) => {
