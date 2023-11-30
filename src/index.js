@@ -75,6 +75,7 @@ async function loader(filepath) {
   return req(filepath)
 }
 
+/** @return {import('lilconfig').Options} */
 const withLoaders = (options = {}) => {
   let moduleName = 'postcss'
 
@@ -88,8 +89,8 @@ const withLoaders = (options = {}) => {
       '.mjs': loader,
       '.mts': loader,
       '.ts': loader,
-      '.yaml': (filepath, content) => yaml.parse(content),
-      '.yml': (filepath, content) => yaml.parse(content)
+      '.yaml': (_, content) => yaml.parse(content),
+      '.yml': (_, content) => yaml.parse(content)
     },
     searchPlaces: [
       ...(options.searchPlaces || []),
