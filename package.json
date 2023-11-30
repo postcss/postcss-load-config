@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@logux/eslint-config": "^52.0.2",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.10.1",
     "@types/postcss-import": "^14.0.3",
     "c8": "^8.0.1",
     "clean-publish": "^4.2.0",
