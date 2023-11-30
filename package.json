@@ -55,9 +55,6 @@
   "peerDependenciesMeta": {
     "jiti": {
       "optional": true
-    },
-    "postcss": {
-      "optional": true
     }
   },
   "c8": {
