@@ -1,3 +1,4 @@
+// @ts-check
 const req = require('./req.js')
 
 /**
@@ -9,18 +10,19 @@ const req = require('./req.js')
  * @param  {String} plugin PostCSS Plugin Name
  * @param  {Object} options PostCSS Plugin Options
  *
- * @return {Function} PostCSS Plugin
+ * @return {Promise<Function>} PostCSS Plugin
  */
-function load(plugin, options, file) {
+async function load(plugin, options, file) {
   try {
     if (
       options === null ||
       options === undefined ||
       Object.keys(options).length === 0
     ) {
-      return req(plugin, file)
+      return await req(plugin, file)
     } else {
-      return req(plugin, file)(options)
+      return (await req(plugin, file))(options)
+      /* c8 ignore next */
     }
   } catch (err) {
     throw new Error(
@@ -37,21 +39,22 @@ function load(plugin, options, file) {
  *
  * @param {Object} config PostCSS Config Plugins
  *
- * @return {Array} plugins PostCSS Plugins
+ * @return {Promise<Array>} plugins PostCSS Plugins
  */
-function plugins(config, file) {
+async function plugins(config, file) {
   let list = []
 
   if (Array.isArray(config.plugins)) {
     list = config.plugins.filter(Boolean)
   } else {
-    list = Object.keys(config.plugins)
-      .filter(plugin => {
-        return config.plugins[plugin] !== false ? plugin : ''
+    list = Object.entries(config.plugins)
+      .filter(([, options]) => {
+        return options !== false
       })
-      .map(plugin => {
-        return load(plugin, config.plugins[plugin], file)
+      .map(([plugin, options]) => {
+        return load(plugin, options, file)
       })
+    list = await Promise.all(list)
   }
 
   if (list.length && list.length > 0) {

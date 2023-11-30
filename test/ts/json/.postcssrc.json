@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "./postcss/1.js": {},
+    "./postcss/2.cjs": {},
+    "./postcss/3.mjs": {},
+    "./postcss/4.ts": {},
+    "./postcss/5.cts": {},
+    "./postcss/6.mts": {}
+  }
+}
