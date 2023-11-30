@@ -1,14 +1,12 @@
-'use strict'
+const { readFileSync } = require('node:fs')
+const { resolve } = require('node:path')
 
-const fs = require('node:fs')
-const path = require('node:path')
-
-const fixture = (dir, file) => {
-  return fs.readFileSync(path.resolve('test', dir, 'fixtures', file), 'utf8')
+function fixture(dir, file) {
+  return readFileSync(resolve('test', dir, 'fixtures', file), 'utf8')
 }
 
-const expected = (dir, file) => {
-  return fs.readFileSync(path.resolve('test', dir, 'expect', file), 'utf8')
+function expected(dir, file) {
+  return readFileSync(resolve('test', dir, 'expect', file), 'utf8')
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-const path = require('node:path')
+const { resolve } = require('node:path')
 const { describe, test } = require('node:test')
 const { deepStrictEqual, equal } = require('node:assert')
 
@@ -77,7 +77,7 @@ describe('Object', () => {
     equal(typeof config.plugins[0], 'function')
     equal(typeof config.plugins[1], 'function')
 
-    equal(config.file, path.resolve(expectedConfigPath))
+    equal(config.file, resolve(expectedConfigPath))
   }
 })
 
@@ -147,6 +147,6 @@ describe('Array', () => {
     equal(typeof config.plugins[0], 'object')
     equal(typeof config.plugins[1], 'object')
 
-    equal(config.file, path.resolve(expectedPath))
+    equal(config.file, resolve(expectedPath))
   }
 })

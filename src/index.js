@@ -1,5 +1,5 @@
 const { resolve } = require('node:path')
-const url = require('node:url')
+const { pathToFileURL } = require('node:url')
 
 const config = require('lilconfig')
 const yaml = require('yaml')
@@ -77,7 +77,7 @@ let jiti = null
 
 async function loader(filepath) {
   try {
-    let module = await import(url.pathToFileURL(filepath).href)
+    let module = await import(pathToFileURL(filepath).href)
     return module.default
   } catch (err) {
     /* c8 ignore start */

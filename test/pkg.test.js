@@ -1,4 +1,4 @@
-const path = require('node:path')
+const { resolve } = require('node:path')
 const { describe, test } = require('node:test')
 const { equal } = require('node:assert')
 
@@ -20,7 +20,7 @@ describe('package.json - {Object} - Load Config', () => {
       equal(typeof config.plugins[0], 'function')
       equal(typeof config.plugins[1], 'function')
 
-      equal(config.file, path.resolve('test/pkg', 'package.json'))
+      equal(config.file, resolve('test/pkg', 'package.json'))
     })
   })
 })
