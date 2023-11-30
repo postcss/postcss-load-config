@@ -9,6 +9,8 @@ const yaml = require('yaml')
 const loadOptions = require('./options.js')
 const loadPlugins = require('./plugins.js')
 
+const TS_EXT_RE = /\.(c|m)?ts$/
+
 const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: obj }
 
 /**
@@ -73,16 +75,28 @@ const loader = async filepath => {
   try {
     const module = await import(url.pathToFileURL(filepath).href)
     return module.default
-  } catch {
+  } catch (err) {
+    /* c8 ignore start */
+    if (!TS_EXT_RE.test(filepath)) {
+      throw err
+    }
     if (!jiti) {
       try {
-        jiti = (await import('jiti')).default(__filename, { interopDefault: true })
+        jiti = (await import('jiti')).default(__filename, {
+          interopDefault: true
+        })
       } catch (err) {
-        /* c8 ignore next 4 */
-        throw new Error(
-          `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
-        )
+        if (
+          err.code === 'ERR_MODULE_NOT_FOUND' &&
+          err.message.includes("Cannot find package 'jiti'")
+        ) {
+          throw new Error(
+            `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
+          )
+        }
+        throw err
       }
+      /* c8 ignore stop */
     }
     return jiti(filepath)
   }

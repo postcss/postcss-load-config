@@ -29,23 +29,23 @@
     }
   ],
   "dependencies": {
-    "lilconfig": "^2.1.0",
+    "lilconfig": "^3.0.0",
     "yaml": "^2.3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.9.0",
+    "@types/node": "^20.10.0",
     "@types/postcss-import": "^14.0.3",
     "c8": "^8.0.1",
     "clean-publish": "^4.2.0",
     "cssnano": "^6.0.1",
-    "jiti": "^1.19.1",
+    "jiti": "^1.21.0",
     "jsdoc-to-markdown": "^8.0.0",
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.1",
     "standard": "^17.1.0",
     "sugarss": "^4.0.1",
-    "typescript": "5.2.2",
+    "typescript": "5.3.2",
     "uvu": "^0.5.6"
   },
   "peerDependencies": {
