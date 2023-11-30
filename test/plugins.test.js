@@ -1,5 +1,5 @@
-const { test } = require('uvu')
-const { is } = require('uvu/assert')
+const { test } = require('node:test')
+const { equal } = require('node:assert')
 
 const postcssrc = require('../src/index.js')
 
@@ -10,7 +10,5 @@ const ctx = {
 
 test('Interop default in validation', async () => {
   const config = await postcssrc(ctx, 'test/plugins')
-  is(config.plugins[0].default.called, true)
+  equal(config.plugins[0].default.called, true)
 })
-
-test.run()

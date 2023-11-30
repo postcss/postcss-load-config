@@ -1,18 +1,18 @@
 const path = require('path')
-const { test } = require('uvu')
-const { is, equal, type } = require('uvu/assert')
+const { test, describe } = require('node:test')
+const { equal, deepStrictEqual } = require('node:assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected, describe } = require('./utils.js')
+const { fixture, expected } = require('./utils.js')
 
 const ctx = {
   parser: true,
   syntax: true
 }
 
-describe('Object', test => {
+describe('Object', () => {
   test('Load Config - postcss.config.mts', async () => {
     const config = await postcssrc(ctx, 'test/ts/object/esm')
     assertExpectedConfig(config, 'test/ts/object/esm/postcss.config.mts')
@@ -44,7 +44,7 @@ describe('Object', test => {
       fixture('ts/object', 'index.css'),
       config.options
     )
-    is(result.css, expected('ts/object', 'index.css'))
+    equal(result.css, expected('ts/object', 'index.css'))
   })
 
   test('Process SSS - postcss.config.ts (CommonJS)', async () => {
@@ -59,11 +59,11 @@ describe('Object', test => {
       fixture('ts/object', 'index.sss'),
       config.options
     )
-    is(result.css, expected('ts/object', 'index.sss'))
+    equal(result.css, expected('ts/object', 'index.sss'))
   })
 
   function assertExpectedConfig (config, expectedConfigPath) {
-    equal(config.options, {
+    deepStrictEqual(config.options, {
       parser: require('sugarss'),
       syntax: require('sugarss'),
       map: false,
@@ -72,16 +72,14 @@ describe('Object', test => {
     })
 
     equal(config.plugins.length, 2)
-    type(config.plugins[0], 'function')
-    type(config.plugins[1], 'function')
+    equal(typeof config.plugins[0], 'function')
+    equal(typeof config.plugins[1], 'function')
 
-    is(config.file, path.resolve(expectedConfigPath))
+    equal(config.file, path.resolve(expectedConfigPath))
   }
-
-  test.run()
 })
 
-describe('Array', test => {
+describe('Array', () => {
   test('Load Config - postcss.config.mts', async () => {
     const config = await postcssrc(ctx, 'test/ts/array/esm')
     assertExpectedConfig(config, 'test/ts/array/esm/postcss.config.mts')
@@ -113,7 +111,7 @@ describe('Array', test => {
       fixture('ts/array', 'index.css'),
       config.options
     )
-    is(result.css, expected('ts/array', 'index.css'))
+    equal(result.css, expected('ts/array', 'index.css'))
   })
 
   test('Process SSS - postcss.config.ts (CommonJS)', async () => {
@@ -129,11 +127,11 @@ describe('Array', test => {
       config.options
     )
 
-    is(result.css, expected('ts/array', 'index.sss'))
+    equal(result.css, expected('ts/array', 'index.sss'))
   })
 
   function assertExpectedConfig (config, expectedPath) {
-    equal(config.options, {
+    deepStrictEqual(config.options, {
       parser: require('sugarss'),
       syntax: require('sugarss'),
       map: false,
@@ -141,14 +139,10 @@ describe('Array', test => {
       to: './test/ts/array/expect/index.css'
     })
 
-    is(config.plugins.length, 2)
-    type(config.plugins[0], 'object')
-    type(config.plugins[1], 'object')
+    equal(config.plugins.length, 2)
+    equal(typeof config.plugins[0], 'object')
+    equal(typeof config.plugins[1], 'object')
 
-    is(config.file, path.resolve(expectedPath))
+    equal(config.file, path.resolve(expectedPath))
   }
-
-  test.run()
 })
-
-test.run()

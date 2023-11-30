@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "standard",
     "test": "pnpm lint && c8 pnpm unit",
-    "unit": "uvu . '\\.test\\.js$'",
+    "unit": "node --test test/*.test.js",
     "docs": "jsdoc2md src/*.js > DOCS.md",
     "clean": "npx rimraf ./coverage",
     "release": "standard-version"
@@ -45,8 +45,7 @@
     "postcss-nested": "^6.0.1",
     "standard": "^17.1.0",
     "sugarss": "^4.0.1",
-    "typescript": "5.3.2",
-    "uvu": "^0.5.6"
+    "typescript": "5.3.2"
   },
   "peerDependencies": {
     "jiti": ">=1.21.0",

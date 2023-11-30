@@ -1,8 +1,7 @@
-const { test } = require('uvu')
-const { match } = require('uvu/assert')
+const { test, describe } = require('node:test')
+const { match } = require('node:assert')
 
 const postcssrc = require('../src/index.js')
-const { describe } = require('./utils.js')
 
 test('Loading Config - {Error}', () => {
   return postcssrc({}, 'test/err').catch(err => {
@@ -10,7 +9,7 @@ test('Loading Config - {Error}', () => {
   })
 })
 
-describe('Loading Plugins - {Error}', test => {
+describe('Loading Plugins - {Error}', () => {
   test('Plugin - {Type} - Invalid', () => {
     return postcssrc({}, 'test/err/plugins').catch(err => {
       match(err.message, /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/)
@@ -40,11 +39,9 @@ describe('Loading Plugins - {Error}', test => {
       match(err.message, /^Cannot find (.*)$/m)
     })
   })
-
-  test.run()
 })
 
-describe('Loading Options - {Error}', test => {
+describe('Loading Options - {Error}', () => {
   test('Parser - {String}', () => {
     return postcssrc({}, 'test/err/options/parser').catch(err => {
       match(err.message, /^Loading PostCSS Parser failed: .*$/m)
@@ -62,8 +59,6 @@ describe('Loading Options - {Error}', test => {
       match(err.message, /^Loading PostCSS Stringifier failed: .*$/m)
     })
   })
-
-  test.run()
 })
 
 test('Loading TS Config - {Error} - Syntax', () => {
@@ -71,5 +66,3 @@ test('Loading TS Config - {Error} - Syntax', () => {
     match(err.message, /^ParseError/)
   })
 })
-
-test.run()

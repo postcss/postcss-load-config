@@ -1,18 +1,18 @@
 const path = require('path')
-const { test } = require('uvu')
-const { is, equal, type } = require('uvu/assert')
+const { test, describe } = require('node:test')
+const { equal, deepStrictEqual } = require('node:assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected, describe } = require('./utils.js')
+const { fixture, expected } = require('./utils.js')
 
 const ctx = {
   parser: true,
   syntax: true
 }
 
-describe('Object', test => {
+describe('Object', () => {
   test('Load Config - postcss.config.mjs', async () => {
     const config = await postcssrc(ctx, 'test/js/object/esm')
     assertExpectedConfig(config, 'test/js/object/esm/postcss.config.mjs')
@@ -40,9 +40,11 @@ describe('Object', test => {
     }
 
     const config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
-    const result = await postcss(config.plugins)
-      .process(fixture('js/object', 'index.css'), config.options)
-    is(result.css, expected('js/object', 'index.css'))
+    const result = await postcss(config.plugins).process(
+      fixture('js/object', 'index.css'),
+      config.options
+    )
+    equal(result.css, expected('js/object', 'index.css'))
   })
 
   test('Process SSS - postcss.config.js (CommonJS)', async () => {
@@ -53,13 +55,15 @@ describe('Object', test => {
     }
 
     const config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
-    const result = await postcss(config.plugins)
-      .process(fixture('js/object', 'index.sss'), config.options)
-    is(result.css, expected('js/object', 'index.sss'))
+    const result = await postcss(config.plugins).process(
+      fixture('js/object', 'index.sss'),
+      config.options
+    )
+    equal(result.css, expected('js/object', 'index.sss'))
   })
 
   function assertExpectedConfig (config, expectedConfigPath) {
-    equal(config.options, {
+    deepStrictEqual(config.options, {
       parser: require('sugarss'),
       syntax: require('sugarss'),
       map: false,
@@ -68,16 +72,14 @@ describe('Object', test => {
     })
 
     equal(config.plugins.length, 2)
-    type(config.plugins[0], 'function')
-    type(config.plugins[1], 'function')
+    equal(typeof config.plugins[0], 'function')
+    equal(typeof config.plugins[1], 'function')
 
-    is(config.file, path.resolve(expectedConfigPath))
+    equal(config.file, path.resolve(expectedConfigPath))
   }
-
-  test.run()
 })
 
-describe('Array', test => {
+describe('Array', () => {
   test('Load Config - postcss.config.mjs', async () => {
     const config = await postcssrc(ctx, 'test/js/array/esm')
     assertExpectedConfig(config, 'test/js/array/esm/postcss.config.mjs')
@@ -105,9 +107,11 @@ describe('Array', test => {
     }
 
     const config = await postcssrc(ctx, 'test/js/array/cjs')
-    const result = await postcss(config.plugins)
-      .process(fixture('js/array', 'index.css'), config.options)
-    is(result.css, expected('js/array', 'index.css'))
+    const result = await postcss(config.plugins).process(
+      fixture('js/array', 'index.css'),
+      config.options
+    )
+    equal(result.css, expected('js/array', 'index.css'))
   })
 
   test('Process SSS - postcss.config.js (CommonJS)', async () => {
@@ -118,14 +122,16 @@ describe('Array', test => {
     }
 
     const config = await postcssrc(ctx, 'test/js/array/cjs')
-    const result = await postcss(config.plugins)
-      .process(fixture('js/array', 'index.sss'), config.options)
+    const result = await postcss(config.plugins).process(
+      fixture('js/array', 'index.sss'),
+      config.options
+    )
 
-    is(result.css, expected('js/array', 'index.sss'))
+    equal(result.css, expected('js/array', 'index.sss'))
   })
 
   function assertExpectedConfig (config, expectedPath) {
-    equal(config.options, {
+    deepStrictEqual(config.options, {
       parser: require('sugarss'),
       syntax: require('sugarss'),
       map: false,
@@ -133,14 +139,10 @@ describe('Array', test => {
       to: './test/js/array/expect/index.css'
     })
 
-    is(config.plugins.length, 2)
-    type((config.plugins)[0], 'object')
-    type((config.plugins)[1], 'object')
+    equal(config.plugins.length, 2)
+    equal(typeof config.plugins[0], 'object')
+    equal(typeof config.plugins[1], 'object')
 
-    is(config.file, path.resolve(expectedPath))
+    equal(config.file, path.resolve(expectedPath))
   }
-
-  test.run()
 })
-
-test.run()

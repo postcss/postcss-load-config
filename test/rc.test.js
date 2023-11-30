@@ -1,32 +1,30 @@
 const path = require('path')
-const { test } = require('uvu')
-const { is } = require('uvu/assert')
+const { test, describe } = require('node:test')
+const { equal } = require('node:assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected, describe } = require('./utils.js')
+const { fixture, expected } = require('./utils.js')
 
-describe('.postcssrc - {Object} - Load Config', test => {
+describe('.postcssrc - {Object} - Load Config', () => {
   const expected = config => {
-    is(config.options.parser, require('sugarss'))
-    is(config.options.syntax, require('sugarss'))
-    is(config.options.map, false)
-    is(config.options.from, './test/rc/fixtures/index.css')
-    is(config.options.to, './test/rc/expect/index.css')
+    equal(config.options.parser, require('sugarss'))
+    equal(config.options.syntax, require('sugarss'))
+    equal(config.options.map, false)
+    equal(config.options.from, './test/rc/fixtures/index.css')
+    equal(config.options.to, './test/rc/expect/index.css')
 
-    is(config.plugins.length, 2)
-    is(typeof config.plugins[0], 'function')
-    is(typeof config.plugins[1], 'function')
+    equal(config.plugins.length, 2)
+    equal(typeof config.plugins[0], 'function')
+    equal(typeof config.plugins[1], 'function')
 
-    is(config.file, path.resolve('test/rc', '.postcssrc'))
+    equal(config.file, path.resolve('test/rc', '.postcssrc'))
   }
 
   test('Async', () => {
     return postcssrc({}, 'test/rc').then(expected)
   })
-
-  test.run()
 })
 
 test('.postcssrc - {Object} - Process CSS', () => {
@@ -39,7 +37,7 @@ test('.postcssrc - {Object} - Process CSS', () => {
     return postcss(config.plugins)
       .process(fixture('rc', 'index.css'), config.options)
       .then(result => {
-        is(result.css, expected('rc', 'index.css'))
+        equal(result.css, expected('rc', 'index.css'))
       })
   })
 })
@@ -54,9 +52,7 @@ test('.postcssrc - {Object} - Process SSS', () => {
     return postcss(config.plugins)
       .process(fixture('rc', 'index.sss'), config.options)
       .then(result => {
-        is(result.css, expected('rc', 'index.sss'))
+        equal(result.css, expected('rc', 'index.sss'))
       })
   })
 })
-
-test.run()
