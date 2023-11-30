@@ -2,8 +2,5 @@
   "compilerOptions": {
     "module": "CommonJS",
     "esModuleInterop": true
-  },
-  "ts-node": {
-    "transpileOnly": true
   }
 }
