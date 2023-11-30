@@ -1,4 +1,4 @@
-const { test, describe } = require('node:test')
+const { describe, test } = require('node:test')
 const { match } = require('node:assert')
 
 const postcssrc = require('../src/index.js')

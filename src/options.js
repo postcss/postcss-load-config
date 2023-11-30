@@ -1,5 +1,3 @@
-'use strict'
-
 const req = require('./req.js')
 
 /**
@@ -12,12 +10,14 @@ const req = require('./req.js')
  *
  * @return {Object} options PostCSS Options
  */
-const options = (config, file) => {
+function options(config, file) {
   if (config.parser && typeof config.parser === 'string') {
     try {
       config.parser = req(config.parser, file)
     } catch (err) {
-      throw new Error(`Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`)
+      throw new Error(
+        `Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`
+      )
     }
   }
 
@@ -25,7 +25,9 @@ const options = (config, file) => {
     try {
       config.syntax = req(config.syntax, file)
     } catch (err) {
-      throw new Error(`Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`)
+      throw new Error(
+        `Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`
+      )
     }
   }
 
@@ -33,12 +35,10 @@ const options = (config, file) => {
     try {
       config.stringifier = req(config.stringifier, file)
     } catch (err) {
-      throw new Error(`Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`)
+      throw new Error(
+        `Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`
+      )
     }
-  }
-
-  if (config.plugins) {
-    delete config.plugins
   }
 
   return config

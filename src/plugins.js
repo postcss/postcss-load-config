@@ -1,5 +1,3 @@
-'use strict'
-
 const req = require('./req.js')
 
 /**
@@ -13,7 +11,7 @@ const req = require('./req.js')
  *
  * @return {Function} PostCSS Plugin
  */
-const load = (plugin, options, file) => {
+function load(plugin, options, file) {
   try {
     if (
       options === null ||
@@ -25,7 +23,9 @@ const load = (plugin, options, file) => {
       return req(plugin, file)(options)
     }
   } catch (err) {
-    throw new Error(`Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`)
+    throw new Error(
+      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
+    )
   }
 }
 
@@ -39,23 +39,23 @@ const load = (plugin, options, file) => {
  *
  * @return {Array} plugins PostCSS Plugins
  */
-const plugins = (config, file) => {
-  let plugins = []
+function plugins(config, file) {
+  let list = []
 
   if (Array.isArray(config.plugins)) {
-    plugins = config.plugins.filter(Boolean)
+    list = config.plugins.filter(Boolean)
   } else {
-    plugins = Object.keys(config.plugins)
-      .filter((plugin) => {
+    list = Object.keys(config.plugins)
+      .filter(plugin => {
         return config.plugins[plugin] !== false ? plugin : ''
       })
-      .map((plugin) => {
+      .map(plugin => {
         return load(plugin, config.plugins[plugin], file)
       })
   }
 
-  if (plugins.length && plugins.length > 0) {
-    plugins.forEach((plugin, i) => {
+  if (list.length && list.length > 0) {
+    list.forEach((plugin, i) => {
       if (plugin.default) {
         plugin = plugin.default
       }
@@ -71,15 +71,17 @@ const plugins = (config, file) => {
         !(
           (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
           (typeof plugin === 'object' && plugin.postcssPlugin) ||
-          (typeof plugin === 'function')
+          typeof plugin === 'function'
         )
       ) {
-        throw new TypeError(`Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`)
+        throw new TypeError(
+          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
+        )
       }
     })
   }
 
-  return plugins
+  return list
 }
 
 module.exports = plugins

@@ -1,7 +1,5 @@
-'use strict'
-
-const resolve = require('path').resolve
-const url = require('url')
+const { resolve } = require('node:path')
+const url = require('node:url')
 
 const config = require('lilconfig')
 const yaml = require('yaml')
@@ -11,7 +9,8 @@ const loadPlugins = require('./plugins.js')
 
 const TS_EXT_RE = /\.(c|m)?ts$/
 
-const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: obj }
+const interopRequireDefault = obj =>
+  obj && obj.__esModule ? obj : { default: obj }
 
 /**
  * Process the result from cosmiconfig
@@ -21,25 +20,27 @@ const interopRequireDefault = (obj) => obj && obj.__esModule ? obj : { default: 
  *
  * @return {Object} PostCSS Config
  */
-const processResult = (ctx, result) => {
-  const file = result.filepath || ''
-  let config = interopRequireDefault(result.config).default || {}
+function processResult(ctx, result) {
+  let file = result.filepath || ''
+  let projectConfig = interopRequireDefault(result.config).default || {}
 
-  if (typeof config === 'function') {
-    config = config(ctx)
+  if (typeof projectConfig === 'function') {
+    projectConfig = projectConfig(ctx)
   } else {
-    config = Object.assign({}, config, ctx)
+    projectConfig = Object.assign({}, projectConfig, ctx)
   }
 
-  if (!config.plugins) {
-    config.plugins = []
+  if (!projectConfig.plugins) {
+    projectConfig.plugins = []
   }
 
-  return {
-    plugins: loadPlugins(config, file),
-    options: loadOptions(config, file),
-    file
+  let res = {
+    file,
+    options: loadOptions(projectConfig, file),
+    plugins: loadPlugins(projectConfig, file)
   }
+  delete projectConfig.plugins
+  return res
 }
 
 /**
@@ -49,17 +50,20 @@ const processResult = (ctx, result) => {
  *
  * @return {Object} Config Context
  */
-const createContext = (ctx) => {
+function createContext(ctx) {
   /**
    * @type {Object}
    *
    * @prop {String} cwd=process.cwd() Config search start location
    * @prop {String} env=process.env.NODE_ENV Config Enviroment, will be set to `development` by `postcss-load-config` if `process.env.NODE_ENV` is `undefined`
    */
-  ctx = Object.assign({
-    cwd: process.cwd(),
-    env: process.env.NODE_ENV
-  }, ctx)
+  ctx = Object.assign(
+    {
+      cwd: process.cwd(),
+      env: process.env.NODE_ENV
+    },
+    ctx
+  )
 
   if (!ctx.env) {
     process.env.NODE_ENV = 'development'
@@ -71,9 +75,9 @@ const createContext = (ctx) => {
 /** @type {import('jiti').JITI | null} */
 let jiti = null
 
-const loader = async filepath => {
+async function loader(filepath) {
   try {
-    const module = await import(url.pathToFileURL(filepath).href)
+    let module = await import(url.pathToFileURL(filepath).href)
     return module.default
   } catch (err) {
     /* c8 ignore start */
@@ -85,16 +89,16 @@ const loader = async filepath => {
         jiti = (await import('jiti')).default(__filename, {
           interopDefault: true
         })
-      } catch (err) {
+      } catch (jitiErr) {
         if (
-          err.code === 'ERR_MODULE_NOT_FOUND' &&
-          err.message.includes("Cannot find package 'jiti'")
+          jitiErr.code === 'ERR_MODULE_NOT_FOUND' &&
+          jitiErr.message.includes("Cannot find package 'jiti'")
         ) {
           throw new Error(
-            `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${err.message}`
+            `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${jitiErr.message}`
           )
         }
-        throw err
+        throw jitiErr
       }
       /* c8 ignore stop */
     }
@@ -103,10 +107,21 @@ const loader = async filepath => {
 }
 
 const withLoaders = (options = {}) => {
-  const moduleName = 'postcss'
+  let moduleName = 'postcss'
 
   return {
     ...options,
+    loaders: {
+      ...options.loaders,
+      '.cjs': loader,
+      '.cts': loader,
+      '.js': loader,
+      '.mjs': loader,
+      '.mts': loader,
+      '.ts': loader,
+      '.yaml': (filepath, content) => yaml.parse(content),
+      '.yml': (filepath, content) => yaml.parse(content)
+    },
     searchPlaces: [
       ...(options.searchPlaces || []),
       'package.json',
@@ -126,18 +141,7 @@ const withLoaders = (options = {}) => {
       `${moduleName}.config.js`,
       `${moduleName}.config.cjs`,
       `${moduleName}.config.mjs`
-    ],
-    loaders: {
-      ...options.loaders,
-      '.yaml': (filepath, content) => yaml.parse(content),
-      '.yml': (filepath, content) => yaml.parse(content),
-      '.js': loader,
-      '.cjs': loader,
-      '.mjs': loader,
-      '.ts': loader,
-      '.cts': loader,
-      '.mts': loader
-    }
+    ]
   }
 }
 
@@ -152,7 +156,7 @@ const withLoaders = (options = {}) => {
  *
  * @return {Promise} config PostCSS Config
  */
-const rc = (ctx, path, options) => {
+function rc(ctx, path, options) {
   /**
    * @type {Object} The full Config Context
    */
@@ -163,13 +167,13 @@ const rc = (ctx, path, options) => {
    */
   path = path ? resolve(path) : process.cwd()
 
-  return config.lilconfig('postcss', withLoaders(options))
+  return config
+    .lilconfig('postcss', withLoaders(options))
     .search(path)
-    .then((result) => {
+    .then(result => {
       if (!result) {
         throw new Error(`No PostCSS Config found in: ${path}`)
       }
-
       return processResult(ctx, result)
     })
 }

@@ -9,6 +9,6 @@ const ctx = {
 }
 
 test('Interop default in validation', async () => {
-  const config = await postcssrc(ctx, 'test/plugins')
+  let config = await postcssrc(ctx, 'test/plugins')
   equal(config.plugins[0].default.called, true)
 })

@@ -1,34 +1,32 @@
-const path = require('path')
-const { test, describe } = require('node:test')
+const path = require('node:path')
+const { describe, test } = require('node:test')
 const { equal } = require('node:assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected } = require('./utils.js')
+const { expected, fixture } = require('./utils.js')
 
 describe('.postcssrc - {Object} - Load Config', () => {
-  const expected = config => {
-    equal(config.options.parser, require('sugarss'))
-    equal(config.options.syntax, require('sugarss'))
-    equal(config.options.map, false)
-    equal(config.options.from, './test/rc/fixtures/index.css')
-    equal(config.options.to, './test/rc/expect/index.css')
-
-    equal(config.plugins.length, 2)
-    equal(typeof config.plugins[0], 'function')
-    equal(typeof config.plugins[1], 'function')
-
-    equal(config.file, path.resolve('test/rc', '.postcssrc'))
-  }
-
   test('Async', () => {
-    return postcssrc({}, 'test/rc').then(expected)
+    return postcssrc({}, 'test/rc').then(config => {
+      equal(config.options.parser, require('sugarss'))
+      equal(config.options.syntax, require('sugarss'))
+      equal(config.options.map, false)
+      equal(config.options.from, './test/rc/fixtures/index.css')
+      equal(config.options.to, './test/rc/expect/index.css')
+
+      equal(config.plugins.length, 2)
+      equal(typeof config.plugins[0], 'function')
+      equal(typeof config.plugins[1], 'function')
+
+      equal(config.file, path.resolve('test/rc', '.postcssrc'))
+    })
   })
 })
 
 test('.postcssrc - {Object} - Process CSS', () => {
-  const ctx = {
+  let ctx = {
     parser: false,
     syntax: false
   }
@@ -43,7 +41,7 @@ test('.postcssrc - {Object} - Process CSS', () => {
 })
 
 test('.postcssrc - {Object} - Process SSS', () => {
-  const ctx = {
+  let ctx = {
     from: './test/rc/fixtures/index.sss',
     syntax: false
   }

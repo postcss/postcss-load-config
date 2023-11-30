@@ -1,11 +1,11 @@
-const path = require('path')
-const { test, describe } = require('node:test')
-const { equal, deepStrictEqual } = require('node:assert')
+const path = require('node:path')
+const { describe, test } = require('node:test')
+const { deepStrictEqual, equal } = require('node:assert')
 
 const postcss = require('postcss')
 const postcssrc = require('../src/index.js')
 
-const { fixture, expected } = require('./utils.js')
+const { expected, fixture } = require('./utils.js')
 
 const ctx = {
   parser: true,
@@ -14,33 +14,34 @@ const ctx = {
 
 describe('Object', () => {
   test('Load Config - postcss.config.mjs', async () => {
-    const config = await postcssrc(ctx, 'test/js/object/esm')
+    let config = await postcssrc(ctx, 'test/js/object/esm')
     assertExpectedConfig(config, 'test/js/object/esm/postcss.config.mjs')
   })
 
   test('Load Config - postcss.config.js (ESM)', async () => {
-    const config = await postcssrc(ctx, 'test/js/object/esm-in-js')
+    let config = await postcssrc(ctx, 'test/js/object/esm-in-js')
     assertExpectedConfig(config, 'test/js/object/esm-in-js/postcss.config.js')
   })
 
   test('Load Config - postcss.config.cjs', async () => {
-    const config = await postcssrc(ctx, 'test/js/object/cjs')
+    let config = await postcssrc(ctx, 'test/js/object/cjs')
     assertExpectedConfig(config, 'test/js/object/cjs/postcss.config.cjs')
   })
 
   test('Load Config - postcss.config.js (CommonJS)', async () => {
-    const config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
+    let config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
     assertExpectedConfig(config, 'test/js/object/cjs-in-js/postcss.config.js')
   })
 
   test('Process CSS - postcss.config.js (CommonJS)', async () => {
-    const ctx = {
-      parser: false,
-      syntax: false
-    }
-
-    const config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
-    const result = await postcss(config.plugins).process(
+    let config = await postcssrc(
+      {
+        parser: false,
+        syntax: false
+      },
+      'test/js/object/cjs-in-js'
+    )
+    let result = await postcss(config.plugins).process(
       fixture('js/object', 'index.css'),
       config.options
     )
@@ -48,26 +49,27 @@ describe('Object', () => {
   })
 
   test('Process SSS - postcss.config.js (CommonJS)', async () => {
-    const ctx = {
-      from: './test/js/object/fixtures/index.sss',
-      parser: true,
-      syntax: false
-    }
-
-    const config = await postcssrc(ctx, 'test/js/object/cjs-in-js')
-    const result = await postcss(config.plugins).process(
+    let config = await postcssrc(
+      {
+        from: './test/js/object/fixtures/index.sss',
+        parser: true,
+        syntax: false
+      },
+      'test/js/object/cjs-in-js'
+    )
+    let result = await postcss(config.plugins).process(
       fixture('js/object', 'index.sss'),
       config.options
     )
     equal(result.css, expected('js/object', 'index.sss'))
   })
 
-  function assertExpectedConfig (config, expectedConfigPath) {
+  function assertExpectedConfig(config, expectedConfigPath) {
     deepStrictEqual(config.options, {
+      from: './test/js/object/fixtures/index.css',
+      map: false,
       parser: require('sugarss'),
       syntax: require('sugarss'),
-      map: false,
-      from: './test/js/object/fixtures/index.css',
       to: './test/js/object/expect/index.css'
     })
 
@@ -81,33 +83,34 @@ describe('Object', () => {
 
 describe('Array', () => {
   test('Load Config - postcss.config.mjs', async () => {
-    const config = await postcssrc(ctx, 'test/js/array/esm')
+    let config = await postcssrc(ctx, 'test/js/array/esm')
     assertExpectedConfig(config, 'test/js/array/esm/postcss.config.mjs')
   })
 
   test('Load Config - postcss.config.js (ESM)', async () => {
-    const config = await postcssrc(ctx, 'test/js/array/esm-in-js')
+    let config = await postcssrc(ctx, 'test/js/array/esm-in-js')
     assertExpectedConfig(config, 'test/js/array/esm-in-js/postcss.config.js')
   })
 
   test('Load Config - postcss.config.cjs', async () => {
-    const config = await postcssrc(ctx, 'test/js/array/cjs')
+    let config = await postcssrc(ctx, 'test/js/array/cjs')
     assertExpectedConfig(config, 'test/js/array/cjs/postcss.config.cjs')
   })
 
   test('Load Config - postcss.config.js (CommonJS)', async () => {
-    const config = await postcssrc(ctx, 'test/js/array/cjs-in-js')
+    let config = await postcssrc(ctx, 'test/js/array/cjs-in-js')
     assertExpectedConfig(config, 'test/js/array/cjs-in-js/postcss.config.js')
   })
 
   test('Process CSS - postcss.config.js (CommonJS)', async () => {
-    const ctx = {
-      parser: false,
-      syntax: false
-    }
-
-    const config = await postcssrc(ctx, 'test/js/array/cjs')
-    const result = await postcss(config.plugins).process(
+    let config = await postcssrc(
+      {
+        parser: false,
+        syntax: false
+      },
+      'test/js/array/cjs'
+    )
+    let result = await postcss(config.plugins).process(
       fixture('js/array', 'index.css'),
       config.options
     )
@@ -115,14 +118,15 @@ describe('Array', () => {
   })
 
   test('Process SSS - postcss.config.js (CommonJS)', async () => {
-    const ctx = {
-      from: './test/js/array/fixtures/index.sss',
-      parser: true,
-      syntax: false
-    }
-
-    const config = await postcssrc(ctx, 'test/js/array/cjs')
-    const result = await postcss(config.plugins).process(
+    let config = await postcssrc(
+      {
+        from: './test/js/array/fixtures/index.sss',
+        parser: true,
+        syntax: false
+      },
+      'test/js/array/cjs'
+    )
+    let result = await postcss(config.plugins).process(
       fixture('js/array', 'index.sss'),
       config.options
     )
@@ -130,12 +134,12 @@ describe('Array', () => {
     equal(result.css, expected('js/array', 'index.sss'))
   })
 
-  function assertExpectedConfig (config, expectedPath) {
+  function assertExpectedConfig(config, expectedPath) {
     deepStrictEqual(config.options, {
+      from: './test/js/array/fixtures/index.css',
+      map: false,
       parser: require('sugarss'),
       syntax: require('sugarss'),
-      map: false,
-      from: './test/js/array/fixtures/index.css',
       to: './test/js/array/expect/index.css'
     })
 
