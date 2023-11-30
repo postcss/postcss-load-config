@@ -48,8 +48,8 @@ async function plugins(config, file) {
     list = config.plugins.filter(Boolean)
   } else {
     list = Object.entries(config.plugins)
-      .filter(([plugin, options]) => {
-        return options !== false ? plugin : false
+      .filter(([, options]) => {
+        return options !== false
       })
       .map(([plugin, options]) => {
         return load(plugin, options, file)
