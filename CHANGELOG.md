@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0](https://github.com/postcss/postcss-load-config/compare/v4.0.2...v5.0.0) (2023-11-20)
+
+### Features
+
+* Added ESM support for TypeScript config ([#249](https://github.com/postcss/postcss-load-config/pull/249))
+* Added ESM and TypeScript plugins support from JSON config ([#254](https://github.com/postcss/postcss-load-config/pull/254))
+
+### BREAKING CHANGES
+
+* Dropped Node.js 16 & 14 support.
+
 ## [4.0.2](https://github.com/postcss/postcss-load-config/compare/v4.0.1...v4.0.2) (2023-11-20)
 
 ### Bug Fixes
