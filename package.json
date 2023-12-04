@@ -105,5 +105,6 @@
     "François Wouts"
   ],
   "repository": "postcss/postcss-load-config",
-  "license": "MIT"
+  "license": "MIT",
+  "packageManager": "pnpm@8.11.0"
 }
