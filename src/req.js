@@ -1,5 +1,6 @@
 // @ts-check
 const { createRequire } = require('node:module')
+const { pathToFileURL } = require('node:url')
 
 const TS_EXT_RE = /\.(c|m)?ts$/
 
@@ -16,7 +17,7 @@ async function req(name, rootFile = __filename) {
   let url = __require.resolve(name)
 
   try {
-    return (await import(url)).default
+    return (await import(pathToFileURL(url).href)).default
   } catch (err) {
     if (!TS_EXT_RE.test(url)) {
       /* c8 ignore start */
