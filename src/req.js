@@ -13,8 +13,7 @@ let jiti = null
  * @returns {Promise<any>}
  */
 async function req(name, rootFile = __filename) {
-  let __require = createRequire(rootFile)
-  let url = __require.resolve(name)
+  let url = createRequire(rootFile).resolve(name)
 
   try {
     return (await import(pathToFileURL(url).href)).default
