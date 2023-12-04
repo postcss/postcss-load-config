@@ -34,7 +34,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
     runs-on: ${{ matrix.os }}
-    name: Node.js ${{ matrix.node-version }} Quick
+    name: Node.js ${{ matrix.node-version }} Quick on ${{ matrix.os }}
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
