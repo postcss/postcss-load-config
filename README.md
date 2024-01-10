@@ -336,7 +336,7 @@ const { readFileSync } = require('fs')
 const postcss = require('postcss')
 const postcssrc = require('postcss-load-config')
 
-const css = readFileSync('index.sss', 'utf8')
+const css = readFileSync('index.css', 'utf8')
 
 const ctx = { parser: true, map: 'inline' }
 
