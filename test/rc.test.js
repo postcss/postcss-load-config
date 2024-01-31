@@ -55,7 +55,7 @@ test('.postcssrc - {Object} - Process SSS', () => {
   })
 })
 
-describe('.postcss.config.js Load Config', () => {
+describe('Load Config Error', () => {
   test('no config found error', () => {
     return postcssrc({}, '..')
     .catch(error => {
