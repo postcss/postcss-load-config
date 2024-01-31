@@ -54,3 +54,12 @@ test('.postcssrc - {Object} - Process SSS', () => {
       })
   })
 })
+
+describe('.postcss.config.js Load Config', () => {
+  test('no config found error', () => {
+    return postcssrc({}, '..')
+    .catch(error => {
+      equal(error.message.startsWith("No PostCSS Config found in:"), true)
+    })
+  })
+})
