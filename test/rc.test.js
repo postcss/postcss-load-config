@@ -57,7 +57,7 @@ test('.postcssrc - {Object} - Process SSS', () => {
 
 describe('Load Config Error', () => {
   test('no config found error', () => {
-    return postcssrc({}, '..')
+    return postcssrc({}, 'ghostDir')
     .catch(error => {
       equal(error.message.startsWith("No PostCSS Config found in:"), true)
     })
