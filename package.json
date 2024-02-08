@@ -1,6 +1,6 @@
 {
   "name": "postcss-load-config",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "description": "Autoload Config for PostCSS",
   "main": "src/index.js",
   "types": "src/index.d.ts",

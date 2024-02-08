@@ -2,13 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [5.0.2](https://github.com/postcss/postcss-load-config/compare/v5.0.1...v5.0.2) (2022-05-23)
+## [5.0.3](https://github.com/postcss/postcss-load-config/compare/v5.0.2...v5.0.3) (2024-02-08)
+
+### Bug Fixes
+
+* Fixed update of ESM configs ([#259](https://github.com/postcss/postcss-load-config/pull/259))
+
+## [5.0.2](https://github.com/postcss/postcss-load-config/compare/v5.0.1...v5.0.2) (2023-05-23)
 
 ### Bug Fixes
 
 * Fixed `__require` name conflict ([#257](https://github.com/postcss/postcss-load-config/pull/257))
 
-## [5.0.1](https://github.com/postcss/postcss-load-config/compare/v5.0.0...v5.0.1) (2022-05-23)
+## [5.0.1](https://github.com/postcss/postcss-load-config/compare/v5.0.0...v5.0.1) (2023-05-23)
 
 ### Bug Fixes
 
