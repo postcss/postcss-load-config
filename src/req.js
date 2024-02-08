@@ -16,7 +16,7 @@ async function req(name, rootFile = __filename) {
   let url = createRequire(rootFile).resolve(name)
 
   try {
-    return (await import(pathToFileURL(url).href)).default
+    return (await import(`${pathToFileURL(url)}?t=${Date.now()}`)).default
   } catch (err) {
     if (!TS_EXT_RE.test(url)) {
       /* c8 ignore start */
