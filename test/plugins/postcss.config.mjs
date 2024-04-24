@@ -1,9 +1,9 @@
 const plugin = {
-  postcssPlugin: 'test',
   get postcss () {
     this.called = true
     return () => {}
-  }
+  },
+  postcssPlugin: 'test'
 }
 
 const mod = {}

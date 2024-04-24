@@ -1,14 +1,14 @@
 export default function (ctx) {
   return {
-    parser: ctx.parser ? 'sugarss' : false,
-    syntax: ctx.syntax ? 'sugarss' : false,
-    map: ctx.map ? 'inline' : false,
     from: './test/js/object/fixtures/index.css',
-    to: './test/js/object/expect/index.css',
+    map: ctx.map ? 'inline' : false,
+    parser: ctx.parser ? 'sugarss' : false,
     plugins: {
+      cssnano: ctx.env === 'production' ? {} : false,
       'postcss-import': {},
-      'postcss-nested': {},
-      cssnano: ctx.env === 'production' ? {} : false
-    }
+      'postcss-nested': {}
+    },
+    syntax: ctx.syntax ? 'sugarss' : false,
+    to: './test/js/object/expect/index.css'
   }
 }

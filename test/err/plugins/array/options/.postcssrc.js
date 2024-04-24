@@ -1,7 +1,5 @@
-module.exports = function (ctx) {
+module.exports = function () {
   return {
-    plugins: [
-      require('postcss-plugin')
-    ]
+    plugins: [require('postcss-plugin')]
   }
 }
