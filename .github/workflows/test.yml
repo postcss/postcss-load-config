@@ -23,7 +23,7 @@ jobs:
           node-version: 21
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --ignore-scripts
       - name: Run tests
         run: pnpm test
   short:
@@ -38,7 +38,7 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
           version: 9
       - name: Install Node.js ${{ matrix.node-version }}
@@ -47,6 +47,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --ignore-scripts
+        run: pnpm install --ignore-scripts
       - name: Run unit tests
         run: pnpm unit
