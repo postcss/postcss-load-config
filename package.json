@@ -29,31 +29,31 @@
     }
   ],
   "dependencies": {
-    "lilconfig": "^3.0.0",
-    "yaml": "^2.3.4"
+    "lilconfig": "^3.1.1",
+    "yaml": "^2.4.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^52.0.2",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.12.7",
     "@types/postcss-import": "^14.0.3",
     "c8": "^9.1.0",
-    "clean-publish": "^4.2.0",
-    "cssnano": "^6.0.3",
-    "eslint": "^8.56.0",
+    "clean-publish": "^4.4.0",
+    "cssnano": "^6.1.2",
+    "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-node-import": "^1.0.4",
-    "eslint-plugin-perfectionist": "^2.5.0",
+    "eslint-plugin-perfectionist": "^2.9.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "jiti": "^1.21.0",
     "jsdoc-to-markdown": "^8.0.1",
-    "postcss": "^8.4.35",
-    "postcss-import": "^16.0.0",
+    "postcss": "^8.4.38",
+    "postcss-import": "^16.1.0",
     "postcss-nested": "^6.0.1",
     "sugarss": "^4.0.1",
-    "typescript": "5.3.3"
+    "typescript": "5.4.5"
   },
   "peerDependencies": {
     "jiti": ">=1.21.0",
