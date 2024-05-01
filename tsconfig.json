@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "esModuleInterop": true
+    "module": "Preserve",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noEmit": true
   }
 }

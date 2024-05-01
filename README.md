@@ -100,6 +100,9 @@ In this case create JS/TS file named:
 - `postcss.config.mts`
 - `postcss.config.cts`
 
+> [!NOTE]  
+> For TypeScript configs, you must have [tsx](https://www.npmjs.com/package/tsx) or [jiti](https://www.npmjs.com/package/jiti) installed as a peer dependency.
+
 ```
 Project (Root)
   |– client
