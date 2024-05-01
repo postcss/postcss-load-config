@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/postcss/postcss-load-config/compare/v5.0.3...v5.1.0) (2024-05-01)
+
+### Features
+
+* Allow to use `tsx` for TypeScript support ([#260](https://github.com/postcss/postcss-load-config/pull/260))
+
 ## [5.0.3](https://github.com/postcss/postcss-load-config/compare/v5.0.2...v5.0.3) (2024-02-08)
 
 ### Bug Fixes
