@@ -6,7 +6,8 @@ export default [
     files: ['test/**/*.js', 'test/**/*.cjs'],
     rules: {
       'n/global-require': 'off',
-      'n/no-missing-require': 'off'
+      'n/no-missing-require': 'off',
+      'n/no-unsupported-features/node-builtins': 'off'
     }
   }
 ]
