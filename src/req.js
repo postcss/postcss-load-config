@@ -4,14 +4,11 @@ const { pathToFileURL } = require('node:url')
 
 const TS_EXT_RE = /\.[mc]?ts$/
 
-/** @type {import('tsx/cjs/api') | void} */
-let tsx;
+let tsx
 
-/** @type {import('jiti').default | void} */
 let jiti
 
-/** @type {Error} */
-let importError;
+let importError
 
 /**
  * @param {string} name
@@ -31,27 +28,32 @@ async function req(name, rootFile = __filename) {
   }
 
   if (tsx === undefined) {
-      tsx = await import('tsx/cjs/api').catch((error) => {
-        importError = error;
-      })
+    tsx = await import('tsx/cjs/api').catch(error => {
+      importError = error
+    })
   }
 
   if (tsx) {
     let loaded = tsx.require(name, rootFile)
-    return (loaded && '__esModule' in loaded) ? loaded.default : loaded;
+    return loaded && '__esModule' in loaded ? loaded.default : loaded
   }
 
   if (jiti === undefined) {
-    jiti = await import('jiti').then(m => m.default, (error) => {
-      importError = importError ?? error;
-    })
+    jiti = await import('jiti').then(
+      m => m.default,
+      error => {
+        importError = importError ?? error
+      }
+    )
   }
 
   if (jiti) {
     return jiti(rootFile, { interopDefault: true })(name)
   }
 
-  throw new Error(`'tsx' or 'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${importError.message}`);
+  throw new Error(
+    `'tsx' or 'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${importError.message}`
+  )
 }
 
 module.exports = req
