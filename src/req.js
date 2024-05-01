@@ -2,10 +2,16 @@
 const { createRequire } = require('node:module')
 const { pathToFileURL } = require('node:url')
 
-const TS_EXT_RE = /\.(c|m)?ts$/
+const TS_EXT_RE = /\.[mc]?ts$/
 
-/** @type {import('jiti').default | null} */
-let jiti = null
+/** @type {import('tsx/cjs/api') | void} */
+let tsx;
+
+/** @type {import('jiti').default | void} */
+let jiti
+
+/** @type {Error} */
+let importError;
 
 /**
  * @param {string} name
@@ -22,18 +28,30 @@ async function req(name, rootFile = __filename) {
       /* c8 ignore start */
       throw err
     }
-    if (!jiti) {
-      try {
-        jiti = (await import('jiti')).default
-      } catch (jitiErr) {
-        throw new Error(
-          `'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${jitiErr.message}`
-        )
-      }
-      /* c8 ignore stop */
-    }
+  }
+
+  if (tsx === undefined) {
+      tsx = await import('tsx/cjs/api').catch((error) => {
+        importError = error;
+      })
+  }
+
+  if (tsx) {
+    let loaded = tsx.require(name, rootFile)
+    return (loaded && '__esModule' in loaded) ? loaded.default : loaded;
+  }
+
+  if (jiti === undefined) {
+    jiti = await import('jiti').then(m => m.default, (error) => {
+      importError = importError ?? error;
+    })
+  }
+
+  if (jiti) {
     return jiti(rootFile, { interopDefault: true })(name)
   }
+
+  throw new Error(`'tsx' or 'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${importError.message}`);
 }
 
 module.exports = req

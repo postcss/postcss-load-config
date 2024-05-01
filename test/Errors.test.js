@@ -63,6 +63,6 @@ describe('Loading Options - {Error}', () => {
 
 test('Loading TS Config - {Error} - Syntax', () => {
   return postcssrc({}, 'test/err/ts').catch(err => {
-    match(err.message, /^ParseError/)
+    match(err.message, /^(Transform failed|ParseError)/)
   })
 })

@@ -53,17 +53,22 @@
     "postcss-import": "^16.1.0",
     "postcss-nested": "^6.0.1",
     "sugarss": "^4.0.1",
+    "tsx": "^4.8.2",
     "typescript": "5.4.5"
   },
   "peerDependencies": {
     "jiti": ">=1.21.0",
-    "postcss": ">=8.0.9"
+    "postcss": ">=8.0.9",
+    "tsx": "^4.8.1"
   },
   "peerDependenciesMeta": {
     "jiti": {
       "optional": true
     },
     "postcss": {
+      "optional": true
+    },
+    "tsx": {
       "optional": true
     }
   },
