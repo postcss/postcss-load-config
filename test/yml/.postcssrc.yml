@@ -1,0 +1,9 @@
+parser: sugarss
+syntax: sugarss
+map: false
+from: './test/yml/fixtures/index.css'
+to: './test/yml/expect/index.css'
+plugins:
+  postcss-import: {}
+  postcss-nested: {}
+  cssnano: false
