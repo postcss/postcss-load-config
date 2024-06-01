@@ -12,11 +12,11 @@
   },
   "scripts": {
     "test:lint": "eslint .",
-    "test:converage": "c8 pnpm unit",
+    "test:coverage": "c8 pnpm unit",
     "test": "pnpm run /^test:/",
     "unit": "node --test test/*.test.js",
     "docs": "jsdoc2md src/*.js > DOCS.md",
-    "clean": "npx rimraf ./coverage"
+    "clean": "rm -R ./coverage"
   },
   "funding": [
     {
