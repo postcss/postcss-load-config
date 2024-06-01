@@ -29,8 +29,7 @@
     }
   ],
   "dependencies": {
-    "lilconfig": "^3.1.1",
-    "yaml": "^2.4.2"
+    "lilconfig": "^3.1.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^53.0.1",
@@ -59,7 +58,8 @@
   "peerDependencies": {
     "jiti": ">=1.21.0",
     "postcss": ">=8.0.9",
-    "tsx": "^4.8.1"
+    "tsx": "^4.8.1",
+    "yaml": "^2.4.2"
   },
   "peerDependenciesMeta": {
     "jiti": {
@@ -69,6 +69,9 @@
       "optional": true
     },
     "tsx": {
+      "optional": true
+    },
+    "yaml": {
       "optional": true
     }
   },
