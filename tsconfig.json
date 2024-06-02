@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "Preserve",
+    "module": "node16",
     "esModuleInterop": true,
     "allowJs": true,
     "noEmit": true
