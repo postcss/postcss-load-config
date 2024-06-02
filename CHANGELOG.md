@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.1](https://github.com/postcss/postcss-load-config/compare/v6.0.0...v6.0.1) (2024-06-02)
+
+### Bug Fixes
+
+- Fixed bundlers support ([#262](https://github.com/postcss/postcss-load-config/pull/262))
+
 ## [6.0](https://github.com/postcss/postcss-load-config/compare/v5.1.0...v6.0.0) (2024-06-02)
 
 ### BREAKING CHANGES
