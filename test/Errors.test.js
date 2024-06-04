@@ -4,13 +4,6 @@ const { rejects } = require('node:assert')
 const postcssrc = require('../src/index.js')
 
 describe('Loading Config - {Error}', () => {
-  // FIXME: this is resolving to nearest postcss config (outside root)
-  // test('Missing File', async () => {
-  //   await rejects(() => postcssrc({}, 'test/err'), {
-  //     message: /^No PostCSS Config found in: (.*)$/
-  //   })
-  // })
-
   test('Missing Directory', () => {
     return rejects(() => postcssrc({}, 'ghostDir'), {
       message: /^No PostCSS Config found in: (.*)$/
