@@ -25,19 +25,23 @@ async function req(name, rootFile = __filename) {
       /* c8 ignore start */
       throw err
     }
+    /* c8 ignore stop */
   }
 
   if (tsx === undefined) {
     try {
       tsx = await import('tsx/cjs/api')
     } catch (error) {
+      /* c8 ignore start */
       importError.push(error)
     }
+    /* c8 ignore stop */
   }
 
   if (tsx) {
     let loaded = tsx.require(name, rootFile)
     return loaded && '__esModule' in loaded ? loaded.default : loaded
+    /* c8 ignore start */
   }
 
   if (jiti === undefined) {
@@ -57,6 +61,7 @@ async function req(name, rootFile = __filename) {
       .map(error => error.message)
       .join('\n')}`
   )
+  /* c8 ignore stop */
 }
 
 module.exports = req

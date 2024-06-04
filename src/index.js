@@ -85,8 +85,9 @@ async function yamlLoader(_, content) {
         `'yaml' is required for the YAML configuration files. Make sure it is installed\nError: ${e.message}`
       )
     }
+    /* c8 ignore stop */
   }
-  return yaml.parse(content);
+  return yaml.parse(content)
 }
 
 /** @return {import('lilconfig').Options} */
