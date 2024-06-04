@@ -3,17 +3,23 @@ const { rejects } = require('node:assert')
 
 const postcssrc = require('../src/index.js')
 
-// FIXME: this is resolving to nearest postcss config (outside root)
-// test('Loading Config - {Error}', async () => {
-//   await rejects(() => postcssrc({}, 'test/err'), {
-//     message: /^No PostCSS Config found in: (.*)$/
-//   })
-// })
-
 describe('Loading Config - {Error}', () => {
-  test('no config found error', () => {
+  // FIXME: this is resolving to nearest postcss config (outside root)
+  // test('Missing File', async () => {
+  //   await rejects(() => postcssrc({}, 'test/err'), {
+  //     message: /^No PostCSS Config found in: (.*)$/
+  //   })
+  // })
+
+  test('Missing Directory', () => {
     return rejects(() => postcssrc({}, 'ghostDir'), {
       message: /^No PostCSS Config found in: (.*)$/
+    })
+  })
+
+  test('TS - Syntax', () => {
+    return rejects(() => postcssrc({}, 'test/err/ts'), {
+      message: /^(Transform failed|ParseError)/
     })
   })
 })
@@ -67,11 +73,5 @@ describe('Loading Options - {Error}', () => {
     return rejects(() => postcssrc({}, 'test/err/options/stringifier'), {
       message: /^Loading PostCSS Stringifier failed: .*$/m
     })
-  })
-})
-
-test('Loading TS Config - {Error} - Syntax', () => {
-  return rejects(() => postcssrc({}, 'test/err/ts'), {
-    message: /^(Transform failed|ParseError)/
   })
 })
