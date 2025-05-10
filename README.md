@@ -411,6 +411,13 @@ module.exports = (env) => ({
 })
 ```
 
+## Security Contact
+
+To report a security vulnerability, please use the [Tidelift security contact].
+Tidelift will coordinate the fix and disclosure.
+
+[Tidelift security contact]: https://tidelift.com/security
+
 <h2 align="center">Maintainers</h2>
 
 <table>
@@ -465,10 +472,3 @@ module.exports = (env) => ({
   <tbody>
 </table
 
-
-## Security Contact
-
-To report a security vulnerability, please use the [Tidelift security contact].
-Tidelift will coordinate the fix and disclosure.
-
-[Tidelift security contact]: https://tidelift.com/security
