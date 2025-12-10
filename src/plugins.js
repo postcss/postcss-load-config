@@ -15,8 +15,7 @@ let req = require('./req.js')
 async function load(plugin, options, file) {
   try {
     if (
-      options === null ||
-      options === undefined ||
+      options == null ||
       Object.keys(options).length === 0
     ) {
       return await req(plugin, file)

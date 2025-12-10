@@ -4,9 +4,7 @@ let { pathToFileURL } = require('node:url')
 
 let TS_EXT_RE = /\.[mc]?ts$/
 
-let tsx
-
-let jiti
+let tsx, jiti
 
 let importError = []
 
@@ -21,10 +19,8 @@ async function req(name, rootFile = __filename) {
   try {
     return (await import(`${pathToFileURL(url)}?t=${Date.now()}`)).default
   } catch (err) {
-    if (!TS_EXT_RE.test(url)) {
-      /* c8 ignore start */
-      throw err
-    }
+    /* c8 ignore start */
+    if (!TS_EXT_RE.test(url)) throw err
     /* c8 ignore stop */
   }
 
@@ -33,7 +29,7 @@ async function req(name, rootFile = __filename) {
       tsx = await import('tsx/cjs/api')
     } catch (error) {
       /* c8 ignore start */
-      importError.push(error)
+      importError.push(error.message)
     }
     /* c8 ignore stop */
   }
@@ -48,18 +44,14 @@ async function req(name, rootFile = __filename) {
     try {
       jiti = (await import('jiti')).default
     } catch (error) {
-      importError.push(error)
+      importError.push(error.message)
     }
   }
 
-  if (jiti) {
-    return jiti(rootFile, { interopDefault: true })(name)
-  }
+  if (jiti) return jiti(rootFile, { interopDefault: true })(name)
 
   throw new Error(
-    `'tsx' or 'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${importError
-      .map(error => error.message)
-      .join('\n')}`
+    `'tsx' or 'jiti' is required for the TypeScript configuration files. Make sure it is installed\nError: ${importError.join('\n')}`
   )
   /* c8 ignore stop */
 }
