@@ -68,7 +68,7 @@ function createContext(ctx) {
   return ctx
 }
 
-async function loader(filepath) {
+function loader(filepath) {
   return req(filepath)
 }
 
