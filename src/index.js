@@ -25,7 +25,7 @@ async function processResult(ctx, result) {
   if (typeof projectConfig === 'function') {
     projectConfig = projectConfig(ctx)
   } else {
-    projectConfig = Object.assign({}, projectConfig, ctx)
+    projectConfig =  { ...projectConfig, ...ctx }
   }
 
   if (!projectConfig.plugins) {
@@ -55,13 +55,11 @@ function createContext(ctx) {
    * @prop {String} cwd=process.cwd() Config search start location
    * @prop {String} env=process.env.NODE_ENV Config Enviroment, will be set to `development` by `postcss-load-config` if `process.env.NODE_ENV` is `undefined`
    */
-  ctx = Object.assign(
-    {
-      cwd: process.cwd(),
-      env: process.env.NODE_ENV
-    },
-    ctx
-  )
+  ctx = {
+    cwd: process.cwd(),
+    env: process.env.NODE_ENV,
+    ...ctx
+  }
 
   if (!ctx.env) {
     process.env.NODE_ENV = 'development'
