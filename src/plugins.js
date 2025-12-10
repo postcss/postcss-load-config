@@ -1,5 +1,5 @@
 // @ts-check
-const req = require('./req.js')
+let req = require('./req.js')
 
 /**
  * Plugin Loader
@@ -59,9 +59,7 @@ async function plugins(config, file) {
 
   if (list.length && list.length > 0) {
     list.forEach((plugin, i) => {
-      if (plugin.default) {
-        plugin = plugin.default
-      }
+      if (plugin.default) plugin = plugin.default
 
       if (plugin.postcss === true) {
         plugin = plugin()

@@ -1,13 +1,13 @@
 // @ts-check
-const { resolve } = require('node:path')
+let { resolve } = require('node:path')
 
-const config = require('lilconfig')
+let { lilconfig } = require('lilconfig')
 
-const loadOptions = require('./options.js')
-const loadPlugins = require('./plugins.js')
-const req = require('./req.js')
+let loadOptions = require('./options.js')
+let loadPlugins = require('./plugins.js')
+let req = require('./req.js')
 
-const interopRequireDefault = obj =>
+let interopRequireDefault = obj =>
   obj && obj.__esModule ? obj : { default: obj }
 
 /**
@@ -28,9 +28,7 @@ async function processResult(ctx, result) {
     projectConfig =  { ...projectConfig, ...ctx }
   }
 
-  if (!projectConfig.plugins) {
-    projectConfig.plugins = []
-  }
+  if (!projectConfig.plugins) projectConfig.plugins = []
 
   let res = {
     file,
@@ -61,9 +59,7 @@ function createContext(ctx) {
     ...ctx
   }
 
-  if (!ctx.env) {
-    process.env.NODE_ENV = 'development'
-  }
+  if (!ctx.env) process.env.NODE_ENV = 'development'
 
   return ctx
 }
@@ -89,7 +85,7 @@ async function yamlLoader(_, content) {
 }
 
 /** @return {import('lilconfig').Options} */
-const withLoaders = (options = {}) => {
+let withLoaders = (options = {}) => {
   let moduleName = 'postcss'
 
   return {
@@ -150,13 +146,10 @@ function rc(ctx, path, options) {
    */
   path = path ? resolve(path) : process.cwd()
 
-  return config
-    .lilconfig('postcss', withLoaders(options))
+  return lilconfig('postcss', withLoaders(options))
     .search(path)
     .then(result => {
-      if (!result) {
-        throw new Error(`No PostCSS Config found in: ${path}`)
-      }
+      if (!result) throw new Error(`No PostCSS Config found in: ${path}`)
       return processResult(ctx, result)
     })
 }

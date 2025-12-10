@@ -1,5 +1,5 @@
 // @ts-check
-const req = require('./req.js')
+let req = require('./req.js')
 
 /**
  * Load Options
