@@ -1,8 +1,8 @@
 // @ts-check
-const { createRequire } = require('node:module')
-const { pathToFileURL } = require('node:url')
+let { createRequire } = require('node:module')
+let { pathToFileURL } = require('node:url')
 
-const TS_EXT_RE = /\.[mc]?ts$/
+let TS_EXT_RE = /\.[mc]?ts$/
 
 let tsx
 
