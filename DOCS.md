@@ -52,7 +52,7 @@ Load Config
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | cwd | <code>String</code> | <code>process.cwd()</code> | Config search start location |
-| env | <code>String</code> | <code>process.env.NODE_ENV</code> | Config Enviroment, will be set to `development` by `postcss-load-config` if `process.env.NODE_ENV` is `undefined` |
+| env | <code>String</code> | <code>process.env.NODE_ENV</code> | Config environment, will be set to `development` by `postcss-load-config` if `process.env.NODE_ENV` is `undefined` |
 
 <a name="rc..path"></a>
 
@@ -69,4 +69,3 @@ Load Config
 | Name | Type | Default |
 | --- | --- | --- |
 | rcExtensions | <code>Boolean</code> | <code>true</code> | 
-
