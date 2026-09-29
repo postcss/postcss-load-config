@@ -156,6 +156,8 @@ module.exports = ({ env }) => ({
 
 > ℹ️ When using an `{Object}`, the key can be a Node.js module name, a path to a JavaScript file that is relative to the directory of the PostCSS config file, or an absolute path to a JavaScript file.
 
+> ℹ️ `postcss-loader` for webpack marks the `{Object}` form as deprecated, so use the `{Array}` form in JS configs that it loads.
+
 #### `{Array}`
 
 **.postcssrc.js**
@@ -317,11 +319,11 @@ When using a `{Function}` (`postcss.config.js` or `.postcssrc.js`), it's possibl
 module.exports = (ctx) => ({
   parser: ctx.parser ? 'sugarss' : false,
   map: ctx.env === 'development' ? ctx.map : false,
-  plugins: {
-    'postcss-import': {},
-    'postcss-nested': {},
-    cssnano: ctx.env === 'production' ? {} : false
-  }
+  plugins: [
+    require('postcss-import')(),
+    require('postcss-nested')(),
+    ctx.env === 'production' ? require('cssnano')() : false
+  ]
 })
 ```
 
