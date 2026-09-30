@@ -369,13 +369,13 @@ postcssrc(ctx).then(({ plugins, options }) => {
 ```js
 const { task, src, dest, series, watch } = require('gulp')
 
-const postcss = require('gulp-postcssrc')
+const postcss = require('gulp-postcss')
 
 const css = () => {
-  src('src/*.css')
+  return src('src/*.css')
     .pipe(postcss())
     .pipe(dest('dest'))
-})
+}
 
 task('watch', () => {
   watch(['src/*.css', 'postcss.config.js'], css)
