@@ -53,7 +53,7 @@ declare namespace postcssrc {
     parser?: string | ProcessOptions['parser'] | false
     stringifier?: string | ProcessOptions['stringifier'] | false
     syntax?: string | ProcessOptions['syntax'] | false
-    map?: string | false
+    map?: ProcessOptions['map']
     from?: string
     to?: string
     plugins?: Array<ConfigPlugin | false> | Record<string, object | false>

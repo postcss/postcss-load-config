@@ -176,7 +176,7 @@ module.exports = ({ env }) => ({
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[**`to`**](#to)|`{String}`|`undefined`|Destination File Path|
-|[**`map`**](#map)|`{String\|Object}`|`false`|Enable/Disable Source Maps|
+|[**`map`**](#map)|`{Boolean\|Object}`|`false`|Enable/Disable Source Maps|
 |[**`from`**](#from)|`{String}`|`undefined`|Source File Path|
 |[**`parser`**](#parser)|`{String\|Function}`|`false`|Custom PostCSS Parser|
 |[**`syntax`**](#syntax)|`{String\|Function}`|`false`|Custom PostCSS Syntax|
@@ -214,7 +214,7 @@ module.exports = {
 **.postcssrc.js**
 ```js
 module.exports = {
-  map: 'inline'
+  map: { inline: true }
 }
 ```
 
@@ -469,6 +469,12 @@ Tidelift will coordinate the fix and disclosure.
         src="https://github.com/fwouts.png?v=3&s=150">
       <br />
       <a href="https://github.com/fwouts">François Wouts</a>
+    </td>
+    <td align="center">
+      <img width="150" height="150"
+        src="https://github.com/DeepanshuPal.png?v=3&s=150">
+      <br />
+      <a href="https://github.com/DeepanshuPal">Deepanshu Pal</a>
     </td>
   </tr>
   <tbody>
