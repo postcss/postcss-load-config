@@ -58,8 +58,9 @@ async function plugins(config, file) {
   }
 
   if (list.length && list.length > 0) {
-    list.forEach((plugin, i) => {
+    list = list.map((plugin, i) => {
       if (plugin.default) plugin = plugin.default
+      let loaded = plugin
 
       if (plugin.postcss === true) {
         plugin = plugin()
@@ -78,6 +79,7 @@ async function plugins(config, file) {
           `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
         )
       }
+      return loaded
     })
   }
 
