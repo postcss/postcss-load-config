@@ -480,7 +480,7 @@ Tidelift will coordinate the fix and disclosure.
       <img width="150" height="150"
         src="https://github.com/feritcemkahraman.png?v=3&s=150">
       <br />
-      <a href="https://github.com/feritcemkahraman">Ferit Cem Kahraman</a>
+      <a href="https://github.com/feritcemkahraman">Ferit Cem</a>
     </td>
   </tr>
   <tbody>
